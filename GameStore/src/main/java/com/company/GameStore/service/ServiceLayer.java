@@ -1,35 +1,34 @@
-//package com.company.GameStore.service;
 
-//import com.company.GameStore.models.Consoles;
-//import com.company.GameStore.models.Games;
-//import com.company.GameStore.models.Invoices;
-//import com.company.GameStore.models.Tshirts;
+package com.company.GameStore.service;
 
-//import com.company.GameStore.repositories.ConsolesRepository;
-//import com.company.GameStore.repositories.GamesRepository;
-//import com.company.GameStore.repositories.InvoicesRepository;
-//import com.company.GameStore.repositories.TshirtsRepository;
-//import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.stereotype.Component;
-//
-//import javax.transaction.Transactional;
-//import java.util.List;
-//import java.util.Optional;
-//
-//@Component
-//public class ServiceLayer {
-//    private GamesRepository gamesRepository;
-//    private ConsolesRepository consolesRepository;
-//    private TshirtsRepository tshirtsRepository;
-//    private InvoicesRepository invoicesRepository;
-//    @Autowired
-//    public ServiceLayer(GamesRepository gamesRepository, ConsolesRepository consolesRepository, TshirtsRepository tshirtsRepository, InvoicesRepository invoicesRepository) {
-//        this.gamesRepository = gamesRepository;
-//        this.consolesRepository = consolesRepository;
-//        this.tshirtsRepository = tshirtsRepository;
-//        this.invoicesRepository = invoicesRepository;
-//    }
-//
+import com.company.GameStore.models.Consoles;
+import com.company.GameStore.repositories.ConsolesRepository;
+import com.company.GameStore.repositories.GamesRepository;
+import com.company.GameStore.repositories.InvoicesRepository;
+import com.company.GameStore.repositories.TshirtsRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+@Service
+public class ServiceLayer {
+    private GamesRepository gamesRepository;
+    private ConsolesRepository consolesRepository;
+    private TshirtsRepository tshirtsRepository;
+    private InvoicesRepository invoicesRepository;
+    @Autowired
+    public ServiceLayer(GamesRepository gamesRepository, ConsolesRepository consolesRepository, TshirtsRepository tshirtsRepository, InvoicesRepository invoicesRepository) {
+        this.gamesRepository = gamesRepository;
+        this.consolesRepository = consolesRepository;
+        this.tshirtsRepository = tshirtsRepository;
+        this.invoicesRepository = invoicesRepository;
+    }
+
+    public List<Consoles> findAllConsoles() {
+    //stub that needs implementation
+    return null;
+        }
 //    @Transactional
 //    public InvoiceViewModel saveInvoices(InvoiceViewModel viewModel) {
 //
@@ -118,4 +117,4 @@
 //        return avm;
 //    }
 //
-//}
+}
