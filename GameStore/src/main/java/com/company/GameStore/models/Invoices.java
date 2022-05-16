@@ -1,6 +1,5 @@
-package com.comapny.GameStore.models;
+package com.company.GameStore.models;
 
-import java.util.List;
 import java.util.Objects;
 
 public class Invoices {

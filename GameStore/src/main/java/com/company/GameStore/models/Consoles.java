@@ -1,4 +1,4 @@
-package com.comapny.GameStore.models;
+package com.company.GameStore.models;
 
 import java.math.BigDecimal;
 import java.util.Objects;
