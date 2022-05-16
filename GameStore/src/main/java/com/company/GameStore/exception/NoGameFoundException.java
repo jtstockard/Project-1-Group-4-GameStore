@@ -1,4 +1,4 @@
-package com.comapny.GameStore.exception;
+package com.company.GameStore.exception;
 
 public class NoGameFoundException extends RuntimeException{
     public NoGameFoundException(String message) { super(message);}

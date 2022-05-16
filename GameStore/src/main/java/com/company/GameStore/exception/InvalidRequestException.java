@@ -1,4 +1,4 @@
-package com.comapny.GameStore.exception;
+package com.company.GameStore.exception;
 
 public class InvalidRequestException extends RuntimeException{
     public InvalidRequestException(String message) {super (message);}
