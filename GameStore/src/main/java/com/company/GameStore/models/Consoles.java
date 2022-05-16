@@ -1,9 +1,19 @@
 package com.company.GameStore.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import javax.persistence.*;
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Objects;
 
-public class Consoles {
+@Entity
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+@Table(name = "consoles")
+public class Consoles implements Serializable {
+    @Id
+    @Column(name = "consoles_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
 
     private int id;
     private String model;

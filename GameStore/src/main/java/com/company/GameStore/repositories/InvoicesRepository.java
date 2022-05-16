@@ -4,10 +4,11 @@ import com.company.GameStore.models.Invoices;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface InvoicesRepository extends JpaRepository<Invoices, Integer>{
 
-    List<Invoices> findById(int id);
+    Optional<Invoices> findById(int id);
 
     List<Invoices> findByName(String name);
 

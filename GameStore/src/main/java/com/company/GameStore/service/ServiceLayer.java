@@ -1,13 +1,20 @@
 //package com.company.GameStore.service;
-//
+
+//import com.company.GameStore.models.Consoles;
 //import com.company.GameStore.models.Games;
+//import com.company.GameStore.models.Invoices;
+//import com.company.GameStore.models.Tshirts;
+
 //import com.company.GameStore.repositories.ConsolesRepository;
 //import com.company.GameStore.repositories.GamesRepository;
 //import com.company.GameStore.repositories.InvoicesRepository;
 //import com.company.GameStore.repositories.TshirtsRepository;
+//import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.stereotype.Component;
 //
 //import javax.transaction.Transactional;
+//import java.util.List;
+//import java.util.Optional;
 //
 //@Component
 //public class ServiceLayer {
@@ -15,7 +22,7 @@
 //    private ConsolesRepository consolesRepository;
 //    private TshirtsRepository tshirtsRepository;
 //    private InvoicesRepository invoicesRepository;
-//
+//    @Autowired
 //    public ServiceLayer(GamesRepository gamesRepository, ConsolesRepository consolesRepository, TshirtsRepository tshirtsRepository, InvoicesRepository invoicesRepository) {
 //        this.gamesRepository = gamesRepository;
 //        this.consolesRepository = consolesRepository;
@@ -24,19 +31,91 @@
 //    }
 //
 //    @Transactional
-//    public GamesViewModel saveGames(GamesViewModel viewModel) {
+//    public InvoiceViewModel saveInvoices(InvoiceViewModel viewModel) {
 //
-//        // Persist Games
-//        Games a = new Games();
+//        // Persist Invoice
+//        Invoices a = new Invoices();
 //        a.setId(viewModel.getId());
-//        a.setTitle(viewModel.getName());
-//        a.setEsrbRating(viewModel.getEsrbRating());
-//        a.setDescription(viewModel.getDescription());
-//        a.setPrice(viewModel.getPrice().getId());
-//        a.setStudio(viewModel.getStudio).getId());
-//        a.setQuantity(viewModel.getQuantity).getId());
-//        a = gamesRepository.save(a);
+//        a.setName(viewModel.getName());
+//        a.setStreet(viewModel.getStreet());
+//        a.setCity(viewModel.getCity());
+//        a.setState(viewModel.getState());
+//        a.setZipCode(viewModel.getZipCode());
+//        a.setItemType(viewModel.getItemType());
+//        a.setItemId(viewModel.getItemId());
+//        a.setQuantity(viewModel.getQuantity());
+//        a = invoicesRepository.save(a);
 //        viewModel.setId(a.getId());
+//
+//        List<Games> game = viewModel.getGames();
+//
+//        game.stream()
+//                .forEach(t ->
+//                {
+//                    t.setInvoicesId(viewModel.getId());
+//                    gamesRepository.save(t);
+//                });
+//
+//        game = gamesRepository.findAllGamesByInvoicesId(viewModel.getId());
+//        viewModel.setGames(game);
+//
+//        List<Consoles> console = viewModel.getConsoles();
+//
+//        console.stream()
+//                .forEach(t ->
+//                {
+//                    t.setInvoicesId(viewModel.getId());
+//                    consolesRepository.save(t);
+//                });
+//
+//        console = consolesRepository.findAllConsolesByInvoicesId(viewModel.getId());
+//        viewModel.setConsoles(console);
+//
+//        List<Tshirts> tshirt = viewModel.getTshirts();
+//
+//        tshirt.stream()
+//                .forEach(t ->
+//                {
+//                    t.setInvoicesId(viewModel.getId());
+//                    tshirtRepository.save(t);
+//                });
+//
+//        tshirt = tshirtRepository.findAllTshirtsByInvoicesId(viewModel.getId());
+//        viewModel.setTshirts(tshirt);
+//
 //        return viewModel;
 //    }
+//    public InvoiceViewModel findInvoices(int id) {
+//
+//        Optional<Invoices> invoices = invoicesRepository.findById(id);
+//
+//        return invoices.isPresent() ? buildInvoiceViewModel(invoices.get()) : null;
+//    }
+//    private InvoiceViewModel buildInvoiceViewModel(Invoices album) {
+//
+//        // Get the associated game
+//        Optional<Games> game = gamesRepository.findById(games.getGamesId());
+//
+//        // Get the associated console
+//        Optional<Consoles> console = consolesRepository.findById(consoles.getConsolesId());
+//
+//        // Get the tracks associated with the album
+//        Optional<Tshirts> tshirt = tshirtsRepository.findById(tshirts.getTshirtsId());
+//
+//        // Assemble the AlbumViewModel
+//        InvoiceViewModel avm = new invoiceViewModel();
+//        avm.setId(invoices.getId());
+//        avm.setName(invoices.getName());
+//        avm.setStreet(invoices.getStreet());
+//        avm.setCity(invoices.getCity());
+//        avm.setState(invoices.getState());
+//        avm.setZipCode(invoices.getZipCode());
+//        avm.setItemType(invoices.getItemType());
+//        avm.setItemId(invoices.getItemId());
+//        avm.setQuantity(invoices.getQuantity());
+//
+//        // Return the AlbumViewModel
+//        return avm;
+//    }
+//
 //}
