@@ -12,7 +12,7 @@ public interface GamesRepository extends JpaRepository<Games, Integer> {
 
     List<Games> findById(int id);
 
-    List<Games> findByName(String name);
+    List<Games> findByTitle(String title);
 
     List<Games> findByEsrbRating(String esrbRating);
 
