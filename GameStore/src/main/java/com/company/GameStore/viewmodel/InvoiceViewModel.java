@@ -10,18 +10,22 @@ public class InvoiceViewModel {
     private String city;
     private String state;
     private String zip;
-    private BigDecimal subTotal;
+    private String itemType;
+    private int itemId;
+    private int quantity;
     private BigDecimal total;
 
-    public InvoiceViewModel(int id, String name, String street, String city, String state, String zip, BigDecimal subTotal, BigDecimal total) {
+    public InvoiceViewModel(int id, String name, String street, String city, String state, String zip, String itemType, int itemId, int quantity, BigDecimal total) {
         this.id = id;
         this.name = name;
         this.street = street;
         this.city = city;
         this.state = state;
-//        ***Not sure where or how to calculate these...***
-//        this.subTotal = item.cost;
-//        this.total = subTotal +  (subTotal * state.tax) + processingFee;
+        this.zip = zip;
+        this.itemType = itemType;
+        this.itemId = itemId;
+        this.quantity = quantity;
+        this.total = total;
     }
 
     public InvoiceViewModel() {
@@ -75,12 +79,28 @@ public class InvoiceViewModel {
         this.zip = zip;
     }
 
-    public BigDecimal getSubTotal() {
-        return subTotal;
+    public String getItemType() {
+        return itemType;
     }
 
-    public void setSubTotal(BigDecimal subTotal) {
-        this.subTotal = subTotal;
+    public void setItemType(String itemType) {
+        this.itemType = itemType;
+    }
+
+    public int getItemId() {
+        return itemId;
+    }
+
+    public void setItemId(int itemId) {
+        this.itemId = itemId;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 
     public BigDecimal getTotal() {
@@ -96,12 +116,12 @@ public class InvoiceViewModel {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         InvoiceViewModel that = (InvoiceViewModel) o;
-        return id == that.id && Objects.equals(name, that.name) && Objects.equals(street, that.street) && Objects.equals(city, that.city) && Objects.equals(state, that.state) && Objects.equals(zip, that.zip) && Objects.equals(subTotal, that.subTotal) && Objects.equals(total, that.total);
+        return id == that.id && itemId == that.itemId && quantity == that.quantity && Objects.equals(name, that.name) && Objects.equals(street, that.street) && Objects.equals(city, that.city) && Objects.equals(state, that.state) && Objects.equals(zip, that.zip) && Objects.equals(itemType, that.itemType) && Objects.equals(total, that.total);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, street, city, state, zip, subTotal, total);
+        return Objects.hash(id, name, street, city, state, zip, itemType, itemId, quantity, total);
     }
 
     @Override
@@ -113,7 +133,9 @@ public class InvoiceViewModel {
                 ", city='" + city + '\'' +
                 ", state='" + state + '\'' +
                 ", zip='" + zip + '\'' +
-                ", subTotal=" + subTotal +
+                ", itemType='" + itemType + '\'' +
+                ", itemId=" + itemId +
+                ", quantity=" + quantity +
                 ", total=" + total +
                 '}';
     }
