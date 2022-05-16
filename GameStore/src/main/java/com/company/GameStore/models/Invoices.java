@@ -1,8 +1,25 @@
 package com.company.GameStore.models;
 
-import java.util.Objects;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Objects;
+import java.util.Set;
+
+@Entity
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+@Table(name = "invoices")
 public class Invoices {
+    @Id
+    @Column(name = "invoices_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    @JoinColumn(name = "Invoices")
+    private Set<Games> games = new HashSet<>();
+    private Set<Consoles> consoles = new HashSet<>();
+    private Set<Tshirts> tshirts = new HashSet<>();
     private int id;
     private String name;
     private String street;
