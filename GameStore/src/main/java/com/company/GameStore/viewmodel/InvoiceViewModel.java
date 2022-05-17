@@ -9,19 +9,19 @@ public class InvoiceViewModel {
     private String street;
     private String city;
     private String state;
-    private String zip;
+    private String zipCode;
     private String itemType;
     private int itemId;
     private int quantity;
     private BigDecimal total;
 
-    public InvoiceViewModel(int id, String name, String street, String city, String state, String zip, String itemType, int itemId, int quantity, BigDecimal total) {
+    public InvoiceViewModel(int id, String name, String street, String city, String state, String zipCode, String itemType, int itemId, int quantity, BigDecimal total) {
         this.id = id;
         this.name = name;
         this.street = street;
         this.city = city;
         this.state = state;
-        this.zip = zip;
+        this.zipCode = zipCode;
         this.itemType = itemType;
         this.itemId = itemId;
         this.quantity = quantity;
@@ -71,12 +71,12 @@ public class InvoiceViewModel {
         this.state = state;
     }
 
-    public String getZip() {
-        return zip;
+    public String getZipCode() {
+        return zipCode;
     }
 
-    public void setZip(String zip) {
-        this.zip = zip;
+    public void setZipCode(String zipCode) {
+        this.zipCode = zipCode;
     }
 
     public String getItemType() {
@@ -116,12 +116,12 @@ public class InvoiceViewModel {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         InvoiceViewModel that = (InvoiceViewModel) o;
-        return id == that.id && itemId == that.itemId && quantity == that.quantity && Objects.equals(name, that.name) && Objects.equals(street, that.street) && Objects.equals(city, that.city) && Objects.equals(state, that.state) && Objects.equals(zip, that.zip) && Objects.equals(itemType, that.itemType) && Objects.equals(total, that.total);
+        return id == that.id && itemId == that.itemId && quantity == that.quantity && Objects.equals(name, that.name) && Objects.equals(street, that.street) && Objects.equals(city, that.city) && Objects.equals(state, that.state) && Objects.equals(zipCode, that.zipCode) && Objects.equals(itemType, that.itemType) && Objects.equals(total, that.total);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, street, city, state, zip, itemType, itemId, quantity, total);
+        return Objects.hash(id, name, street, city, state, zipCode, itemType, itemId, quantity, total);
     }
 
     @Override
@@ -132,7 +132,7 @@ public class InvoiceViewModel {
                 ", street='" + street + '\'' +
                 ", city='" + city + '\'' +
                 ", state='" + state + '\'' +
-                ", zip='" + zip + '\'' +
+                ", zipCode='" + zipCode + '\'' +
                 ", itemType='" + itemType + '\'' +
                 ", itemId=" + itemId +
                 ", quantity=" + quantity +

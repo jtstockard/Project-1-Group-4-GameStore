@@ -2,14 +2,19 @@
 package com.company.GameStore.service;
 
 import com.company.GameStore.models.Consoles;
+import com.company.GameStore.models.Invoices;
 import com.company.GameStore.models.Games;
 import com.company.GameStore.models.Tshirts;
+
 import com.company.GameStore.repositories.ConsolesRepository;
 import com.company.GameStore.repositories.GamesRepository;
 import com.company.GameStore.repositories.InvoicesRepository;
 import com.company.GameStore.repositories.TshirtsRepository;
+import com.company.GameStore.viewmodel.InvoiceViewModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 
 import java.awt.peer.CanvasPeer;
 import java.util.List;
@@ -20,6 +25,7 @@ public class ServiceLayer {
     private ConsolesRepository consolesRepository;
     private TshirtsRepository tshirtsRepository;
     private InvoicesRepository invoicesRepository;
+
     @Autowired
     public ServiceLayer(GamesRepository gamesRepository, ConsolesRepository consolesRepository, TshirtsRepository tshirtsRepository, InvoicesRepository invoicesRepository) {
         this.gamesRepository = gamesRepository;
@@ -28,200 +34,44 @@ public class ServiceLayer {
         this.invoicesRepository = invoicesRepository;
     }
 
+
+//    Console CRUD
         public List<Consoles> findAllConsoles() {
-        //stub that needs implementation
-        return null;
+            return consolesRepository.findAll();
+        }
+        public List<Consoles> getAConsoles(int id) {
+        return consolesRepository.findById(id);
         }
 
-        public List<Consoles> saveConsole(Consoles consoles) {
-        return null;
+        public Consoles addConsoles(Consoles consoles) {
+        return consolesRepository.save(consoles);
         }
 
-        public List<Consoles> findByManufacturer(String manufacturer) {
-        return null;
+        public void deleteConsole(int id){
         }
 
-        public List<Consoles> updateConsole(Consoles consoles) {
-        return null;
-    }
-
-        public List<Consoles> deleteConsole() {
-        return null;
+        public void updateConsoles( Consoles consoles){
         }
 
-        public List<Games> findAllGames() {
-        //stub that needs implementation
-            return null;
-        }
-        public List<Games> saveGame() {
-        //stub that needs implementation
-            return null;
-        }
-
-        public List<Games> findGamesByStudio() {
-            //stub that needs implementation
-            return null;
-        }
-
-        public List<Games> findGamesByRating() {
-            //stub that needs implementation
-            return null;
-        }
-        public List<Games> findGamesByTitle() {
-            //stub that needs implementation
-            return null;
-        }
-
-        public List<Games> updateGamesByStudio() {
-            return null;
-        }
-
-        public List<Games> updateGamesByRating() {
-            return null;
-        }
-
-        public List<Games> updateGamesByTitle() {
-            return null;
-        }
-        public List<Games> removeGamesByStudio() {
-        return null;
-        }
-
-        public List<Games> removeGamesByRating() {
-            return null;
-        }
-
-        public List<Games> removeGamesByTitle() {
-            return null;
-        }
-
-        public List<Tshirts> findAllTshirts() {
-            //stub that needs implementation
-            return null;
-        }
-
-        public List<Tshirts> saveTshirt() {
-            //stub that needs implementation
-            return null;
-        }
-
-        public List<Tshirts> findTshirtsByColor() {
-            //stub that needs implementation
-            return null;
-        }
-
-        public List<Tshirts> findTshirtsBySize() {
-            //stub that needs implementation
-            return null;
-        }
-
-        public List<Tshirts> updateTshirtsByColor() {
-            //stub that needs implementation
-            return null;
-        }
-
-        public List<Tshirts> updateTshirtsBySize() {
-            //stub that needs implementation
-            return null;
-        }
-
-        public List<Tshirts> removeTshirtsByColor() {
-            //stub that needs implementation
-            return null;
-        }
-
-        public List<Tshirts> removeTshirtsBySize() {
-            //stub that needs implementation
-            return null;
-    }
 
 
-//    @Transactional
-//    public InvoiceViewModel saveInvoices(InvoiceViewModel viewModel) {
-//
+      @Transactional
+      public InvoiceViewModel saveInvoices(InvoiceViewModel viewModel) {
 //        // Persist Invoice
-//        Invoices a = new Invoices();
-//        a.setId(viewModel.getId());
-//        a.setName(viewModel.getName());
-//        a.setStreet(viewModel.getStreet());
-//        a.setCity(viewModel.getCity());
-//        a.setState(viewModel.getState());
-//        a.setZipCode(viewModel.getZipCode());
-//        a.setItemType(viewModel.getItemType());
-//        a.setItemId(viewModel.getItemId());
-//        a.setQuantity(viewModel.getQuantity());
-//        a = invoicesRepository.save(a);
-//        viewModel.setId(a.getId());
-//
-//        List<Games> game = viewModel.getGames();
-//
-//        game.stream()
-//                .forEach(t ->
-//                {
-//                    t.setInvoicesId(viewModel.getId());
-//                    gamesRepository.save(t);
-//                });
-//
-//        game = gamesRepository.findAllGamesByInvoicesId(viewModel.getId());
-//        viewModel.setGames(game);
-//
-//        List<Consoles> console = viewModel.getConsoles();
-//
-//        console.stream()
-//                .forEach(t ->
-//                {
-//                    t.setInvoicesId(viewModel.getId());
-//                    consolesRepository.save(t);
-//                });
-//
-//        console = consolesRepository.findAllConsolesByInvoicesId(viewModel.getId());
-//        viewModel.setConsoles(console);
-//
-//        List<Tshirts> tshirt = viewModel.getTshirts();
-//
-//        tshirt.stream()
-//                .forEach(t ->
-//                {
-//                    t.setInvoicesId(viewModel.getId());
-//                    tshirtRepository.save(t);
-//                });
-//
-//        tshirt = tshirtRepository.findAllTshirtsByInvoicesId(viewModel.getId());
-//        viewModel.setTshirts(tshirt);
-//
-//        return viewModel;
-//    }
-//    public InvoiceViewModel findInvoices(int id) {
-//
-//        Optional<Invoices> invoices = invoicesRepository.findById(id);
-//
-//        return invoices.isPresent() ? buildInvoiceViewModel(invoices.get()) : null;
-//    }
-//    private InvoiceViewModel buildInvoiceViewModel(Invoices album) {
-//
-//        // Get the associated game
-//        Optional<Games> game = gamesRepository.findById(games.getGamesId());
-//
-//        // Get the associated console
-//        Optional<Consoles> console = consolesRepository.findById(consoles.getConsolesId());
-//
-//        // Get the tracks associated with the album
-//        Optional<Tshirts> tshirt = tshirtsRepository.findById(tshirts.getTshirtsId());
-//
-//        // Assemble the AlbumViewModel
-//        InvoiceViewModel avm = new invoiceViewModel();
-//        avm.setId(invoices.getId());
-//        avm.setName(invoices.getName());
-//        avm.setStreet(invoices.getStreet());
-//        avm.setCity(invoices.getCity());
-//        avm.setState(invoices.getState());
-//        avm.setZipCode(invoices.getZipCode());
-//        avm.setItemType(invoices.getItemType());
-//        avm.setItemId(invoices.getItemId());
-//        avm.setQuantity(invoices.getQuantity());
-//
-//        // Return the AlbumViewModel
-//        return avm;
-//    }
-//
+        Invoices a = new Invoices();
+        a.setId(invoiceViewModel.getId());
+        a.setName(invoiceViewModel.getName());
+        a.setStreet(invoiceViewModel.getStreet());
+        a.setCity(invoiceViewModel.getCity());
+        a.setState(invoiceViewModel.getState());
+        a.setZipCode(invoiceViewModel.getZipCode());
+        a.setItemType(invoiceViewModel.getItemType());
+        a.setItemId(invoiceViewModel.getItemId());
+        a.setQuantity(invoiceViewModel.getQuantity());
+        a = invoicesRepository.save(a);
+        invoiceViewModel.setId(a.getId());
+
+        return invoiceViewModel;
+    }
+
 }

@@ -25,12 +25,12 @@ public class Invoices {
     private String street;
     private String city;
     private String state;
-    private Integer zipCode;
+    private String zipCode;
     private String itemType;
     private Integer itemId;
     private int quantity;
 
-    public Invoices(int id, String name, String street, String city, String state, Integer zipCode, String itemType, Integer itemId, int quantity) {
+    public Invoices(int id, String name, String street, String city, String state, String zipCode, String itemType, Integer itemId, int quantity) {
         this.id = id;
         this.name = name;
         this.street = street;
@@ -85,11 +85,11 @@ public class Invoices {
         this.state = state;
     }
 
-    public Integer getZipCode() {
+    public String getZipCode() {
         return zipCode;
     }
 
-    public void setZipCode(Integer zipCode) {
+    public void setZipCode(String zipCode) {
         this.zipCode = zipCode;
     }
 
