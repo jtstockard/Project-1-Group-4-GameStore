@@ -87,12 +87,31 @@ public class ConsolesControllerTest {
         consoles.setProcessor("Intel");
         consoles.setQuantity(99);
 
+        Consoles consoles1 = new Consoles();
+        consoles1.setModel("PlayStation 3");
+        consoles1.setManufacturer("Sony");
+        consoles1.setMemoryAmount("256gb");
+        consoles1.setPrice(new BigDecimal("599.99"));
+        consoles1.setProcessor("Intel");
+        consoles1.setQuantity(75);
+
+        Consoles consoles2 = new Consoles();
+        consoles2.setModel("Xbox");
+        consoles2.setManufacturer("Microsoft");
+        consoles2.setMemoryAmount("512gb");
+        consoles2.setPrice(new BigDecimal("725.01"));
+        consoles2.setProcessor("AMD");
+        consoles2.setQuantity(10);
+
         List<Consoles> consolesList = new ArrayList<>();
         consolesList.add(consoles);
+        consolesList.add(consoles1);
+        consolesList.add(consoles2);
+        doReturn(consolesList).when(serviceLayer).findAllConsoles();
 
         String consolesJson = mapper.writeValueAsString(consolesList);
 
-        mockMvc.perform(get("/consoles"))
+        mockMvc.perform(get("/console"))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(content().json(consolesJson));
@@ -112,7 +131,7 @@ public class ConsolesControllerTest {
 
         String consolesJson = mapper.writeValueAsString(consoles);
 
-            mockMvc.perform(get("/consoles"))
+            mockMvc.perform(get("/console"))
                .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(content().json(consolesJson));
@@ -134,7 +153,7 @@ public class ConsolesControllerTest {
 
        String consolesJson = mapper.writeValueAsString(consolesList);
 
-       mockMvc.perform(get("/consoles"))
+       mockMvc.perform(get("/console"))
                .andDo(print())
                .andExpect(status().isCreated())
                .andExpect(content().json(consolesJson));
@@ -155,7 +174,7 @@ public class ConsolesControllerTest {
        consolesList.add(consoles);
        String consolesJson = mapper.writeValueAsString(consolesList);
 
-       mockMvc.perform(post("/consoles/{2}"))
+       mockMvc.perform(post("/console/{2}"))
                .andDo(print())
                .andExpect(status().isCreated())
                .andExpect(content().json(consolesJson));
@@ -163,7 +182,7 @@ public class ConsolesControllerTest {
 
   @Test
    public void deleteConsole() throws Exception {
-      mockMvc.perform(delete("/consoles/2"))
+      mockMvc.perform(delete("/console/2"))
               .andDo(print())
               .andExpect(status().isNoContent());
  }

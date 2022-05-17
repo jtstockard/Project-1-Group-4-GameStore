@@ -19,7 +19,7 @@ public class ConsolesController {
     private ServiceLayer serviceLayer;
 
 
-    @RequestMapping(value = "/consoles", method = RequestMethod.GET)
+    @RequestMapping(value = "/console", method = RequestMethod.GET)
     @ResponseStatus(HttpStatus.OK)
     public List<Consoles> getAllConsoles() {
         return serviceLayer.findAllConsoles();

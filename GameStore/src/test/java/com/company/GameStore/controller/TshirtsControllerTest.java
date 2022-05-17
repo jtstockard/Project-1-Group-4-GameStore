@@ -80,7 +80,7 @@ public class TshirtsControllerTest {
         tshirtsList.add(tshirts);
         String tshirtsJson = mapper.writeValueAsString(tshirtsList);
 
-        mockMvc.perform(get("/tshirts"))
+        mockMvc.perform(get("/tshirt"))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(content().json(tshirtsJson));
@@ -97,7 +97,7 @@ public class TshirtsControllerTest {
 
         String tshirtsJson = mapper.writeValueAsString(tshirts);
 
-        mockMvc.perform(put("/tshirts"))
+        mockMvc.perform(put("/tshirt"))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(content().json(tshirtsJson));
@@ -110,7 +110,7 @@ public class TshirtsControllerTest {
         tshirtsList.add(tshirts);
         String tshirtsJson = mapper.writeValueAsString(tshirtsList);
 
-        mockMvc.perform(get("/tshirts/{2}"))
+        mockMvc.perform(get("/tshirt/{2}"))
                 .andDo(print())
                 .andExpect(status().isCreated())
                 .andExpect(content().json(tshirtsJson));
@@ -130,7 +130,7 @@ public class TshirtsControllerTest {
         tshirtsList.add(tshirts);
         String tshirtsJson = mapper.writeValueAsString(tshirtsList);
 
-        mockMvc.perform(post("/tshirts/{2}"))
+        mockMvc.perform(post("/tshirt/{2}"))
                 .andDo(print())
                 .andExpect(status().isCreated())
                 .andExpect(content().json(tshirtsJson));
@@ -138,7 +138,7 @@ public class TshirtsControllerTest {
 
     @Test
     public void deleteTshirt() throws Exception {
-        mockMvc.perform(delete("/thsirts/{2}"))
+        mockMvc.perform(delete("/tshirt/{2}"))
                 .andDo(print())
                 .andExpect(status().isNoContent());
     }

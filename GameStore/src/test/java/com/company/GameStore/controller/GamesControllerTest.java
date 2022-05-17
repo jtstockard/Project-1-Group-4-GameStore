@@ -82,7 +82,7 @@ public class GamesControllerTest {
         gamesList.add(games);
         String gamesJson = mapper.writeValueAsString(gamesList);
 
-        mockMvc.perform(get("/games"))
+        mockMvc.perform(get("/game"))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(content().json(gamesJson));
@@ -100,7 +100,7 @@ public class GamesControllerTest {
 
         String gamesJson = mapper.writeValueAsString(games);
 
-        mockMvc.perform(put("/games"))
+        mockMvc.perform(put("/game"))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(content().json(gamesJson));
@@ -114,7 +114,7 @@ public class GamesControllerTest {
         gamesList.add(games);
         String gamesJson = mapper.writeValueAsString(gamesList);
 
-        mockMvc.perform(get("/games/{2}"))
+        mockMvc.perform(get("/game/{2}"))
                 .andDo(print())
                 .andExpect(status().isCreated())
                 .andExpect(content().json(gamesJson));
@@ -135,7 +135,7 @@ public class GamesControllerTest {
         gamesList.add(games);
         String gamesJson = mapper.writeValueAsString(gamesList);
 
-        mockMvc.perform(post("/games/{2}"))
+        mockMvc.perform(post("/game/{2}"))
                 .andDo(print())
                 .andExpect(status().isCreated())
                 .andExpect(content().json(gamesJson));
@@ -143,7 +143,7 @@ public class GamesControllerTest {
 
     @Test
     public void deleteGame() throws Exception {
-        mockMvc.perform(delete("/games/{2}"))
+        mockMvc.perform(delete("/game/{2}"))
                 .andDo(print())
                 .andExpect(status().isNoContent());
     }
