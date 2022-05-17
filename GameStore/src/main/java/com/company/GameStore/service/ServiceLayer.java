@@ -5,6 +5,7 @@ import com.company.GameStore.models.Consoles;
 import com.company.GameStore.models.Invoices;
 import com.company.GameStore.models.Games;
 import com.company.GameStore.models.Tshirts;
+
 import com.company.GameStore.repositories.ConsolesRepository;
 import com.company.GameStore.repositories.GamesRepository;
 import com.company.GameStore.repositories.InvoicesRepository;
@@ -15,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
@@ -46,10 +48,13 @@ public class ServiceLayer {
         return consolesRepository.save(consoles);
         }
 
-        public void deleteConsole(int id){
+        public void deleteConsoles(int id){
         }
-
-        public void updateConsoles( Consoles consoles){
+    public List<Consoles> findByManufacturer(String manufacturer) {
+        return consolesRepository.findByManufacturer(manufacturer);
+    }
+        public List<Consoles> updateConsoles(Consoles consoles){
+            return null;
         }
 
 //    Invoice CRUD
@@ -69,13 +74,13 @@ public class ServiceLayer {
     public List<Games> getAllGames() {
         return gamesRepository.findAll();
     }
-    public List<Games> getGetGamesByStudio(String studio){
+    public List<Games> getGamesByStudio(String studio){
         return gamesRepository.findByStudio(studio);
     }
-    public List<Games> getGetGamesByErsbRating(String ersbRating){
+    public List<Games> getGamesByErsbRating(String ersbRating){
         return gamesRepository.findByEsrbRating(ersbRating);
     }
-    public List<Games> getGetGamesByTitle(String title){
+    public List<Games> getGamesByTitle(String title){
         return gamesRepository.findByTitle(title);
     }
     public List<Games> getAGamesById(int id){
@@ -88,6 +93,28 @@ public class ServiceLayer {
     }
     public void deleteGames (int id){
     }
+    public List<Games> findAllGames() {
+        return gamesRepository.findAll();
+    }
+
+//    public List<Games> updateGamesByStudio() {
+//        gamesRepository.save();
+//    }
+//
+//    public List<Games> updateGamesByRating() {
+//    }
+//
+//    public List<Games> updateGamesByTitle() {
+//    }
+//
+//    public List<Games> removeGamesByStudio() {
+//    }
+//
+//    public List<Games> removeGamesByRating() {
+//    }
+//
+//    public List<Games> removeGamesByTitle() {
+//    }
 
 
 
@@ -107,6 +134,7 @@ public class ServiceLayer {
     public void deleteTshirts(int id) {
         tshirtsRepository.deleteById(id);
     }
+
 
 
 
@@ -136,3 +164,4 @@ public class ServiceLayer {
     }
 
 }
+

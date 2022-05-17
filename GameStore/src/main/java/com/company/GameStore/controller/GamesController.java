@@ -4,13 +4,10 @@ import com.company.GameStore.models.Games;
 import com.company.GameStore.service.ServiceLayer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
-
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 public class GamesController {
@@ -18,112 +15,83 @@ public class GamesController {
     @Autowired
     private ServiceLayer serviceLayer;
 
-
-    @RequestMapping(value="/game", method= RequestMethod.GET)
-
-
+    @RequestMapping(value="/games", method= RequestMethod.GET)
     @ResponseStatus(HttpStatus.OK)
     public List<Games> getAllGames() {
         return serviceLayer.findAllGames();
     }
 
+    @RequestMapping(value="/games/{id}", method= RequestMethod.GET)
+    @ResponseStatus(HttpStatus.OK)
+    public Optional getAGamesById() {
 
-//    @RequestMapping(value="/game", method=RequestMethod.POST)
-//    @ResponseStatus(HttpStatus.CREATED)
-//    public GamesViewModel createAlbum(@RequestBody GamesViewModel gameViewModel) {
-//        return serviceLayer.saveGame(gameViewModel);
-//    }
+        return serviceLayer.getAGamesById();
+    }
 
-//    @RequestMapping(value="/game/{studio}", method=RequestMethod.GET)
+    @RequestMapping(value="/games", method=RequestMethod.POST)
+    @ResponseStatus(HttpStatus.CREATED)
+    public List<Games> createGame(@RequestBody Games games) {
+        return (List<Games>) serviceLayer.addGames(games);
+    }
+
+    @RequestMapping(value="/games/{studio}", method=RequestMethod.GET)
+    @ResponseStatus(HttpStatus.OK)
+    public List<Games> getGamesByStudio(@PathVariable String studio) {
+        return serviceLayer.getGamesByStudio(studio);
+    }
+
+    @RequestMapping(value="/games/{rating}", method=RequestMethod.GET)
+    @ResponseStatus(HttpStatus.OK)
+    public List<Games> getGamesByRating(@PathVariable String rating) {
+
+        return serviceLayer.getGamesByErsbRating(rating);
+    }
+
+    @RequestMapping(value="/games/{title}", method=RequestMethod.GET)
+    @ResponseStatus(HttpStatus.OK)
+    public List<Games> getGamesByTitle(@PathVariable String title) {
+
+        return serviceLayer.getGamesByTitle(title);
+    }
+
+
+//
+//    @RequestMapping(value="/games/{studio}", method=RequestMethod.PUT)
 //    @ResponseStatus(HttpStatus.OK)
-//    public GamesViewModel getGameByStudio(@PathVariable String studio) {
-//        GamesViewModel gvm = serviceLayer.findGames(studio);
-//        if (gvm == null) {
-//            throw new NoRecordFoundException("Game studio " + studio + " not found.");
-//        }
-//        return serviceLayer.findGame(studio);
+//    public List<Games> updateGamesByStudio(@RequestBody String studio){
+//        return serviceLayer.updateGamesByStudio();
 //    }
-
-//    @RequestMapping(value="/game/{rating}", method=RequestMethod.GET)
+//
+//    @RequestMapping(value="/games/{rating}", method=RequestMethod.PUT)
 //    @ResponseStatus(HttpStatus.OK)
-//    public GamesViewModel getGameByRating(@PathVariable String rating) {
-//        GamesViewModel gvm = serviceLayer.findGames(rating);
-//        if (gvm == null) {
-//            throw new NoRecordFoundException("Game ESRB rating " + rating + " not found.");
-//        }
-//        return serviceLayer.findGame(rating);
+//    public List<Games> updateGamesByRating(@PathVariable String rating) {
+//        return serviceLayer.updateGamesByRating();
 //    }
-
-//    @RequestMapping(value="/game/{title}", method=RequestMethod.GET)
+//
+//    @RequestMapping(value="/games/{title}", method=RequestMethod.PUT)
 //    @ResponseStatus(HttpStatus.OK)
-//    public GamesViewModel getGameByTitle(@PathVariable String title) {
-//        GamesViewModel gvm = serviceLayer.findGames(title);
-//        if (gvm == null) {
-//            throw new NoRecordFoundException("Game title " + title + " not found.");
-//        }
-//        return serviceLayer.findGame(title);
-//    }
-
-
-
-//    @RequestMapping(value="/game/{studio}", method=RequestMethod.PUT)
-//    @ResponseStatus(HttpStatus.NO_CONTENT)
-//    public void updateGame(@PathVariable String studio, @RequestBody GamesViewModel gvm) {
-//
-//    }
-
-//    @RequestMapping(value="/game/{rating}", method=RequestMethod.PUT)
-//    @ResponseStatus(HttpStatus.NO_CONTENT)
-//    public void updateGame(@PathVariable String rating, @RequestBody GamesViewModel gvm) {
-//
-//        if (gvm.getRating() == null) {
-////                gvm.setRating(rating);
-////            }
-////            if (gvm.getRating() != rating) {
-//                throw new InvalidRequestException("id in request body must match id in path");
-//            }
-//            serviceLayer.updateGame(gvm);
-//        }
-
-//    }
-
-//    @RequestMapping(value="/game/{title}", method=RequestMethod.PUT)
-//    @ResponseStatus(HttpStatus.NO_CONTENT)
-//    public void updateGame(@PathVariable String title, @RequestBody GamesViewModel gvm) {
-//
-//    }
-
-
-//        @RequestMapping(value="/game/{id}", method=RequestMethod.PUT)
-//        @ResponseStatus(HttpStatus.NO_CONTENT)
-//        public void updateGame(@PathVariable int id, @RequestBody GamesViewModel gvm) {
-//            if (gvm.getId() == 0) {
-//                gvm.setId(id);
-//            }
-//            if (gvm.getId() != id) {
-//                throw new InvalidRequestException("id in request body must match id in path");
-//            }
-//            serviceLayer.updateGame(gvm);
-//        }
-//
-//    @RequestMapping(value="/game/{studio}", method=RequestMethod.DELETE)
-//    @ResponseStatus(HttpStatus.NO_CONTENT)
-//    public void deleteGameByStudio(@PathVariable String studio) {
-//        serviceLayer.removeGame(studio);
+//    public List<Games> updateGamesByTitle(@PathVariable String title) {
+//        return serviceLayer.updateGamesByTitle();
 //    }
 //
-//    @RequestMapping(value="/game/{rating}", method=RequestMethod.DELETE)
-//    @ResponseStatus(HttpStatus.NO_CONTENT)
-//    public void deleteGameByRating(@PathVariable String rating) {
-//        serviceLayer.removeGame(rating);
+//    @RequestMapping(value="/games/{studio}", method=RequestMethod.DELETE)
+//    @ResponseStatus(HttpStatus.OK)
+//    public List<Games> deleteGamesByStudio(@PathVariable String studio) {
+//        return serviceLayer.removeGamesByStudio();
 //    }
 //
-//    @RequestMapping(value="/game/{title}", method=RequestMethod.DELETE)
-//    @ResponseStatus(HttpStatus.NO_CONTENT)
-//    public void deleteGameByTitle(@PathVariable String title) {
-//        serviceLayer.removeGame(title);
+//    @RequestMapping(value="/games/{rating}", method=RequestMethod.DELETE)
+//    @ResponseStatus(HttpStatus.OK)
+//    public List<Games> deleteGamesByRating(@PathVariable String rating) {
+//        return serviceLayer.removeGamesByRating();
 //    }
 //
-}
+//    @RequestMapping(value="/games/{title}", method=RequestMethod.DELETE)
+//    @ResponseStatus(HttpStatus.OK)
+//    public List<Games> deleteGamesByTitle(@PathVariable String title) {
+//        return serviceLayer.removeGamesByTitle();
+//
+//    }
+    }
 
 
