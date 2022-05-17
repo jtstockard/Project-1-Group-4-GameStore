@@ -128,8 +128,9 @@ public class ServiceLayer {
         return tshirtsRepository.findBySize(size);
     }
 
-    public void updateTshirts(Tshirts tshirts) {
+    public Tshirts updateTshirts(Tshirts tshirts) {
         tshirtsRepository.save(tshirts);
+        return tshirts;
     }
     public void deleteTshirts(int id) {
         tshirtsRepository.deleteById(id);

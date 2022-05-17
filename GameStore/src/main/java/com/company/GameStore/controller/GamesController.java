@@ -50,7 +50,7 @@ public class GamesController {
 
     @RequestMapping(value="/games/{studio}", method=RequestMethod.PUT)
     @ResponseStatus(HttpStatus.OK)
-    public Games updateGamesByStudio(@RequestBody Games games){
+    public Games updateGames(@RequestBody Games games){
         return serviceLayer.updateGames(games);
     }
 
@@ -58,7 +58,7 @@ public class GamesController {
     @ResponseStatus(HttpStatus.OK)
     public Games deleteGames(@PathVariable int id) {
         serviceLayer.deleteGames(id);
-        return null;
+        return deleteGames(id);
     }
 
 

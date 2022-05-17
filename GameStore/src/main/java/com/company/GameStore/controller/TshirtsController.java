@@ -45,17 +45,28 @@ public class TshirtsController {
 
     @RequestMapping(value="/tshirts/{color}", method=RequestMethod.PUT)
     @ResponseStatus(HttpStatus.OK)
-    public List<Tshirts> updateTshirtsByColor(@PathVariable String color) {
-        return serviceLayer.updateTshirtsByColor();
+    public Tshirts updateTshirts(@RequestBody Tshirts tshirts) {
+        return serviceLayer.updateTshirts(tshirts);
     }
+//    @RequestMapping(value="/tshirts/{color}", method=RequestMethod.PUT)
+//    @ResponseStatus(HttpStatus.OK)
+//    public List<Tshirts> updateTshirtsByColor(@PathVariable String color) {
+//        return serviceLayer.updateTshirtsByColor();
+//    }
 
 
     @RequestMapping(value="/tshirts/{color}", method=RequestMethod.DELETE)
     @ResponseStatus(HttpStatus.OK)
-    public List<Tshirts> deleteTshirtsByColor(@PathVariable String color) {
-        return serviceLayer.removeTshirtsByColor();
+    public List<Tshirts> deleteTshirts(@PathVariable int id) {
+        serviceLayer.deleteTshirts(id);
+        return deleteTshirts(id);
     }
 
+//    @RequestMapping(value="/tshirts/{color}", method=RequestMethod.DELETE)
+//    @ResponseStatus(HttpStatus.OK)
+//    public List<Tshirts> deleteTshirtsByColor(@PathVariable String color) {
+//        return serviceLayer.removeTshirtsByColor();
+//    }
 
 
 }
