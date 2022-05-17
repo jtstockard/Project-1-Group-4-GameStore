@@ -63,8 +63,11 @@ public class ServiceLayer {
         a.setItemType(invoiceViewModel.getItemType());
         a.setItemId(invoiceViewModel.getItemId());
         a.setQuantity(invoiceViewModel.getQuantity());
+        a.setTotal(invoiceViewModel.getTotal());
         a = invoicesRepository.save(a);
         invoiceViewModel.setId(a.getId());
+
+        
 
         return invoiceViewModel;
     }
