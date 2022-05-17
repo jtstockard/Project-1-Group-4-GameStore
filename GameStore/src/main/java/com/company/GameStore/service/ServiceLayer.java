@@ -66,6 +66,12 @@ public class ServiceLayer {
             //stub that needs implementation
             return null;
         }
+        public List<Games> findGamesByTitle() {
+            //stub that needs implementation
+            return null;
+        }
+
+
 
 //    @Transactional
 //    public InvoiceViewModel saveInvoices(InvoiceViewModel viewModel) {

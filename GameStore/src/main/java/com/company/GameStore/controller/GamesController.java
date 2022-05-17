@@ -41,64 +41,39 @@ public class GamesController {
 
     @RequestMapping(value="/games/{title}", method=RequestMethod.GET)
     @ResponseStatus(HttpStatus.OK)
-    public GamesViewModel getGameByTitle(@PathVariable String title) {
-        GamesViewModel gvm = serviceLayer.findGames(title);
-        if (gvm == null) {
-            throw new NoRecordFoundException("Game title " + title + " not found.");
-        }
-        return serviceLayer.findGame(title);
+    public List<Games> getGameByTitle(@PathVariable String title) {
+
+        return serviceLayer.findGamesByTitle();
     }
 
 
 
     @RequestMapping(value="/games/{studio}", method=RequestMethod.PUT)
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void updateGame(@PathVariable String studio, @RequestBody GamesViewModel gvm) {
-
+    @ResponseStatus(HttpStatus.OK)
+    public List<Games> updateGamesByStudio(@RequestBody String studio){
+        return serviceLayer.updateGamesByStudio();
     }
 
     @RequestMapping(value="/games/{rating}", method=RequestMethod.PUT)
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void updateGame(@PathVariable String rating, @RequestBody GamesViewModel gvm) {
-
-        if (gvm.getRating() == null) {
-//                gvm.setRating(rating);
-//            }
-//            if (gvm.getRating() != rating) {
-//                throw new InvalidRequestException("id in request body must match id in path");
-//            }
-//            serviceLayer.updateGame(gvm);
-        }
-
+    @ResponseStatus(HttpStatus.OK)
+    public List<Games> updateGamesByRating(@PathVariable String rating) {
+        return serviceLayer.updateGamesByRating();
     }
 
     @RequestMapping(value="/games/{title}", method=RequestMethod.PUT)
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void updateGame(@PathVariable String title, @RequestBody GamesViewModel gvm) {
-
+    @ResponseStatus(HttpStatus.OK)
+    public List<Games> updateGamesByTitle(@PathVariable String title) {
+        return serviceLayer.updateGamesByTitle();
     }
 
-
-//        @RequestMapping(value="/game/{id}", method=RequestMethod.PUT)
-//        @ResponseStatus(HttpStatus.NO_CONTENT)
-//        public void updateGame(@PathVariable int id, @RequestBody GamesViewModel gvm) {
-//            if (gvm.getId() == 0) {
-//                gvm.setId(id);
-//            }
-//            if (gvm.getId() != id) {
-//                throw new InvalidRequestException("id in request body must match id in path");
-//            }
-//            serviceLayer.updateGame(gvm);
-//        }
-
     @RequestMapping(value="/games/{studio}", method=RequestMethod.DELETE)
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteGameByStudio(@PathVariable String studio) {
-        serviceLayer.removeGame(studio);
+    @ResponseStatus(HttpStatus.OK)
+    public List<Games> deleteGameByStudio(@PathVariable String studio) {
+        serviceLayer.removeGameByStudio();
     }
 
     @RequestMapping(value="/games/{rating}", method=RequestMethod.DELETE)
-    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @ResponseStatus(HttpStatus.OK)
     public void deleteGameByRating(@PathVariable String rating) {
         serviceLayer.removeGame(rating);
     }
