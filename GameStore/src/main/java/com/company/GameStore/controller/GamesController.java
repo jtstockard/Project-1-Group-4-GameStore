@@ -17,13 +17,13 @@ public class GamesController {
     @RequestMapping(value="/games", method= RequestMethod.GET)
     @ResponseStatus(HttpStatus.OK)
     public List<Games> getAllGames() {
-        return serviceLayer.findAllGames();
+        return serviceLayer.getAllGames();
     }
 
     @RequestMapping(value="/games", method=RequestMethod.POST)
     @ResponseStatus(HttpStatus.CREATED)
-    public List<Games> createGame(@RequestBody Games games) {
-        return serviceLayer.saveGame();
+    public Games createGame(@RequestBody Games games) {
+        return serviceLayer.addGames(games);
     }
 
     @RequestMapping(value="/games/{studio}", method=RequestMethod.GET)

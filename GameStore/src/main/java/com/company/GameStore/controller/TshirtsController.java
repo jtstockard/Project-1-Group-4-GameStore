@@ -19,7 +19,7 @@ public class TshirtsController {
     @RequestMapping(value = "/tshirts", method = RequestMethod.GET)
     @ResponseStatus(HttpStatus.OK)
     public List<Tshirts> getAllTshirts() {
-        return serviceLayer.findAllTshirts();
+        return serviceLayer.findAll();
 
     }
 
