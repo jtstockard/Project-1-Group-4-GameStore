@@ -100,7 +100,30 @@ public class ServiceLayer {
             return null;
         }
 
+        public List<Tshirts> saveTshirt() {
+            //stub that needs implementation
+            return null;
+        }
 
+        public List<Tshirts> findTshirtsByColor() {
+            //stub that needs implementation
+            return null;
+        }
+
+        public List<Tshirts> updateTshirtsByColor() {
+            //stub that needs implementation
+            return null;
+        }
+
+    public List<Tshirts> updateTshirtsBySize() {
+        //stub that needs implementation
+        return null;
+    }
+
+    public List<Tshirts> () {
+        //stub that needs implementation
+        return null;
+    }
 
 
 //    @Transactional

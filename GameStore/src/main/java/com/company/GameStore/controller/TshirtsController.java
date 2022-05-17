@@ -26,21 +26,21 @@ public class TshirtsController {
     @RequestMapping(value = "/tshirts", method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.CREATED)
     public List<Tshirts> createTshirt(@RequestBody Tshirts tshirts ) {
-        return serviceLayar.saveTshirt(tshirts);
+        return serviceLayer.saveTshirt();
     }
 
     @RequestMapping(value="/tshirts/{color}", method=RequestMethod.GET)
     @ResponseStatus(HttpStatus.OK)
     public List<Tshirts> getTshirtsByColor(@PathVariable String color) {
 
-        return serviceLayer.findTshirtByColor(color);
+        return serviceLayer.findTshirtsByColor();
     }
 
     @RequestMapping(value="/tshirts/{size}", method=RequestMethod.GET)
     @ResponseStatus(HttpStatus.OK)
     public List<Tshirts> getTshirtBySize(@PathVariable String size) {
 
-        return serviceLayer.findTshirtBySize(size);
+        return serviceLayer.findTshirtsBySize();
     }
 
     @RequestMapping(value="/tshirts/{color}", method=RequestMethod.PUT)

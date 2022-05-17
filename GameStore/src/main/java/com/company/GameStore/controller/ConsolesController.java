@@ -50,24 +50,4 @@ public class ConsolesController {
 
 
 
-
-//
-//    @RequestMapping(value="/console/{manufacturer}", method=RequestMethod.PUT)
-//    @ResponseStatus(HttpStatus.NO_CONTENT)
-//    public void updateConsole(@PathVariable String manufacturer, @RequestBody Consoles cvm) {
-////        if (cvm.getId() == 0) {
-////            cvm.setId(manufacturer);
-////        }
-////        if (cvm.getId() != manufacturer) {
-////            throw new InvalidRequestException("id in request body must match id in path");
-////        }
-////        serviceLayer.updateConsole(cvm);
-//    }
-//
-//
-//    @RequestMapping(value="/console/{manufacturer}", method=RequestMethod.DELETE)
-//    @ResponseStatus(HttpStatus.NO_CONTENT)
-//    public void deleteConsole(@PathVariable String manufacturer) {
-//        serviceLayer.removeConsole(manufacturer);
-//    }
 }
