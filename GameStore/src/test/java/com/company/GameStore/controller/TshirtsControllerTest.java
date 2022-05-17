@@ -19,6 +19,10 @@ import java.util.List;
 
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.doReturn;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringRunner.class)
 @WebMvcTest(TshirtsController.class)
@@ -45,21 +49,34 @@ public class TshirtsControllerTest {
 
     @Before
     public void setUp() throws Exception {
-        Consoles consoles = new Consoles();
-        consoles.setModel("Gamecube");
-        consoles.setManufacturer("Nintendo");
-        consoles.setMemoryAmount("128gb");
-        consoles.setPrice(new BigDecimal("199.02"));
-        consoles.setProcessor("Intel");
-        consoles.setQuantity(99);
+        Tshirts tshirts = new Tshirts();
+        tshirts.setModel("Gamecube");
+        tshirts.setManufacturer("Nintendo");
+        tshirts.setMemoryAmount("128gb");
+        tshirts.setPrice(new BigDecimal("199.02"));
+        tshirts.setProcessor("Intel");
+        tshirts.setQuantity(99);
 
-        List<Consoles> consolesList = new ArrayList<>();
-        consolesList.add(consoles);
-        doReturn(consolesList).when(serviceLayer).findAllConsoles();
+        List<Tshirts> tshirtsList = new ArrayList<>();
+        tshirtsList.add(tshirts);
+        doReturn(tshirtsList).when(serviceLayer).findAllTshirts();
     }
 
     @Test
     public void getAllTshirts() {
+
+
+
+        List<Tshirts> tshirtsList = new ArrayList<>();
+        tshirtsList.add(tshirts);
+
+        String consolesJson = mapper.writeValueAsString(consolesList);
+
+        mockMvc.perform(get("/consoles"))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(content().json(consolesJson));
+
     }
 
     @Test
