@@ -3,6 +3,7 @@ package com.company.GameStore.service;
 
 import com.company.GameStore.models.Consoles;
 import com.company.GameStore.models.Games;
+import com.company.GameStore.models.Tshirts;
 import com.company.GameStore.repositories.ConsolesRepository;
 import com.company.GameStore.repositories.GamesRepository;
 import com.company.GameStore.repositories.InvoicesRepository;
@@ -94,6 +95,10 @@ public class ServiceLayer {
             return null;
         }
 
+        public List<Tshirts> findAllTshirts() {
+            //stub that needs implementation
+            return null;
+        }
 
 
 
