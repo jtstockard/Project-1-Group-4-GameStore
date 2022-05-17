@@ -50,12 +50,11 @@ public class TshirtsControllerTest {
     @Before
     public void setUp() throws Exception {
         Tshirts tshirts = new Tshirts();
-        tshirts.setModel("Gamecube");
-        tshirts.setManufacturer("Nintendo");
-        tshirts.setMemoryAmount("128gb");
-        tshirts.setPrice(new BigDecimal("199.02"));
-        tshirts.setProcessor("Intel");
-        tshirts.setQuantity(99);
+        tshirts.setSize("Large");
+        tshirts.setColor("red");
+        tshirts.setDescription("Large athletic tshirt.");
+        tshirts.setPrice(new BigDecimal("49.99"));
+        tshirts.setQuantity(199);
 
         List<Tshirts> tshirtsList = new ArrayList<>();
         tshirtsList.add(tshirts);
@@ -63,19 +62,24 @@ public class TshirtsControllerTest {
     }
 
     @Test
-    public void getAllTshirts() {
+    public void getAllTshirts() throws Exception{
+        Tshirts tshirts = new Tshirts();
+        tshirts.setSize("Large");
+        tshirts.setColor("red");
+        tshirts.setDescription("Large athletic tshirt.");
+        tshirts.setPrice(new BigDecimal("49.99"));
+        tshirts.setQuantity(199);
 
 
-
-        List<Tshirts> tshirtsList = new ArrayList<>();
+        List <Tshirts> tshirtsList = new ArrayList<>();
         tshirtsList.add(tshirts);
 
-        String consolesJson = mapper.writeValueAsString(consolesList);
+        String tshirtsJson = mapper.writeValueAsString(tshirtsList);
 
-        mockMvc.perform(get("/consoles"))
+        mockMvc.perform(get("/tshirts"))
                 .andDo(print())
                 .andExpect(status().isOk())
-                .andExpect(content().json(consolesJson));
+                .andExpect(content().json(tshirtsJson));
 
     }
 
