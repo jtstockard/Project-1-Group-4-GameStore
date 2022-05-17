@@ -16,8 +16,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.awt.peer.CanvasPeer;
 import java.util.List;
+import java.util.Optional;
 
 @Component
 public class ServiceLayer {
@@ -53,11 +53,67 @@ public class ServiceLayer {
         public void updateConsoles( Consoles consoles){
         }
 
+//    Invoice CRUD
+        public List<Invoices> getAllInvoices() {
+        return invoicesRepository.findAll();
+        }
+
+        public Optional<Invoices> getInvoicesById(int id) {
+         return invoicesRepository.findById(id);
+         }
+
+        public Invoices addInvoices(Invoices invoices) {
+        return invoicesRepository.save(invoices);
+         }
+
+//    Game CRUD
+    public List<Games> getAllGames() {
+        return gamesRepository.findAll();
+    }
+    public List<Games> getGetGamesByStudio(String studio){
+        return gamesRepository.findByStudio(studio);
+    }
+    public List<Games> getGetGamesByErsbRating(String ersbRating){
+        return gamesRepository.findByEsrbRating(ersbRating);
+    }
+    public List<Games> getGetGamesByTitle(String title){
+        return gamesRepository.findByTitle(title);
+    }
+    public List<Games> getAGamesById(int id){
+        return GamesRepository.findById(id);
+    }
+    public Games addGames(Games games) {
+        return gamesRepository.save(games); }
+    public void updateGames (Games games){
+        gamesRepository.save(games);
+    }
+    public void deleteGames (int id){
+    }
+
+
+
+//    Tshirts CRUD
+    public List<Tshirts> getAllTshirts(){
+        return tshirtsRepository.findAll();
+    }
+    public List<Tshirts> getATshirtsById(int id){
+        return tshirtsRepository.findById(id);
+    }
+    public Tshirts addATshirts(Tshirts tshirts){
+        return tshirtsRepository.save(tshirts);
+    }
+    public void updateTshirts(Tshirts tshirts) {
+        tshirtsRepository.save(tshirts);
+    }
+    public void deleteTshirts(int id) {
+        tshirtsRepository.deleteById(id);
+    }
+
+
 
   
     @Transactional
     public InvoiceViewModel saveInvoices(InvoiceViewModel invoiceViewModel) {
-
         Invoices a = new Invoices();
         a.setId(invoiceViewModel.getId());
         a.setName(invoiceViewModel.getName());
@@ -79,5 +135,6 @@ public class ServiceLayer {
 
         return invoiceViewModel;
     }
+
 
 }
