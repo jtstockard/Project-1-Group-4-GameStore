@@ -110,19 +110,29 @@ public class ServiceLayer {
             return null;
         }
 
+        public List<Tshirts> findTshirtsBySize() {
+            //stub that needs implementation
+            return null;
+        }
+
         public List<Tshirts> updateTshirtsByColor() {
             //stub that needs implementation
             return null;
         }
 
-    public List<Tshirts> updateTshirtsBySize() {
-        //stub that needs implementation
-        return null;
-    }
+        public List<Tshirts> updateTshirtsBySize() {
+            //stub that needs implementation
+            return null;
+        }
 
-    public List<Tshirts> () {
-        //stub that needs implementation
-        return null;
+        public List<Tshirts> removeTshirtsByColor() {
+            //stub that needs implementation
+            return null;
+        }
+
+        public List<Tshirts> removeTshirtsBySize() {
+            //stub that needs implementation
+            return null;
     }
 
 
