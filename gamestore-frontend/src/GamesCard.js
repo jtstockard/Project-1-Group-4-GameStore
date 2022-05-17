@@ -1,20 +1,20 @@
-function GameCard({ game, notify }) {
+function GamesCard({ games, notify }) {
   function handleDelete() {
-    fetch(`http://localhost:8080/game/${game.gameId}`, {
+    fetch(`http://localhost:8080/game/${games.gamesId}`, {
       method: "DELETE",
     })
-      .then(() => notify({ action: "delete", game: game }))
+      .then(() => notify({ action: "delete", games: games }))
       .catch((error) => notify({ action: "delete", error: error }));
   }
 
   return (
-    <tr key={game.gameId}>
-      <td>{game.title}</td>
-      <td>{game.ersbRating}</td>
-      <td>{game.description}</td>
-      <td>{game.price}</td>
-      <td>{game.studio}</td>
-      <td>{game.quantity}</td>
+    <tr key={games.gamesId}>
+      <td>{games.title}</td>
+      <td>{games.ersbRating}</td>
+      <td>{games.description}</td>
+      <td>{games.price}</td>
+      <td>{games.studio}</td>
+      <td>{games.quantity}</td>
 
       <td>
         <button
@@ -29,7 +29,7 @@ function GameCard({ game, notify }) {
           id="editButton"
           className="btn btn-secondary"
           type="button"
-          onClick={() => notify({ action: "edit-form", game: game })}
+          onClick={() => notify({ action: "edit-form", games: games })}
         >
           Edit
         </button>
@@ -38,4 +38,4 @@ function GameCard({ game, notify }) {
   );
 }
 
-export default GameCard;
+export default GamesCard;
