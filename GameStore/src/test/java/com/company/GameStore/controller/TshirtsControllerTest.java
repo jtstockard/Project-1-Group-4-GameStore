@@ -74,7 +74,7 @@ public class TshirtsControllerTest {
         tshirtsList.add(tshirts);
         tshirtsList.add(tshirts1);
         tshirtsList.add(tshirts2);
-        doReturn(tshirtsList).when(serviceLayer).findAllTshirts();
+        doReturn(tshirtsList).when(serviceLayer).getAllTshirts();
         String tshirtsJson = mapper.writeValueAsString(tshirtsList);
     }
 

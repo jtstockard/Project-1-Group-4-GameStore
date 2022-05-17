@@ -7,7 +7,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 public class GamesController {
@@ -18,14 +17,17 @@ public class GamesController {
     @RequestMapping(value="/games", method= RequestMethod.GET)
     @ResponseStatus(HttpStatus.OK)
     public List<Games> getAllGames() {
+
         return serviceLayer.getAllGames();
     }
 
     @RequestMapping(value="/games/{id}", method= RequestMethod.GET)
     @ResponseStatus(HttpStatus.OK)
-    public Optional getAGamesById() {
+    public Games getAGamesById(@PathVariable int id) {
 
-        return serviceLayer.getAGamesById();
+        Games games = (Games) serviceLayer.getAGamesById(id);
+
+        return games;
     }
 
     @RequestMapping(value="/games", method=RequestMethod.POST)
@@ -37,7 +39,7 @@ public class GamesController {
     @RequestMapping(value="/games/{studio}", method=RequestMethod.GET)
     @ResponseStatus(HttpStatus.OK)
     public List<Games> getGamesByStudio(@PathVariable String studio) {
-        return serviceLayer.getGetGamesByStudio(studio);
+        return serviceLayer.getGamesByStudio(studio);
 
     }
 
@@ -51,7 +53,7 @@ public class GamesController {
     @RequestMapping(value="/games/{title}", method=RequestMethod.GET)
     @ResponseStatus(HttpStatus.OK)
     public List<Games> getGamesByTitle(@PathVariable String title) {
-        return serviceLayer.getGetGamesByTitle(title);
+        return serviceLayer.getGamesByTitle(title);
     }
 
 
