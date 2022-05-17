@@ -7,8 +7,6 @@ import java.math.BigDecimal;
 import java.util.List;
 
 public interface ConsolesRepository extends JpaRepository<Consoles, Integer> {
-    
-    List<Consoles> findById(int id);
 
     List<Consoles> findByModel(String model);
 

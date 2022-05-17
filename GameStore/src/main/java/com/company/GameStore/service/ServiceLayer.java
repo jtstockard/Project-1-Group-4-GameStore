@@ -2,21 +2,18 @@
 package com.company.GameStore.service;
 
 import com.company.GameStore.models.Consoles;
-import com.company.GameStore.models.Invoices;
 import com.company.GameStore.models.Games;
+import com.company.GameStore.models.Invoices;
 import com.company.GameStore.models.Tshirts;
-
 import com.company.GameStore.repositories.ConsolesRepository;
 import com.company.GameStore.repositories.GamesRepository;
 import com.company.GameStore.repositories.InvoicesRepository;
 import com.company.GameStore.repositories.TshirtsRepository;
 import com.company.GameStore.viewmodel.InvoiceViewModel;
 import org.springframework.beans.factory.annotation.Autowired;
-
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
@@ -40,8 +37,8 @@ public class ServiceLayer {
         public List<Consoles> findAllConsoles() {
             return consolesRepository.findAll();
         }
-        public List<Consoles> getAConsoles(int id) {
-        return consolesRepository.findById(id);
+        public Consoles getAConsoles(int id) {
+        return consolesRepository.findById(id).get();
         }
 
         public List<Consoles> getByManufacturer(String manufacturer) {
@@ -51,16 +48,18 @@ public class ServiceLayer {
         public Consoles addConsoles(Consoles consoles) {
         return consolesRepository.save(consoles);
         }
+        public Consoles updateConsoles(Consoles consoles){
+        return consolesRepository.save(consoles);
+        }
 
 
         public void deleteConsoles(int id){
+        consolesRepository.deleteById(id);
         }
     public List<Consoles> findByManufacturer(String manufacturer) {
         return consolesRepository.findByManufacturer(manufacturer);
     }
-        public List<Consoles> updateConsoles(Consoles consoles){
-            return null;
-        }
+
 
 //    Invoice CRUD
         public List<Invoices> getAllInvoices() {

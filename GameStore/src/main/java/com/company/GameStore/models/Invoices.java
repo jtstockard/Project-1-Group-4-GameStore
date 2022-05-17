@@ -14,8 +14,8 @@ public class Invoices {
     @Column(name = "invoices_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
-    @JoinColumn(name = "Invoices")
+//    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+//    @JoinColumn(name = "Invoices")
     private int id;
     private String name;
     private String street;
