@@ -17,9 +17,9 @@ public class TshirtsController {
 
     @RequestMapping(value = "/tshirt", method = RequestMethod.GET)
     @ResponseStatus(HttpStatus.OK)
-    public List<Tshirts> getAllTshirts() { return serviceLayer.findAllTshirts();
+    public List<Tshirts> getAllTshirts() { return serviceLayer.getAllTshirts();
 
-    }
+    }}
 
 //    @RequestMapping(value = "/tshirt", method = RequestMethod.POST)
 //    @ResponseStatus(HttpStatus.CREATED)
