@@ -9,15 +9,18 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static org.mockito.Mockito.doReturn;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -80,6 +83,30 @@ public class ConsolesControllerTest {
                 .andExpect(content().json(consolesJson));
 
     }
+
+    @Test
+    public void shouldCreateConsole() throws Exception {
+
+
+//        mockMvc.perform(post("/consoles")
+//                        .content(inputConsoleString)
+//                        .contentType(MediaType.APPLICATION_JSON)
+//                ).andDo(print())
+//                .andExpect(status().isCreated())
+//                .andExpect(content().json(outputConsoleString));
+    }
+
+
+    @Test
+    public void shouldReturnByManufacturer() throws Exception {
+
+    }
+
+    @Test
+    public void shouldDeleteConsole() throws Exception {
+
+    }
+
 //
 //    @Test
 //    public void getAllTshirts() throws Exception{
