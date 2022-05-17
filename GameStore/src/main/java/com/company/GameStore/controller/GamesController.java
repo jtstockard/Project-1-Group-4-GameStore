@@ -29,29 +29,29 @@ public class GamesController {
     @RequestMapping(value="/games/{studio}", method=RequestMethod.GET)
     @ResponseStatus(HttpStatus.OK)
     public List<Games> getGamesByStudio(@PathVariable String studio) {
-        return serviceLayer.findGamesByStudio();
+        return serviceLayer.getGetGamesByStudio(studio);
     }
 
     @RequestMapping(value="/games/{rating}", method=RequestMethod.GET)
     @ResponseStatus(HttpStatus.OK)
     public List<Games> getGamesByRating(@PathVariable String rating) {
 
-        return serviceLayer.findGamesByRating();
+        return serviceLayer.getGetGamesByErsbRating(rating);
     }
 
     @RequestMapping(value="/games/{title}", method=RequestMethod.GET)
     @ResponseStatus(HttpStatus.OK)
     public List<Games> getGamesByTitle(@PathVariable String title) {
 
-        return serviceLayer.findGamesByTitle();
+        return serviceLayer.getGetGamesByTitle(title);
     }
 
 
 
     @RequestMapping(value="/games/{studio}", method=RequestMethod.PUT)
     @ResponseStatus(HttpStatus.OK)
-    public List<Games> updateGamesByStudio(@RequestBody String studio){
-        return serviceLayer.updateGamesByStudio();
+    public Games updateGamesByStudio(@RequestBody Games games){
+        return serviceLayer.updateGames(games);
     }
 
     @RequestMapping(value="/games/{rating}", method=RequestMethod.PUT)

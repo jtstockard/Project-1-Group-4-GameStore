@@ -50,12 +50,15 @@ public class ServiceLayer {
         public Consoles addConsoles(Consoles consoles) {
         return consolesRepository.save(consoles);
         }
-
-        public Consoles deleteConsole(int id){
-
-           consolesRepository.deleteById(id);
-//           Returned Null to clear error. Not sure if this will need updating.
-            return null;
+//
+//        public Consoles deleteConsole(int id){
+//
+//
+////           Returned Null to clear error. Not sure if this will need updating.
+//            consolesRepository.deleteById(id);
+//        }
+        public void deleteConsole(int id) {
+            tshirtsRepository.deleteById(id);
         }
 
         public Consoles updateConsoles(Consoles consoles){
@@ -94,9 +97,11 @@ public class ServiceLayer {
     }
     public Games addGames(Games games) {
         return gamesRepository.save(games); }
-    public void updateGames (Games games){
+    public Games updateGames (Games games){
         gamesRepository.save(games);
+        return games;
     }
+
     public void deleteGames (int id){
         gamesRepository.deleteById(id);
     }

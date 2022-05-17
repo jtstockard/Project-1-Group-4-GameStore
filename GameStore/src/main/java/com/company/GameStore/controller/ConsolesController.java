@@ -45,7 +45,8 @@ public class ConsolesController {
     @RequestMapping(value = "/consoles/{manufacturer}", method = RequestMethod.DELETE)
     @ResponseStatus(HttpStatus.OK)
     public Consoles deleteConsole(@PathVariable int id) {
-        return serviceLayer.deleteConsole(id);
+        serviceLayer.deleteConsole(id);
+        return null;
     }
 
 
