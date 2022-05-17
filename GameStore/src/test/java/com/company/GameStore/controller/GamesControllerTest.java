@@ -1,6 +1,5 @@
 package com.company.GameStore.controller;
 
-import com.company.GameStore.models.Consoles;
 import com.company.GameStore.models.Games;
 import com.company.GameStore.service.ServiceLayer;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -39,9 +38,9 @@ public class GamesControllerTest {
 
     private Games games;
 
-    private String gamessJson;
+    private String gamesJson;
 
-    private List<Games> allGames= new ArrayList<>();
+    private List<Games> allGames = new ArrayList<>();
 
     private String allGamesJson;
 
@@ -52,10 +51,10 @@ public class GamesControllerTest {
     @Before
     public void setUp() throws Exception {
         Games games = new Games();
-        games.setTitle("Grand Theft Auto V");
+        games.setTitle("GrandTheftAutoV");
         games.setEsrbRating("Mature");
         games.setDescription("Enjoy online gameplay with friends and other gamers!");
-        games.setPrice(new BigDecimal("29.99"));
+        games.setPrice(new BigDecimal("109.99"));
         games.setStudio("Rockstar");
         games.setQuantity(99);
 
@@ -65,30 +64,24 @@ public class GamesControllerTest {
     }
 
     @Test
-    public void getAllConsoles() throws Exception{
+    public void getAllGames() throws Exception {
         Games games = new Games();
-        games.setTitle("Grand Theft Auto V");
+        games.setTitle("GrandTheftAutoV");
         games.setEsrbRating("Mature");
         games.setDescription("Enjoy online gameplay with friends and other gamers!");
-        games.setPrice(new BigDecimal("29.99"));
+        games.setPrice(new BigDecimal("109.99"));
         games.setStudio("Rockstar");
         games.setQuantity(99);
 
         List<Games> gamesList = new ArrayList<>();
-
-        String consolesJson = mapper.writeValueAsString(consolesList);
+        gamesList.add(games);
+        String gamesJson = mapper.writeValueAsString(gamesList);
 
         mockMvc.perform(get("/games"))
                 .andDo(print())
                 .andExpect(status().isOk())
-                .andExpect(content().json(consolesJson));
+                .andExpect(content().json(gamesJson));
 
-    }
-
-
-
-    @Test
-    public void getAllGames() {
     }
 
     @Test
