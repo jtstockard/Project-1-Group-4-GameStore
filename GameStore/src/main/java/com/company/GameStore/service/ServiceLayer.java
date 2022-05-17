@@ -9,13 +9,13 @@ import com.company.GameStore.repositories.InvoicesRepository;
 import com.company.GameStore.repositories.TshirtsRepository;
 import com.company.GameStore.viewmodel.InvoiceViewModel;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
+import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-@Service
+@Component
 public class ServiceLayer {
     private GamesRepository gamesRepository;
     private ConsolesRepository consolesRepository;
@@ -67,7 +67,8 @@ public class ServiceLayer {
         invoiceViewModel.setId(a.getId());
 
 //       need to calculate total with
-        a.setTotal();
+
+
         
 
         return invoiceViewModel;
