@@ -69,21 +69,21 @@ public class GamesController {
     @RequestMapping(value="/games/{studio}", method=RequestMethod.DELETE)
     @ResponseStatus(HttpStatus.OK)
     public List<Games> deleteGamesByStudio(@PathVariable String studio) {
-        serviceLayer.removeGamesByStudio();
+        return serviceLayer.removeGamesByStudio();
     }
 
     @RequestMapping(value="/games/{rating}", method=RequestMethod.DELETE)
     @ResponseStatus(HttpStatus.OK)
     public List<Games> deleteGamesByRating(@PathVariable String rating) {
-        serviceLayer.removeGamesByRating();
+        return serviceLayer.removeGamesByRating();
     }
 
     @RequestMapping(value="/games/{title}", method=RequestMethod.DELETE)
-    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @ResponseStatus(HttpStatus.OK)
     public List<Games> deleteGamesByTitle(@PathVariable String title) {
-        serviceLayer.removeGamesByTitle();
-    }
+        return serviceLayer.removeGamesByTitle();
 
+    }
     }
 
 
