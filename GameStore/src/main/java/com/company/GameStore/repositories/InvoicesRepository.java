@@ -25,4 +25,5 @@ public interface InvoicesRepository extends JpaRepository<Invoices, Integer>{
     List<Invoices> findByItemId(Integer itemId);
 
     List<Invoices> findByQuantity(int quantity);
+
 }
