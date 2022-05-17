@@ -2,6 +2,7 @@
 package com.company.GameStore.service;
 
 import com.company.GameStore.models.Consoles;
+import com.company.GameStore.models.Games;
 import com.company.GameStore.repositories.ConsolesRepository;
 import com.company.GameStore.repositories.GamesRepository;
 import com.company.GameStore.repositories.InvoicesRepository;
@@ -47,6 +48,24 @@ public class ServiceLayer {
         return null;
         }
 
+        public List<Games> findAllGames() {
+        //stub that needs implementation
+            return null;
+        }
+        public List<Games> saveGame() {
+        //stub that needs implementation
+            return null;
+        }
+
+        public List<Games> findGamesByStudio() {
+            //stub that needs implementation
+            return null;
+        }
+
+        public List<Games> findGamesByRating() {
+            //stub that needs implementation
+            return null;
+        }
 
 //    @Transactional
 //    public InvoiceViewModel saveInvoices(InvoiceViewModel viewModel) {

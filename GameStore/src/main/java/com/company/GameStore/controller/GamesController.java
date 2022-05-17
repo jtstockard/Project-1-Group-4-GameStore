@@ -23,23 +23,20 @@ public class GamesController {
     @RequestMapping(value="/games", method=RequestMethod.POST)
     @ResponseStatus(HttpStatus.CREATED)
     public List<Games> createGame(@RequestBody Games games) {
-        return serviceLayer.saveGame(games);
+        return serviceLayer.saveGame();
     }
 
     @RequestMapping(value="/games/{studio}", method=RequestMethod.GET)
     @ResponseStatus(HttpStatus.OK)
     public List<Games> getGamesByStudio(@PathVariable String studio) {
-        return serviceLayer.findGameByStudio(studio);
+        return serviceLayer.findGamesByStudio();
     }
 
     @RequestMapping(value="/games/{rating}", method=RequestMethod.GET)
     @ResponseStatus(HttpStatus.OK)
-    public GamesViewModel getGameByRating(@PathVariable String rating) {
-        GamesViewModel gvm = serviceLayer.findGames(rating);
-        if (gvm == null) {
-            throw new NoRecordFoundException("Game ESRB rating " + rating + " not found.");
-        }
-        return serviceLayer.findGame(rating);
+    public List<Games> getGamesByRating(@PathVariable String rating) {
+
+        return serviceLayer.findGamesByRating();
     }
 
     @RequestMapping(value="/games/{title}", method=RequestMethod.GET)
