@@ -5,7 +5,6 @@ import com.company.GameStore.models.Consoles;
 import com.company.GameStore.models.Invoices;
 import com.company.GameStore.models.Games;
 import com.company.GameStore.models.Tshirts;
-
 import com.company.GameStore.repositories.ConsolesRepository;
 import com.company.GameStore.repositories.GamesRepository;
 import com.company.GameStore.repositories.InvoicesRepository;
@@ -135,6 +134,5 @@ public class ServiceLayer {
 
         return invoiceViewModel;
     }
-
 
 }

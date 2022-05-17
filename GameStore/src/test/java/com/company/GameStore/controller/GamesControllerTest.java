@@ -12,14 +12,17 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
+
 import java.awt.peer.ScrollbarPeer;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
+
+
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.doReturn;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -28,7 +31,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WebMvcTest(GamesController.class)
 
 public class GamesControllerTest {
-
 
     @Autowired
     private MockMvc mockMvc;
@@ -44,40 +46,50 @@ public class GamesControllerTest {
 
     private String allGamesJson;
 
-
-
     private ObjectMapper mapper = new ObjectMapper();
 
     @Before
     public void setUp() throws Exception {
         Games games = new Games();
-        games.setTitle("GrandTheftAutoV");
-        games.setEsrbRating("Mature");
-        games.setDescription("Enjoy online gameplay with friends and other gamers!");
-        games.setPrice(new BigDecimal("109.99"));
-        games.setStudio("Rockstar");
-        games.setQuantity(99);
+        games.setTitle("Mario");
+        games.setEsrbRating("E");
+        games.setDescription("Yahoo!");
+        games.setPrice(new BigDecimal("$59.99"));
+        games.setStudio("Nintendo");
+        games.setQuantity(999);
+
+        Games games1 = new Games();
+        games1.setTitle("God Of War");
+        games1.setEsrbRating("M");
+        games1.setDescription("Hades Awaits");
+        games1.setPrice(new BigDecimal("$49.99"));
+        games1.setStudio("Sony");
+        games1.setQuantity(123);
+
+        Games games2 = new Games();
+        games2.setTitle("Cuphead");
+        games2.setEsrbRating("T");
+        games2.setDescription("Rubberhose Cartoons that shoot");
+        games2.setPrice(new BigDecimal("$55.00"));
+        games2.setStudio("MDHR");
+        games2.setQuantity(101);
 
         List<Games> gamesList = new ArrayList<>();
         gamesList.add(games);
-        doReturn(gamesList).when(serviceLayer).findAllGames();
+        gamesList.add(games1);
+        gamesList.add(games2);
+        String gamesJson = mapper.writeValueAsString(gamesList);
     }
 
     @Test
-    public void getAllGames() throws Exception {
-        Games games = new Games();
-        games.setTitle("GrandTheftAutoV");
-        games.setEsrbRating("Mature");
-        games.setDescription("Enjoy online gameplay with friends and other gamers!");
-        games.setPrice(new BigDecimal("109.99"));
-        games.setStudio("Rockstar");
-        games.setQuantity(99);
+    public void getAllGames() throws Exception{
 
         List<Games> gamesList = new ArrayList<>();
         gamesList.add(games);
         String gamesJson = mapper.writeValueAsString(gamesList);
 
-        mockMvc.perform(get("/games"))
+
+        mockMvc.perform(get("/game"))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(content().json(gamesJson));
@@ -85,42 +97,98 @@ public class GamesControllerTest {
     }
 
     @Test
-    public void createGame() {
+    public void createGame() throws Exception{
+        Games games = new Games();
+        games.setTitle("Fallout");
+        games.setEsrbRating("M");
+        games.setDescription("Explore an apocalypse wasteland");
+        games.setPrice(new BigDecimal("$99.99"));
+        games.setStudio("Bethesda");
+        games.setQuantity(420);
+
+        String gamesJson = mapper.writeValueAsString(games);
+
+        mockMvc.perform(put("/game"))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(content().json(gamesJson));
+
     }
 
     @Test
-    public void getGamesByStudio() {
+    public void getGameById() throws Exception{
+
+        List<Games> gamesList = new ArrayList<>();
+        gamesList.add(games);
+        String gamesJson = mapper.writeValueAsString(gamesList);
+
+        mockMvc.perform(get("/game/{2}"))
+                .andDo(print())
+                .andExpect(status().isCreated())
+                .andExpect(content().json(gamesJson));
+
     }
 
     @Test
-    public void getGamesByRating() {
+    public void updateGame() throws Exception {
+        Games games = new Games();
+        games.setTitle("Minecraft");
+        games.setEsrbRating("E");
+        games.setDescription("Build Something");
+        games.setPrice(new BigDecimal("$0.99"));
+        games.setStudio("Microsoft");
+        games.setQuantity(10000);
+
+        List<Games> gamesList = new ArrayList<>();
+        gamesList.add(games);
+        String gamesJson = mapper.writeValueAsString(gamesList);
+
+        mockMvc.perform(post("/game/{2}"))
+                .andDo(print())
+                .andExpect(status().isCreated())
+                .andExpect(content().json(gamesJson));
     }
 
     @Test
-    public void getGamesByTitle() {
+    public void deleteGame() throws Exception {
+        mockMvc.perform(delete("/game/{2}"))
+                .andDo(print())
+                .andExpect(status().isNoContent());
     }
 
-    @Test
-    public void updateGamesByStudio() {
-    }
+//     @Test
+//     public void getGamesByStudio() {
+//     }
 
-    @Test
-    public void updateGamesByRating() {
-    }
+//     @Test
+//     public void getGamesByRating() {
+//     }
 
-    @Test
-    public void updateGamesByTitle() {
-    }
+//     @Test
+//     public void getGamesByTitle() {
+//     }
 
-    @Test
-    public void deleteGamesByStudio() {
-    }
+//     @Test
+//     public void updateGamesByStudio() {
+//     }
 
-    @Test
-    public void deleteGamesByRating() {
-    }
+//     @Test
+//     public void updateGamesByRating() {
+//     }
 
-    @Test
-    public void deleteGamesByTitle() {
-    }
+//     @Test
+//     public void updateGamesByTitle() {
+//     }
+
+//     @Test
+//     public void deleteGamesByStudio() {
+//     }
+
+//     @Test
+//     public void deleteGamesByRating() {
+//     }
+
+//     @Test
+//     public void deleteGamesByTitle() {
+//     }
 }
