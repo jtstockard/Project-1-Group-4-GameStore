@@ -1,5 +1,6 @@
 package com.company.GameStore.controller;
 
+import com.company.GameStore.models.Consoles;
 import com.company.GameStore.models.Tshirts;
 import com.company.GameStore.service.ServiceLayer;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,66 +22,30 @@ public class TshirtsController {
 
     }
 
-    @RequestMapping(value = "/tshirt", method = RequestMethod.POST)
+    @RequestMapping(value = "/tshirts", method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.CREATED)
-    public TshirtsViewModel createTshirt(@RequestBody TshirtsViewModel tshirtsViewModel) {
-        return serviceLayar.saveTshirt(tshirtsViewModel);
+    public List<Tshirts> createTshirt(@RequestBody Tshirts tshirts ) {
+        return serviceLayar.saveTshirt(tshirts);
     }
 
-    @RequestMapping(value = "/tshirt/{color}", method = RequestMethod.POST)
-    @ResponseStatus(HttpStatus.CREATED)
-    public TshirtsViewModel createTshirtByColor(@PathVariable String color) {
-        return serviceLayar.saveTshirtByColor(tshirtsViewModel);
-    }
-
-    @RequestMapping(value = "/tshirt/{size}", method = RequestMethod.POST)
-    @ResponseStatus(HttpStatus.CREATED)
-    public TshirtsViewModel createTshirtBySize(@PathVariable String color) {
-        return serviceLayar.saveTshirtBySize(tshirtsViewModel);
-    }
-
-    @RequestMapping(value="/tshirt/{color}", method=RequestMethod.GET)
+    @RequestMapping(value="/tshirts/{color}", method=RequestMethod.GET)
     @ResponseStatus(HttpStatus.OK)
-    public TshirtsViewModel getTshirtByColor(@PathVariable String color) {
-        TshirtsViewModel tvm = serviceLayer.findTshirt(color);
-        if (tvm == null) {
-            throw new NoRecordFoundException("Tshirt color " + color + " not found.");
-        }
-        return serviceLayer.findTshirt(color);
+    public List<Tshirts> getTshirtsByColor(@PathVariable String color) {
+
+        return serviceLayer.findTshirtByColor(color);
     }
 
-    @RequestMapping(value="/tshirt/{size}", method=RequestMethod.GET)
+    @RequestMapping(value="/tshirts/{size}", method=RequestMethod.GET)
     @ResponseStatus(HttpStatus.OK)
-    public TshirtsViewModel getTshirtBySize(@PathVariable String size) {
-        TshirtsViewModel tvm = serviceLayer.findTshirt(size);
-        if (tvm == null) {
-            throw new NoRecordFoundException("Tshirt size " + size + " not found.");
-        }
-        return serviceLayer.findTshirt(color);
+    public List<Tshirts> getTshirtBySize(@PathVariable String size) {
+
+        return serviceLayer.findTshirtBySize(size);
     }
 
-    @RequestMapping(value="/tshirt/{color}", method=RequestMethod.PUT)
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void updateTshirt(@PathVariable String color, @RequestBody TshirtsViewModel tvm) {
-//        if (tvm.getId() == 0) {
-//            tvm.setId(id);
-//        }
-//        if (tvm.getId() != id) {
-//            throw new InvalidRequestException("id in request body must match id in path");
-//        }
-        serviceLayer.updateTshirt(tvm);
-    }
-
-    @RequestMapping(value="/tshirt/{size}", method=RequestMethod.PUT)
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void updateTshirt(@PathVariable String size, @RequestBody TshirtsViewModel tvm) {
-//        if (tvm.getId() == 0) {
-//            tvm.setId(id);
-//        }
-//        if (tvm.getId() != id) {
-//            throw new InvalidRequestException("id in request body must match id in path");
-//        }
-        serviceLayer.updateTshirt(tvm);
+    @RequestMapping(value = "/tshirts", method =RequestMethod.PUT)
+    @ResponseStatus(HttpStatus.OK)
+    public List<Tshirts> updateTshirts(@RequestBody Tshirts tshirts) {
+        return serviceLayer.updateTshirts(tshirts);
     }
 
 
