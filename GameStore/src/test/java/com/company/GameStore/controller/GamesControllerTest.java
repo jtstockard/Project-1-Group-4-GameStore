@@ -41,9 +41,9 @@ public class GamesControllerTest {
 
     private String gamessJson;
 
-    private List<Consoles> allGames= new ArrayList<>();
+    private List<Games> allGames= new ArrayList<>();
 
-    private String allGamessJson;
+    private String allGamesJson;
 
 
 
@@ -51,35 +51,34 @@ public class GamesControllerTest {
 
     @Before
     public void setUp() throws Exception {
-        Consoles consoles = new Consoles();
-        consoles.setModel("Gamecube");
-        consoles.setManufacturer("Nintendo");
-        consoles.setMemoryAmount("128gb");
-        consoles.setPrice(new BigDecimal("199.02"));
-        consoles.setProcessor("Intel");
-        consoles.setQuantity(99);
+        Games games = new Games();
+        games.setTitle("Grand Theft Auto V");
+        games.setEsrbRating("Mature");
+        games.setDescription("Enjoy online gameplay with friends and other gamers!");
+        games.setPrice(new BigDecimal("29.99"));
+        games.setStudio("Rockstar");
+        games.setQuantity(99);
 
-        List<Consoles> consolesList = new ArrayList<>();
-        consolesList.add(consoles);
-        doReturn(consolesList).when(serviceLayer).findAllConsoles();
+        List<Games> gamesList = new ArrayList<>();
+        gamesList.add(games);
+        doReturn(gamesList).when(serviceLayer).findAllGames();
     }
 
     @Test
     public void getAllConsoles() throws Exception{
-        Consoles consoles = new Consoles();
-        consoles.setModel("Gamecube");
-        consoles.setManufacturer("Nintendo");
-        consoles.setMemoryAmount("128gb");
-        consoles.setPrice(new BigDecimal("199.02"));
-        consoles.setProcessor("Intel");
-        consoles.setQuantity(99);
+        Games games = new Games();
+        games.setTitle("Grand Theft Auto V");
+        games.setEsrbRating("Mature");
+        games.setDescription("Enjoy online gameplay with friends and other gamers!");
+        games.setPrice(new BigDecimal("29.99"));
+        games.setStudio("Rockstar");
+        games.setQuantity(99);
 
-        List<Consoles> consolesList = new ArrayList<>();
-        consolesList.add(consoles);
+        List<Games> gamesList = new ArrayList<>();
 
         String consolesJson = mapper.writeValueAsString(consolesList);
 
-        mockMvc.perform(get("/consoles"))
+        mockMvc.perform(get("/games"))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(content().json(consolesJson));
