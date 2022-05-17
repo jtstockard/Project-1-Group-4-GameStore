@@ -1,7 +1,5 @@
 package com.company.GameStore.controller;
 
-import com.company.GameStore.models.Consoles;
-import com.company.GameStore.models.Games;
 import com.company.GameStore.models.Tshirts;
 import com.company.GameStore.service.ServiceLayer;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -68,5 +66,3 @@ public class TshirtsController {
 //        return serviceLayer.removeTshirtsByColor();
 //    }
 
-
-}

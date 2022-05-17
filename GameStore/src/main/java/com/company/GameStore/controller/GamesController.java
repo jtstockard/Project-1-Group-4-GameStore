@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 public class GamesController {
@@ -20,6 +21,13 @@ public class GamesController {
         return serviceLayer.getAllGames();
     }
 
+    @RequestMapping(value="/games/{id}", method= RequestMethod.GET)
+    @ResponseStatus(HttpStatus.OK)
+    public Optional getAGamesById() {
+
+        return serviceLayer.getAGamesById();
+    }
+
     @RequestMapping(value="/games", method=RequestMethod.POST)
     @ResponseStatus(HttpStatus.CREATED)
     public Games createGame(@RequestBody Games games) {
@@ -30,19 +38,19 @@ public class GamesController {
     @ResponseStatus(HttpStatus.OK)
     public List<Games> getGamesByStudio(@PathVariable String studio) {
         return serviceLayer.getGetGamesByStudio(studio);
+
     }
 
     @RequestMapping(value="/games/{rating}", method=RequestMethod.GET)
     @ResponseStatus(HttpStatus.OK)
     public List<Games> getGamesByRating(@PathVariable String rating) {
 
-        return serviceLayer.getGetGamesByErsbRating(rating);
+        return serviceLayer.getGamesByErsbRating(rating);
     }
 
     @RequestMapping(value="/games/{title}", method=RequestMethod.GET)
     @ResponseStatus(HttpStatus.OK)
     public List<Games> getGamesByTitle(@PathVariable String title) {
-
         return serviceLayer.getGetGamesByTitle(title);
     }
 
@@ -60,34 +68,7 @@ public class GamesController {
         serviceLayer.deleteGames(id);
         return deleteGames(id);
     }
-
-
 }
-
-//    @RequestMapping(value="/games/{rating}", method=RequestMethod.PUT)
-//    @ResponseStatus(HttpStatus.OK)
-//    public List<Games> updateGamesByRating(@PathVariable String rating) {
-//        return serviceLayer.updateGames(rating);
-//    }
-//
-//    @RequestMapping(value="/games/{title}", method=RequestMethod.PUT)
-//    @ResponseStatus(HttpStatus.OK)
-//    public List<Games> updateGamesByTitle(@PathVariable String title) {
-//        return serviceLayer.updateGamesByTitle();
-//    }
-
-//    @RequestMapping(value="/games/{studio}", method=RequestMethod.DELETE)
-//    @ResponseStatus(HttpStatus.OK)
-//    public List<Games> deleteGamesByStudio(@PathVariable String studio) {
-//        return serviceLayer.removeGamesByStudio();
-//    }
-//
-//    @RequestMapping(value="/games/{rating}", method=RequestMethod.DELETE)
-//    @ResponseStatus(HttpStatus.OK)
-//    public List<Games> deleteGamesByRating(@PathVariable String rating) {
-//        return serviceLayer.removeGamesByRating();
-//    }
-
 
 
 

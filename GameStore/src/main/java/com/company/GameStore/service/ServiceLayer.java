@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
@@ -50,22 +51,16 @@ public class ServiceLayer {
         public Consoles addConsoles(Consoles consoles) {
         return consolesRepository.save(consoles);
         }
-//
-//        public Consoles deleteConsole(int id){
-//
-//
-////           Returned Null to clear error. Not sure if this will need updating.
-//            consolesRepository.deleteById(id);
-//        }
-        public void deleteConsole(int id) {
-            tshirtsRepository.deleteById(id);
+
+
+        public void deleteConsoles(int id){
         }
-
-        public Consoles updateConsoles(Consoles consoles){
-        return consolesRepository.save(consoles);
-
-
+    public List<Consoles> findByManufacturer(String manufacturer) {
+        return consolesRepository.findByManufacturer(manufacturer);
     }
+        public List<Consoles> updateConsoles(Consoles consoles){
+            return null;
+        }
 
 //    Invoice CRUD
         public List<Invoices> getAllInvoices() {
@@ -84,13 +79,13 @@ public class ServiceLayer {
     public List<Games> getAllGames() {
         return gamesRepository.findAll();
     }
-    public List<Games> getGetGamesByStudio(String studio){
+    public List<Games> getGamesByStudio(String studio){
         return gamesRepository.findByStudio(studio);
     }
-    public List<Games> getGetGamesByErsbRating(String ersbRating){
+    public List<Games> getGamesByErsbRating(String ersbRating){
         return gamesRepository.findByEsrbRating(ersbRating);
     }
-    public List<Games> getGetGamesByTitle(String title){
+    public List<Games> getGamesByTitle(String title){
         return gamesRepository.findByTitle(title);
     }
     public List<Games> getAGamesById(int id){
@@ -107,6 +102,28 @@ public class ServiceLayer {
     public void deleteGames (int id){
         gamesRepository.deleteById(id);
     }
+    public List<Games> findAllGames() {
+        return gamesRepository.findAll();
+    }
+
+//    public List<Games> updateGamesByStudio() {
+//        gamesRepository.save();
+//    }
+//
+//    public List<Games> updateGamesByRating() {
+//    }
+//
+//    public List<Games> updateGamesByTitle() {
+//    }
+//
+//    public List<Games> removeGamesByStudio() {
+//    }
+//
+//    public List<Games> removeGamesByRating() {
+//    }
+//
+//    public List<Games> removeGamesByTitle() {
+//    }
 
 
 
@@ -138,6 +155,7 @@ public class ServiceLayer {
 
 
 
+
   
     @Transactional
     public InvoiceViewModel saveInvoices(InvoiceViewModel invoiceViewModel) {
@@ -163,5 +181,5 @@ public class ServiceLayer {
         return invoiceViewModel;
     }
 
-
 }
+

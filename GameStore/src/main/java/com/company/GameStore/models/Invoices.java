@@ -4,9 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
-import java.util.HashSet;
 import java.util.Objects;
-import java.util.Set;
 
 @Entity
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
@@ -18,9 +16,6 @@ public class Invoices {
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     @JoinColumn(name = "Invoices")
-    private Set<Games> games = new HashSet<>();
-    private Set<Consoles> consoles = new HashSet<>();
-    private Set<Tshirts> tshirts = new HashSet<>();
     private int id;
     private String name;
     private String street;
@@ -35,10 +30,7 @@ public class Invoices {
     public Invoices() {
     }
 
-    public Invoices(Set<Games> games, Set<Consoles> consoles, Set<Tshirts> tshirts, int id, String name, String street, String city, String state, String zipCode, String itemType, Integer itemId, int quantity, BigDecimal total) {
-        this.games = games;
-        this.consoles = consoles;
-        this.tshirts = tshirts;
+    public Invoices(int id, String name, String street, String city, String state, String zipCode, String itemType, Integer itemId, int quantity, BigDecimal total) {
         this.id = id;
         this.name = name;
         this.street = street;
@@ -49,30 +41,6 @@ public class Invoices {
         this.itemId = itemId;
         this.quantity = quantity;
         this.total = total;
-    }
-
-    public Set<Games> getGames() {
-        return games;
-    }
-
-    public void setGames(Set<Games> games) {
-        this.games = games;
-    }
-
-    public Set<Consoles> getConsoles() {
-        return consoles;
-    }
-
-    public void setConsoles(Set<Consoles> consoles) {
-        this.consoles = consoles;
-    }
-
-    public Set<Tshirts> getTshirts() {
-        return tshirts;
-    }
-
-    public void setTshirts(Set<Tshirts> tshirts) {
-        this.tshirts = tshirts;
     }
 
     public int getId() {
@@ -160,21 +128,18 @@ public class Invoices {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Invoices invoices = (Invoices) o;
-        return id == invoices.id && quantity == invoices.quantity && Objects.equals(games, invoices.games) && Objects.equals(consoles, invoices.consoles) && Objects.equals(tshirts, invoices.tshirts) && Objects.equals(name, invoices.name) && Objects.equals(street, invoices.street) && Objects.equals(city, invoices.city) && Objects.equals(state, invoices.state) && Objects.equals(zipCode, invoices.zipCode) && Objects.equals(itemType, invoices.itemType) && Objects.equals(itemId, invoices.itemId) && Objects.equals(total, invoices.total);
+        return id == invoices.id && quantity == invoices.quantity && Objects.equals(name, invoices.name) && Objects.equals(street, invoices.street) && Objects.equals(city, invoices.city) && Objects.equals(state, invoices.state) && Objects.equals(zipCode, invoices.zipCode) && Objects.equals(itemType, invoices.itemType) && Objects.equals(itemId, invoices.itemId) && Objects.equals(total, invoices.total);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(games, consoles, tshirts, id, name, street, city, state, zipCode, itemType, itemId, quantity, total);
+        return Objects.hash(id, name, street, city, state, zipCode, itemType, itemId, quantity, total);
     }
 
     @Override
     public String toString() {
         return "Invoices{" +
-                "games=" + games +
-                ", consoles=" + consoles +
-                ", tshirts=" + tshirts +
-                ", id=" + id +
+                "id=" + id +
                 ", name='" + name + '\'' +
                 ", street='" + street + '\'' +
                 ", city='" + city + '\'' +
