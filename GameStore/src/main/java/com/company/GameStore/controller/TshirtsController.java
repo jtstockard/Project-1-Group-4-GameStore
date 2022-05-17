@@ -1,28 +1,31 @@
-//package com.company.GameStore.controller;
-//
-//import com.company.GameStore.models.Tshirts;
-//import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.http.HttpStatus;
-//import org.springframework.web.bind.annotation.*;
-//
-//@RestController
-//public class TshirtsController {
-//
-//    @Autowired
-//    private ServiceLayar serviceLayar;
-//
-//    @RequestMapping(value = "/tshirt", method = RequestMethod.GET)
-//    @ResponseStatus(HttpStatus.OK)
-//    public List<TshirtsViewModel> getAllTshirts() {
-//        return serviceLayar.findAllTshirts();
-//
-//    }
-//
+package com.company.GameStore.controller;
+
+import com.company.GameStore.models.Tshirts;
+import com.company.GameStore.service.ServiceLayer;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+@RestController
+public class TshirtsController {
+
+    @Autowired
+    private ServiceLayer serviceLayer;
+
+    @RequestMapping(value = "/tshirt", method = RequestMethod.GET)
+    @ResponseStatus(HttpStatus.OK)
+    public List<Tshirts> getAllTshirts() { return serviceLayer.findAllTshirts();
+
+    }
+
 //    @RequestMapping(value = "/tshirt", method = RequestMethod.POST)
 //    @ResponseStatus(HttpStatus.CREATED)
-//    public TshirtsViewModel createTshirt(@RequestBody TshirtsViewModel tshirtsViewModel) {
-//        return serviceLayar.saveTshirt(tshirtsViewModel);
+//    public Tshirts createTshirt(@RequestBody Tshirts tshirts) {
+//        return serviceLayer.saveTshirt(tshirts);
 //    }
+
 //
 //    @RequestMapping(value = "/tshirt/{color}", method = RequestMethod.POST)
 //    @ResponseStatus(HttpStatus.CREATED)
@@ -93,4 +96,4 @@
 //    public void deleteTshirt(@PathVariable String size) {
 //        serviceLayer.removeTshirt(size);
 //    }
-//}
+}
