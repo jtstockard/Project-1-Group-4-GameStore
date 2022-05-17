@@ -82,6 +82,19 @@ public class ServiceLayer {
         public List<Games> updateGamesByTitle() {
             return null;
         }
+        public List<Games> removeGamesByStudio() {
+        return null;
+        }
+
+        public List<Games> removeGamesByRating() {
+            return null;
+        }
+
+        public List<Games> removeGamesByTitle() {
+            return null;
+        }
+
+
 
 
 
