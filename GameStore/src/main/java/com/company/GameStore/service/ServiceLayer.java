@@ -121,9 +121,12 @@ public class ServiceLayer {
         return tshirtsRepository.save(tshirts);
     }
 
-    public List<Tshirts> getTshirtsByColor(String color){
+    public List<Tshirts> getTshirtsByColor(String color) {
         return tshirtsRepository.findByColor(color);
-
+    }
+    public List<Tshirts> getTshirtsBySize(String size) {
+        return tshirtsRepository.findBySize(size);
+    }
 
     public void updateTshirts(Tshirts tshirts) {
         tshirtsRepository.save(tshirts);

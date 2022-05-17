@@ -40,7 +40,7 @@ public class TshirtsController {
     @ResponseStatus(HttpStatus.OK)
     public List<Tshirts> getTshirtBySize(@PathVariable String size) {
 
-        return serviceLayer.findTshirtsBySize();
+        return serviceLayer.getTshirtsBySize(size);
     }
 
     @RequestMapping(value="/tshirts/{color}", method=RequestMethod.PUT)
@@ -49,11 +49,6 @@ public class TshirtsController {
         return serviceLayer.updateTshirtsByColor();
     }
 
-    @RequestMapping(value="/tshirts/{size}", method=RequestMethod.PUT)
-    @ResponseStatus(HttpStatus.OK)
-    public List<Tshirts> updateTshirtsBySize(@PathVariable String size) {
-        return serviceLayer.updateTshirtsBySize();
-    }
 
     @RequestMapping(value="/tshirts/{color}", method=RequestMethod.DELETE)
     @ResponseStatus(HttpStatus.OK)
@@ -61,10 +56,6 @@ public class TshirtsController {
         return serviceLayer.removeTshirtsByColor();
     }
 
-    @RequestMapping(value="/tshirts/{size}", method=RequestMethod.DELETE)
-    @ResponseStatus(HttpStatus.OK)
-    public List<Tshirts> deleteTshirtsBySize(@PathVariable String size) {
-        return serviceLayer.removeTshirtsBySize();
-    }
+
 
 }
