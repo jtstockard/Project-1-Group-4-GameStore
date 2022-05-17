@@ -3,6 +3,9 @@ package com.company.GameStore.service;
 
 import com.company.GameStore.models.Consoles;
 import com.company.GameStore.models.Invoices;
+import com.company.GameStore.models.Games;
+import com.company.GameStore.models.Tshirts;
+
 import com.company.GameStore.repositories.ConsolesRepository;
 import com.company.GameStore.repositories.GamesRepository;
 import com.company.GameStore.repositories.InvoicesRepository;
@@ -13,6 +16,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 
+import java.awt.peer.CanvasPeer;
 import java.util.List;
 
 @Service
@@ -29,6 +33,7 @@ public class ServiceLayer {
         this.tshirtsRepository = tshirtsRepository;
         this.invoicesRepository = invoicesRepository;
     }
+
 
 //    Console CRUD
         public List<Consoles> findAllConsoles() {
@@ -49,9 +54,9 @@ public class ServiceLayer {
         }
 
 
-    @Transactional
-    public InvoiceViewModel saveInvoices(InvoiceViewModel invoiceViewModel) {
-//
+
+      @Transactional
+      public InvoiceViewModel saveInvoices(InvoiceViewModel viewModel) {
 //        // Persist Invoice
         Invoices a = new Invoices();
         a.setId(invoiceViewModel.getId());
