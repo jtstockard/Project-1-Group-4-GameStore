@@ -54,36 +54,40 @@ public class GamesController {
         return serviceLayer.updateGames(games);
     }
 
-    @RequestMapping(value="/games/{rating}", method=RequestMethod.PUT)
-    @ResponseStatus(HttpStatus.OK)
-    public List<Games> updateGamesByRating(@PathVariable String rating) {
-        return serviceLayer.updateGames(rating);
-    }
-
-    @RequestMapping(value="/games/{title}", method=RequestMethod.PUT)
-    @ResponseStatus(HttpStatus.OK)
-    public List<Games> updateGamesByTitle(@PathVariable String title) {
-        return serviceLayer.updateGamesByTitle();
-    }
-
-    @RequestMapping(value="/games/{studio}", method=RequestMethod.DELETE)
-    @ResponseStatus(HttpStatus.OK)
-    public List<Games> deleteGamesByStudio(@PathVariable String studio) {
-        return serviceLayer.removeGamesByStudio();
-    }
-
-    @RequestMapping(value="/games/{rating}", method=RequestMethod.DELETE)
-    @ResponseStatus(HttpStatus.OK)
-    public List<Games> deleteGamesByRating(@PathVariable String rating) {
-        return serviceLayer.removeGamesByRating();
-    }
-
     @RequestMapping(value="/games/{title}", method=RequestMethod.DELETE)
     @ResponseStatus(HttpStatus.OK)
-    public List<Games> deleteGamesByTitle(@PathVariable String title) {
-        return serviceLayer.removeGamesByTitle();
+    public Games deleteGames(@PathVariable int id) {
+        serviceLayer.deleteGames(id);
+        return null;
+    }
 
-    }
-    }
+
+}
+
+//    @RequestMapping(value="/games/{rating}", method=RequestMethod.PUT)
+//    @ResponseStatus(HttpStatus.OK)
+//    public List<Games> updateGamesByRating(@PathVariable String rating) {
+//        return serviceLayer.updateGames(rating);
+//    }
+//
+//    @RequestMapping(value="/games/{title}", method=RequestMethod.PUT)
+//    @ResponseStatus(HttpStatus.OK)
+//    public List<Games> updateGamesByTitle(@PathVariable String title) {
+//        return serviceLayer.updateGamesByTitle();
+//    }
+
+//    @RequestMapping(value="/games/{studio}", method=RequestMethod.DELETE)
+//    @ResponseStatus(HttpStatus.OK)
+//    public List<Games> deleteGamesByStudio(@PathVariable String studio) {
+//        return serviceLayer.removeGamesByStudio();
+//    }
+//
+//    @RequestMapping(value="/games/{rating}", method=RequestMethod.DELETE)
+//    @ResponseStatus(HttpStatus.OK)
+//    public List<Games> deleteGamesByRating(@PathVariable String rating) {
+//        return serviceLayer.removeGamesByRating();
+//    }
+
+
 
 

@@ -98,6 +98,7 @@ public class ServiceLayer {
     }
     public Games addGames(Games games) {
         return gamesRepository.save(games); }
+
     public Games updateGames (Games games){
         gamesRepository.save(games);
         return games;
@@ -119,6 +120,11 @@ public class ServiceLayer {
     public Tshirts addATshirts(Tshirts tshirts){
         return tshirtsRepository.save(tshirts);
     }
+
+    public List<Tshirts> getTshirtsByColor(String color){
+        return tshirtsRepository.findByColor(color);
+
+
     public void updateTshirts(Tshirts tshirts) {
         tshirtsRepository.save(tshirts);
     }
