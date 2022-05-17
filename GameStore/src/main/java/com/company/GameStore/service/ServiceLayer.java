@@ -51,8 +51,7 @@ public class ServiceLayer {
 
     @Transactional
     public InvoiceViewModel saveInvoices(InvoiceViewModel invoiceViewModel) {
-//
-//        // Persist Invoice
+
         Invoices a = new Invoices();
         a.setId(invoiceViewModel.getId());
         a.setName(invoiceViewModel.getName());
@@ -67,6 +66,8 @@ public class ServiceLayer {
         a = invoicesRepository.save(a);
         invoiceViewModel.setId(a.getId());
 
+//       need to calculate total with
+        a.setTotal();
         
 
         return invoiceViewModel;
