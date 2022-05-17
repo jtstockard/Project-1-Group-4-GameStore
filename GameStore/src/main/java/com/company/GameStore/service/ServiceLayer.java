@@ -44,9 +44,14 @@ public class ServiceLayer {
         return consolesRepository.findById(id);
         }
 
+        public List<Consoles> getByManufacturer(String manufacturer) {
+            return consolesRepository.findByManufacturer(manufacturer);
+        }
+
         public Consoles addConsoles(Consoles consoles) {
         return consolesRepository.save(consoles);
         }
+
 
         public void deleteConsoles(int id){
         }
@@ -84,14 +89,18 @@ public class ServiceLayer {
         return gamesRepository.findByTitle(title);
     }
     public List<Games> getAGamesById(int id){
-        return GamesRepository.findById(id);
+        return gamesRepository.findById(id);
     }
     public Games addGames(Games games) {
         return gamesRepository.save(games); }
-    public void updateGames (Games games){
+
+    public Games updateGames (Games games){
         gamesRepository.save(games);
+        return games;
     }
+
     public void deleteGames (int id){
+        gamesRepository.deleteById(id);
     }
     public List<Games> findAllGames() {
         return gamesRepository.findAll();
@@ -128,8 +137,17 @@ public class ServiceLayer {
     public Tshirts addATshirts(Tshirts tshirts){
         return tshirtsRepository.save(tshirts);
     }
-    public void updateTshirts(Tshirts tshirts) {
+
+    public List<Tshirts> getTshirtsByColor(String color) {
+        return tshirtsRepository.findByColor(color);
+    }
+    public List<Tshirts> getTshirtsBySize(String size) {
+        return tshirtsRepository.findBySize(size);
+    }
+
+    public Tshirts updateTshirts(Tshirts tshirts) {
         tshirtsRepository.save(tshirts);
+        return tshirts;
     }
     public void deleteTshirts(int id) {
         tshirtsRepository.deleteById(id);

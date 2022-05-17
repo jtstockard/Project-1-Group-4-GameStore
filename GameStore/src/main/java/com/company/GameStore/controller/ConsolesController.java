@@ -24,28 +24,29 @@ public class ConsolesController {
 
     @RequestMapping(value="/consoles", method=RequestMethod.POST)
     @ResponseStatus(HttpStatus.CREATED)
-    public List<Consoles> createConsole(@RequestBody Consoles consoles) {
-        return (List<Consoles>) serviceLayer.addConsoles(consoles);
+    public Consoles createConsole(@RequestBody Consoles consoles) {
+        return serviceLayer.addConsoles(consoles);
     }
 
     @RequestMapping(value="/consoles/{manufacturer}", method=RequestMethod.GET)
     @ResponseStatus(HttpStatus.OK)
     public List<Consoles> getByManufacturer(@PathVariable String manufacturer) {
 
-        return serviceLayer.findByManufacturer(manufacturer);
+        return serviceLayer.getByManufacturer(manufacturer);
 
 
     }
     @RequestMapping(value = "/consoles", method =RequestMethod.PUT)
     @ResponseStatus(HttpStatus.OK)
-    public List<Consoles> updateConsole(@RequestBody Consoles consoles) {
+    public Consoles updateConsoles(@RequestBody Consoles consoles) {
         return serviceLayer.updateConsoles(consoles);
     }
 
     @RequestMapping(value = "/consoles/{manufacturer}", method = RequestMethod.DELETE)
     @ResponseStatus(HttpStatus.OK)
-    public List<Consoles> deleteConsole(@PathVariable String manufacturer) {
-        return serviceLayer.findByManufacturer(manufacturer);
+    public Consoles deleteConsole(@PathVariable int id) {
+        serviceLayer.deleteConsole(id);
+        return null;
     }
 
 

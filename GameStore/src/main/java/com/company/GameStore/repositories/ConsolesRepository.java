@@ -22,4 +22,5 @@ public interface ConsolesRepository extends JpaRepository<Consoles, Integer> {
 
     List<Consoles> findByQuantity(int quantity);
 
+
 }
