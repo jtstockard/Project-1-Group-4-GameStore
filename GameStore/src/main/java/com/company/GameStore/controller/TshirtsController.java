@@ -55,16 +55,16 @@ public class TshirtsController {
         return serviceLayer.updateTshirtsBySize();
     }
 
-    @RequestMapping(value="/games/{studio}", method=RequestMethod.DELETE)
+    @RequestMapping(value="/tshirts/{color}", method=RequestMethod.DELETE)
     @ResponseStatus(HttpStatus.OK)
-    public List<Games> deleteGamesByStudio(@PathVariable String studio) {
-        return serviceLayer.removeGamesByStudio();
+    public List<Tshirts> deleteTshirtsByColor(@PathVariable String color) {
+        return serviceLayer.removeTshirtsByColor();
     }
 
-    @RequestMapping(value="/games/{rating}", method=RequestMethod.DELETE)
+    @RequestMapping(value="/tshirts/{size}", method=RequestMethod.DELETE)
     @ResponseStatus(HttpStatus.OK)
-    public List<Games> deleteGamesByRating(@PathVariable String rating) {
-        return serviceLayer.removeGamesByRating();
+    public List<Tshirts> deleteTshirtsBySize(@PathVariable String size) {
+        return serviceLayer.removeTshirtsBySize();
     }
 
 }
