@@ -12,14 +12,14 @@ import com.company.GameStore.repositories.InvoicesRepository;
 import com.company.GameStore.repositories.TshirtsRepository;
 import com.company.GameStore.viewmodel.InvoiceViewModel;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
+import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
 
-@Service
+@Component
 public class ServiceLayer {
     private GamesRepository gamesRepository;
     private ConsolesRepository consolesRepository;
@@ -111,10 +111,9 @@ public class ServiceLayer {
 
 
 
-
-      @Transactional
-      public InvoiceViewModel saveInvoices(InvoiceViewModel invoiceViewModel) {
-//        // Persist Invoice
+  
+    @Transactional
+    public InvoiceViewModel saveInvoices(InvoiceViewModel invoiceViewModel) {
         Invoices a = new Invoices();
         a.setId(invoiceViewModel.getId());
         a.setName(invoiceViewModel.getName());
@@ -125,8 +124,14 @@ public class ServiceLayer {
         a.setItemType(invoiceViewModel.getItemType());
         a.setItemId(invoiceViewModel.getItemId());
         a.setQuantity(invoiceViewModel.getQuantity());
+        a.setTotal(invoiceViewModel.getTotal());
         a = invoicesRepository.save(a);
         invoiceViewModel.setId(a.getId());
+
+//       need to calculate total with
+
+
+        
 
         return invoiceViewModel;
     }
