@@ -4,10 +4,7 @@ import com.company.GameStore.models.Consoles;
 import com.company.GameStore.service.ServiceLayer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -25,21 +22,18 @@ public class ConsolesController {
         return serviceLayer.findAllConsoles();
     }
 
-//    @RequestMapping(value="/console", method=RequestMethod.POST)
-//    @ResponseStatus(HttpStatus.CREATED)
-//    public Consoles createConsole(@RequestBody Consoles Consoles) {
-//        return serviceLayer.saveConsole(Consoles);
-//    }
-//
-//    @RequestMapping(value="/console/{manufacturer}", method=RequestMethod.GET)
-//    @ResponseStatus(HttpStatus.OK)
-//    public Consoles getConsoleById(@PathVariable String manufacturer) {
-//        Consoles cvm = serviceLayer.findConsole(manufacturer);
-//        if (cvm == null) {
-//            throw new NoRecordFoundException("Console manufacturer " + manufacturer + " not found.");
-//        }
-//        return serviceLayer.findConsole(manufacturer);
-//    }
+    @RequestMapping(value="/consoles", method=RequestMethod.POST)
+    @ResponseStatus(HttpStatus.CREATED)
+    public List<Consoles> createConsole(@RequestBody Consoles consoles) {
+        return serviceLayer.saveConsole(consoles);
+    }
+
+    @RequestMapping(value="/consoles/{manufacturer}", method=RequestMethod.GET)
+    @ResponseStatus(HttpStatus.OK)
+    public List<Consoles> getByManufacturer(@RequestBody String manufacturer) {
+
+        return serviceLayer.findByManufacturer(manufacturer);
+    }
 //
 //    @RequestMapping(value="/console/{manufacturer}", method=RequestMethod.PUT)
 //    @ResponseStatus(HttpStatus.NO_CONTENT)

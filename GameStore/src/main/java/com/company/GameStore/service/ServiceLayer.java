@@ -25,10 +25,22 @@ public class ServiceLayer {
         this.invoicesRepository = invoicesRepository;
     }
 
-    public List<Consoles> findAllConsoles() {
-    //stub that needs implementation
-    return null;
+        public List<Consoles> findAllConsoles() {
+        //stub that needs implementation
+        return null;
         }
+
+        public List<Consoles> saveConsole(Consoles consoles) {
+        return null;
+        }
+
+        public List<Consoles> findByManufacturer(String manufacturer) {
+        return null;
+        }
+
+
+
+
 //    @Transactional
 //    public InvoiceViewModel saveInvoices(InvoiceViewModel viewModel) {
 //
