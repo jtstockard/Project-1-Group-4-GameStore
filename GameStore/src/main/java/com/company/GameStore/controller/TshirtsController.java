@@ -14,6 +14,7 @@ public class TshirtsController {
     @Autowired
     private ServiceLayer serviceLayer;
 
+
     @RequestMapping(value = "/tshirt", method = RequestMethod.GET)
     @ResponseStatus(HttpStatus.OK)
     public List<Tshirts> getAllTshirts() { return serviceLayer.findAllTshirts();
@@ -96,4 +97,4 @@ public class TshirtsController {
 //    public void deleteTshirt(@PathVariable String size) {
 //        serviceLayer.removeTshirt(size);
 //    }
-}
+

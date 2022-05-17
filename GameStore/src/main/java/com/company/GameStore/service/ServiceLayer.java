@@ -2,23 +2,29 @@
 package com.company.GameStore.service;
 
 import com.company.GameStore.models.Consoles;
+import com.company.GameStore.models.Invoices;
 import com.company.GameStore.models.Games;
 import com.company.GameStore.models.Tshirts;
 import com.company.GameStore.repositories.ConsolesRepository;
 import com.company.GameStore.repositories.GamesRepository;
 import com.company.GameStore.repositories.InvoicesRepository;
 import com.company.GameStore.repositories.TshirtsRepository;
+import com.company.GameStore.viewmodel.InvoiceViewModel;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+
+import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
-@Service
+@Component
 public class ServiceLayer {
     private GamesRepository gamesRepository;
     private ConsolesRepository consolesRepository;
     private TshirtsRepository tshirtsRepository;
     private InvoicesRepository invoicesRepository;
+
     @Autowired
     public ServiceLayer(GamesRepository gamesRepository, ConsolesRepository consolesRepository, TshirtsRepository tshirtsRepository, InvoicesRepository invoicesRepository) {
         this.gamesRepository = gamesRepository;
@@ -27,103 +33,106 @@ public class ServiceLayer {
         this.invoicesRepository = invoicesRepository;
     }
 
-    public List<Consoles> findAllConsoles() {
-    //stub that needs implementation
-        return null;
+
+//    Console CRUD
+        public List<Consoles> findAllConsoles() {
+            return consolesRepository.findAll();
+        }
+        public List<Consoles> getAConsoles(int id) {
+        return consolesRepository.findById(id);
         }
 
-    public List<Games> findAllGames() {
-        return null;
+        public Consoles addConsoles(Consoles consoles) {
+        return consolesRepository.save(consoles);
+        }
+
+        public void deleteConsole(int id){
+        }
+
+        public void updateConsoles( Consoles consoles){
+        }
+
+//    Invoice CRUD
+        public List<Invoices> getAllInvoices() {
+        return invoicesRepository.findAll();
+        }
+
+        public Optional<Invoices> getInvoicesById(int id) {
+         return invoicesRepository.findById(id);
+         }
+
+        public Invoices addInvoices(Invoices invoices) {
+        return invoicesRepository.save(invoices);
+         }
+
+//    Game CRUD
+    public List<Games> getAllGames() {
+        return gamesRepository.findAll();
     }
-    public static List<Tshirts> findAllTshirts() {
-        return null;
+    public List<Games> getGetGamesByStudio(String studio){
+        return gamesRepository.findByStudio(studio);
     }
-//    @Transactional
-//    public InvoiceViewModel saveInvoices(InvoiceViewModel viewModel) {
-//
-//        // Persist Invoice
-//        Invoices a = new Invoices();
-//        a.setId(viewModel.getId());
-//        a.setName(viewModel.getName());
-//        a.setStreet(viewModel.getStreet());
-//        a.setCity(viewModel.getCity());
-//        a.setState(viewModel.getState());
-//        a.setZipCode(viewModel.getZipCode());
-//        a.setItemType(viewModel.getItemType());
-//        a.setItemId(viewModel.getItemId());
-//        a.setQuantity(viewModel.getQuantity());
-//        a = invoicesRepository.save(a);
-//        viewModel.setId(a.getId());
-//
-//        List<Games> game = viewModel.getGames();
-//
-//        game.stream()
-//                .forEach(t ->
-//                {
-//                    t.setInvoicesId(viewModel.getId());
-//                    gamesRepository.save(t);
-//                });
-//
-//        game = gamesRepository.findAllGamesByInvoicesId(viewModel.getId());
-//        viewModel.setGames(game);
-//
-//        List<Consoles> console = viewModel.getConsoles();
-//
-//        console.stream()
-//                .forEach(t ->
-//                {
-//                    t.setInvoicesId(viewModel.getId());
-//                    consolesRepository.save(t);
-//                });
-//
-//        console = consolesRepository.findAllConsolesByInvoicesId(viewModel.getId());
-//        viewModel.setConsoles(console);
-//
-//        List<Tshirts> tshirt = viewModel.getTshirts();
-//
-//        tshirt.stream()
-//                .forEach(t ->
-//                {
-//                    t.setInvoicesId(viewModel.getId());
-//                    tshirtRepository.save(t);
-//                });
-//
-//        tshirt = tshirtRepository.findAllTshirtsByInvoicesId(viewModel.getId());
-//        viewModel.setTshirts(tshirt);
-//
-//        return viewModel;
-//    }
-//    public InvoiceViewModel findInvoices(int id) {
-//
-//        Optional<Invoices> invoices = invoicesRepository.findById(id);
-//
-//        return invoices.isPresent() ? buildInvoiceViewModel(invoices.get()) : null;
-//    }
-//    private InvoiceViewModel buildInvoiceViewModel(Invoices album) {
-//
-//        // Get the associated game
-//        Optional<Games> game = gamesRepository.findById(games.getGamesId());
-//
-//        // Get the associated console
-//        Optional<Consoles> console = consolesRepository.findById(consoles.getConsolesId());
-//
-//        // Get the tracks associated with the album
-//        Optional<Tshirts> tshirt = tshirtsRepository.findById(tshirts.getTshirtsId());
-//
-//        // Assemble the AlbumViewModel
-//        InvoiceViewModel avm = new invoiceViewModel();
-//        avm.setId(invoices.getId());
-//        avm.setName(invoices.getName());
-//        avm.setStreet(invoices.getStreet());
-//        avm.setCity(invoices.getCity());
-//        avm.setState(invoices.getState());
-//        avm.setZipCode(invoices.getZipCode());
-//        avm.setItemType(invoices.getItemType());
-//        avm.setItemId(invoices.getItemId());
-//        avm.setQuantity(invoices.getQuantity());
-//
-//        // Return the AlbumViewModel
-//        return avm;
-//    }
-//
+    public List<Games> getGetGamesByErsbRating(String ersbRating){
+        return gamesRepository.findByEsrbRating(ersbRating);
+    }
+    public List<Games> getGetGamesByTitle(String title){
+        return gamesRepository.findByTitle(title);
+    }
+    public List<Games> getAGamesById(int id){
+        return GamesRepository.findById(id);
+    }
+    public Games addGames(Games games) {
+        return gamesRepository.save(games); }
+    public void updateGames (Games games){
+        gamesRepository.save(games);
+    }
+    public void deleteGames (int id){
+    }
+
+
+
+//    Tshirts CRUD
+    public List<Tshirts> getAllTshirts(){
+        return tshirtsRepository.findAll();
+    }
+    public List<Tshirts> getATshirtsById(int id){
+        return tshirtsRepository.findById(id);
+    }
+    public Tshirts addATshirts(Tshirts tshirts){
+        return tshirtsRepository.save(tshirts);
+    }
+    public void updateTshirts(Tshirts tshirts) {
+        tshirtsRepository.save(tshirts);
+    }
+    public void deleteTshirts(int id) {
+        tshirtsRepository.deleteById(id);
+    }
+
+
+
+  
+    @Transactional
+    public InvoiceViewModel saveInvoices(InvoiceViewModel invoiceViewModel) {
+        Invoices a = new Invoices();
+        a.setId(invoiceViewModel.getId());
+        a.setName(invoiceViewModel.getName());
+        a.setStreet(invoiceViewModel.getStreet());
+        a.setCity(invoiceViewModel.getCity());
+        a.setState(invoiceViewModel.getState());
+        a.setZipCode(invoiceViewModel.getZipCode());
+        a.setItemType(invoiceViewModel.getItemType());
+        a.setItemId(invoiceViewModel.getItemId());
+        a.setQuantity(invoiceViewModel.getQuantity());
+        a.setTotal(invoiceViewModel.getTotal());
+        a = invoicesRepository.save(a);
+        invoiceViewModel.setId(a.getId());
+
+//       need to calculate total with
+
+
+        
+
+        return invoiceViewModel;
+    }
+
 }

@@ -12,10 +12,16 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
+
+import java.awt.peer.ScrollbarPeer;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
+
+
+import static org.junit.Assert.*;
+import static org.mockito.Mockito.doReturn;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
@@ -25,6 +31,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WebMvcTest(GamesController.class)
 
 public class GamesControllerTest {
+
     @Autowired
     private MockMvc mockMvc;
 
@@ -35,10 +42,9 @@ public class GamesControllerTest {
 
     private String gamesJson;
 
-    private List<Games> allGames= new ArrayList<>();
+    private List<Games> allGames = new ArrayList<>();
 
     private String allGamesJson;
-
 
     private ObjectMapper mapper = new ObjectMapper();
 
@@ -82,12 +88,14 @@ public class GamesControllerTest {
         gamesList.add(games);
         String gamesJson = mapper.writeValueAsString(gamesList);
 
+
         mockMvc.perform(get("/game"))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(content().json(gamesJson));
 
     }
+
     @Test
     public void createGame() throws Exception{
         Games games = new Games();
@@ -147,4 +155,40 @@ public class GamesControllerTest {
                 .andDo(print())
                 .andExpect(status().isNoContent());
     }
+
+//     @Test
+//     public void getGamesByStudio() {
+//     }
+
+//     @Test
+//     public void getGamesByRating() {
+//     }
+
+//     @Test
+//     public void getGamesByTitle() {
+//     }
+
+//     @Test
+//     public void updateGamesByStudio() {
+//     }
+
+//     @Test
+//     public void updateGamesByRating() {
+//     }
+
+//     @Test
+//     public void updateGamesByTitle() {
+//     }
+
+//     @Test
+//     public void deleteGamesByStudio() {
+//     }
+
+//     @Test
+//     public void deleteGamesByRating() {
+//     }
+
+//     @Test
+//     public void deleteGamesByTitle() {
+//     }
 }

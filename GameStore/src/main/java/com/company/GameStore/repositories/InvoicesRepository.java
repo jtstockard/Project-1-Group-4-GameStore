@@ -18,11 +18,12 @@ public interface InvoicesRepository extends JpaRepository<Invoices, Integer>{
 
     List<Invoices> findByState(String state);
 
-    List<Invoices> findByZipCode(Integer zipCode);
+    List<Invoices> findByZipCode(String zipCode);
     
     List<Invoices> findByItemType(String itemType);
 
     List<Invoices> findByItemId(Integer itemId);
 
     List<Invoices> findByQuantity(int quantity);
+
 }

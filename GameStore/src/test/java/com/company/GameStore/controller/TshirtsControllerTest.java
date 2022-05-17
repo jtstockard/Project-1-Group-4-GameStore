@@ -1,6 +1,6 @@
 package com.company.GameStore.controller;
 
-
+import com.company.GameStore.models.Consoles;
 import com.company.GameStore.models.Tshirts;
 import com.company.GameStore.service.ServiceLayer;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -17,6 +17,8 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.junit.Assert.*;
+import static org.mockito.Mockito.doReturn;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
@@ -32,13 +34,14 @@ public class TshirtsControllerTest {
     @MockBean
     ServiceLayer serviceLayer;
 
-    private com.company.GameStore.models.Tshirts tshirts;
+    private Tshirts tshirts;
 
-    private String TshirtsJson;
+    private String tshirtsJson;
 
     private List<Tshirts> allTshirts= new ArrayList<>();
 
-    private String allTshirtsJson;
+    private String allTshirtssJson;
+
 
 
     private ObjectMapper mapper = new ObjectMapper();
@@ -46,6 +49,7 @@ public class TshirtsControllerTest {
     @Before
     public void setUp() throws Exception {
         Tshirts tshirts = new Tshirts();
+
         tshirts.setSize("L");
         tshirts.setColor("Yellow");
         tshirts.setDescription("Ironic tshirt");
@@ -70,6 +74,7 @@ public class TshirtsControllerTest {
         tshirtsList.add(tshirts);
         tshirtsList.add(tshirts1);
         tshirtsList.add(tshirts2);
+        doReturn(tshirtsList).when(serviceLayer).findAllTshirts();
         String tshirtsJson = mapper.writeValueAsString(tshirtsList);
     }
 
@@ -142,4 +147,26 @@ public class TshirtsControllerTest {
                 .andDo(print())
                 .andExpect(status().isNoContent());
     }
-}
+//     @Test
+//       public void getTshirtsByColor() {
+//       }
+
+//       @Test
+//       public void getTshirtBySize() {
+//       }
+
+//       @Test
+//       public void updateTshirtsByColor() {
+//       }
+
+//       @Test
+//       public void updateTshirtsBySize() {
+//       }
+
+//       @Test
+//       public void deleteTshirtsByColor() {
+//       }
+
+//       @Test
+//       public void deleteTshirtsBySize() {
+ }

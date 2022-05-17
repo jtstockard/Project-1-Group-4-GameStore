@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+
 import java.util.List;
 
 @RestController
@@ -17,11 +18,13 @@ public class GamesController {
     @Autowired
     private ServiceLayer serviceLayer;
 
+
     @RequestMapping(value="/game", method= RequestMethod.GET)
+
+
     @ResponseStatus(HttpStatus.OK)
     public List<Games> getAllGames() {
         return serviceLayer.findAllGames();
-    }
     }
 
 
@@ -121,6 +124,6 @@ public class GamesController {
 //        serviceLayer.removeGame(title);
 //    }
 //
-//    }
+}
 
 
