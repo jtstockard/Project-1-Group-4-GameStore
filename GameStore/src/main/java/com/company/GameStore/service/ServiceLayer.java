@@ -71,6 +71,18 @@ public class ServiceLayer {
             return null;
         }
 
+        public List<Games> updateGamesByStudio() {
+            return null;
+        }
+
+        public List<Games> updateGamesByRating() {
+            return null;
+        }
+
+        public List<Games> updateGamesByTitle() {
+            return null;
+        }
+
 
 
 //    @Transactional
