@@ -43,15 +43,25 @@ public class ServiceLayer {
         return consolesRepository.findById(id);
         }
 
+        public List<Consoles> getByManufacturer(String manufacturer) {
+            return consolesRepository.findByManufacturer(manufacturer);
+        }
+
         public Consoles addConsoles(Consoles consoles) {
         return consolesRepository.save(consoles);
         }
 
-        public void deleteConsole(int id){
+        public Consoles deleteConsole(int id){
+
+           consolesRepository.deleteById(id);
+//           Returned Null to clear error. Not sure if this will need updating.
+            return null;
         }
 
-        public void updateConsoles( Consoles consoles){
-        }
+        public Consoles updateConsoles(Consoles consoles){
+        return consolesRepository.save(consoles);
+
+    }
 
 //    Invoice CRUD
         public List<Invoices> getAllInvoices() {
@@ -88,6 +98,7 @@ public class ServiceLayer {
         gamesRepository.save(games);
     }
     public void deleteGames (int id){
+        gamesRepository.deleteById(id);
     }
 
 
