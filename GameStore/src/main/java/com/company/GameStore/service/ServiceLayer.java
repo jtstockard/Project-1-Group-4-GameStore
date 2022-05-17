@@ -2,6 +2,8 @@
 package com.company.GameStore.service;
 
 import com.company.GameStore.models.Consoles;
+import com.company.GameStore.models.Games;
+import com.company.GameStore.models.Tshirts;
 import com.company.GameStore.repositories.ConsolesRepository;
 import com.company.GameStore.repositories.GamesRepository;
 import com.company.GameStore.repositories.InvoicesRepository;
@@ -9,6 +11,7 @@ import com.company.GameStore.repositories.TshirtsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.awt.peer.CanvasPeer;
 import java.util.List;
 
 @Service
@@ -25,10 +28,114 @@ public class ServiceLayer {
         this.invoicesRepository = invoicesRepository;
     }
 
-    public List<Consoles> findAllConsoles() {
-    //stub that needs implementation
-    return null;
+        public List<Consoles> findAllConsoles() {
+        //stub that needs implementation
+        return null;
         }
+
+        public List<Consoles> saveConsole(Consoles consoles) {
+        return null;
+        }
+
+        public List<Consoles> findByManufacturer(String manufacturer) {
+        return null;
+        }
+
+        public List<Consoles> updateConsole(Consoles consoles) {
+        return null;
+    }
+
+        public List<Consoles> deleteConsole() {
+        return null;
+        }
+
+        public List<Games> findAllGames() {
+        //stub that needs implementation
+            return null;
+        }
+        public List<Games> saveGame() {
+        //stub that needs implementation
+            return null;
+        }
+
+        public List<Games> findGamesByStudio() {
+            //stub that needs implementation
+            return null;
+        }
+
+        public List<Games> findGamesByRating() {
+            //stub that needs implementation
+            return null;
+        }
+        public List<Games> findGamesByTitle() {
+            //stub that needs implementation
+            return null;
+        }
+
+        public List<Games> updateGamesByStudio() {
+            return null;
+        }
+
+        public List<Games> updateGamesByRating() {
+            return null;
+        }
+
+        public List<Games> updateGamesByTitle() {
+            return null;
+        }
+        public List<Games> removeGamesByStudio() {
+        return null;
+        }
+
+        public List<Games> removeGamesByRating() {
+            return null;
+        }
+
+        public List<Games> removeGamesByTitle() {
+            return null;
+        }
+
+        public List<Tshirts> findAllTshirts() {
+            //stub that needs implementation
+            return null;
+        }
+
+        public List<Tshirts> saveTshirt() {
+            //stub that needs implementation
+            return null;
+        }
+
+        public List<Tshirts> findTshirtsByColor() {
+            //stub that needs implementation
+            return null;
+        }
+
+        public List<Tshirts> findTshirtsBySize() {
+            //stub that needs implementation
+            return null;
+        }
+
+        public List<Tshirts> updateTshirtsByColor() {
+            //stub that needs implementation
+            return null;
+        }
+
+        public List<Tshirts> updateTshirtsBySize() {
+            //stub that needs implementation
+            return null;
+        }
+
+        public List<Tshirts> removeTshirtsByColor() {
+            //stub that needs implementation
+            return null;
+        }
+
+        public List<Tshirts> removeTshirtsBySize() {
+            //stub that needs implementation
+            return null;
+    }
+
+
 //    @Transactional
 //    public InvoiceViewModel saveInvoices(InvoiceViewModel viewModel) {
 //
