@@ -13,7 +13,7 @@ public class SearchErrorResponse {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd hh:mm:ss")
     LocalDateTime timestamp;
 
-    public SearchErrorResponse(String errorMsg, HttpStatus httpStatus)) {
+    public SearchErrorResponse(String errorMsg, HttpStatus httpStatus) {
         this.errorMsg = errorMsg;
         this.status = status;
         this.errorCode = errorCode;

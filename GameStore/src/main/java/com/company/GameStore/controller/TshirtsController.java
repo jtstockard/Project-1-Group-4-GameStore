@@ -58,7 +58,7 @@ public class TshirtsController {
     public List<Tshirts> deleteTshirts(@PathVariable int id) {
         serviceLayer.deleteTshirts(id);
         return deleteTshirts(id);
-    }
+    }}
 
 //    @RequestMapping(value="/tshirts/{color}", method=RequestMethod.DELETE)
 //    @ResponseStatus(HttpStatus.OK)
