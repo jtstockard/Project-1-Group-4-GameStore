@@ -9,6 +9,7 @@ import com.company.GameStore.repositories.TshirtsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.awt.peer.CanvasPeer;
 import java.util.List;
 
 @Service
@@ -38,7 +39,13 @@ public class ServiceLayer {
         return null;
         }
 
+        public List<Consoles> updateConsole(Consoles consoles) {
+        return null;
+    }
 
+        public List<Consoles> deleteConsole() {
+        return null;
+        }
 
 
 //    @Transactional

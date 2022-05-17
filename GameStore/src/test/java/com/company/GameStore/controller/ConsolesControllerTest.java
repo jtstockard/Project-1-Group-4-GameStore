@@ -101,6 +101,12 @@ public class ConsolesControllerTest {
     public void shouldReturnByManufacturer() throws Exception {
 
     }
+
+    @Test
+    public void shouldDeleteConsole() throws Exception {
+
+    }
+
 //
 //    @Test
 //    public void getAllTshirts() throws Exception{
