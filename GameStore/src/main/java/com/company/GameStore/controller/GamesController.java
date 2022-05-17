@@ -57,7 +57,7 @@ public class GamesController {
     @RequestMapping(value="/games/{rating}", method=RequestMethod.PUT)
     @ResponseStatus(HttpStatus.OK)
     public List<Games> updateGamesByRating(@PathVariable String rating) {
-        return serviceLayer.updateGamesByRating();
+        return serviceLayer.updateGames(rating);
     }
 
     @RequestMapping(value="/games/{title}", method=RequestMethod.PUT)

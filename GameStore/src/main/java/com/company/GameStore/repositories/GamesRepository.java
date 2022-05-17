@@ -10,7 +10,7 @@ import java.util.List;
 @Repository
 public interface GamesRepository extends JpaRepository<Games, Integer> {
 
-    static List<Games> findById(int id);
+    List<Games> findById(int id);
 
     List<Games> findByTitle(String title);
 

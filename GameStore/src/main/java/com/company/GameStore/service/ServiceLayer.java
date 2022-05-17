@@ -64,6 +64,7 @@ public class ServiceLayer {
         public Consoles updateConsoles(Consoles consoles){
         return consolesRepository.save(consoles);
 
+
     }
 
 //    Invoice CRUD
@@ -93,7 +94,7 @@ public class ServiceLayer {
         return gamesRepository.findByTitle(title);
     }
     public List<Games> getAGamesById(int id){
-        return GamesRepository.findById(id);
+        return gamesRepository.findById(id);
     }
     public Games addGames(Games games) {
         return gamesRepository.save(games); }
