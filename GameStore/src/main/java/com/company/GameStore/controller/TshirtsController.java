@@ -27,42 +27,31 @@ public class TshirtsController {
         return serviceLayer.addATshirts(tshirts);
     }
 
-    @RequestMapping(value="/tshirts/{color}", method=RequestMethod.GET)
+    @RequestMapping(value="/tshirts/color/{color}", method=RequestMethod.GET)
     @ResponseStatus(HttpStatus.OK)
     public List<Tshirts> getTshirtsByColor(@PathVariable String color) {
 
         return serviceLayer.getTshirtsByColor(color);
     }
 
-    @RequestMapping(value="/tshirts/{size}", method=RequestMethod.GET)
+    @RequestMapping(value="/tshirts/size/{size}", method=RequestMethod.GET)
     @ResponseStatus(HttpStatus.OK)
     public List<Tshirts> getTshirtBySize(@PathVariable String size) {
 
         return serviceLayer.getTshirtsBySize(size);
     }
 
-    @RequestMapping(value="/tshirts/{color}", method=RequestMethod.PUT)
+    @RequestMapping(value="/tshirts/{id}", method=RequestMethod.PUT)
     @ResponseStatus(HttpStatus.OK)
-    public Tshirts updateTshirts(@RequestBody Tshirts tshirts) {
+    public Tshirts updateTshirtsById(@RequestBody Tshirts tshirts) {
         return serviceLayer.updateTshirts(tshirts);
     }
-//    @RequestMapping(value="/tshirts/{color}", method=RequestMethod.PUT)
-//    @ResponseStatus(HttpStatus.OK)
-//    public List<Tshirts> updateTshirtsByColor(@PathVariable String color) {
-//        return serviceLayer.updateTshirtsByColor();
-//    }
 
-
-    @RequestMapping(value="/tshirts/{color}", method=RequestMethod.DELETE)
+    @RequestMapping(value="/tshirts/{id}", method=RequestMethod.DELETE)
     @ResponseStatus(HttpStatus.OK)
-    public List<Tshirts> deleteTshirts(@PathVariable int id) {
+    public Tshirts deleteTshirtsById(@PathVariable int id) {
         serviceLayer.deleteTshirts(id);
-        return deleteTshirts(id);
-    }}
-
-//    @RequestMapping(value="/tshirts/{color}", method=RequestMethod.DELETE)
-//    @ResponseStatus(HttpStatus.OK)
-//    public List<Tshirts> deleteTshirtsByColor(@PathVariable String color) {
-//        return serviceLayer.removeTshirtsByColor();
-//    }
+        return null;
+    }
+}
 

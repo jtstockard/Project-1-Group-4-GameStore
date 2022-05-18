@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface TshirtsRepository extends JpaRepository<Tshirts, Integer> {
 
-    List<Tshirts> findById(int id);
+//    List<Tshirts> findById(int id);
 
     List<Tshirts> findBySize(String size);
 

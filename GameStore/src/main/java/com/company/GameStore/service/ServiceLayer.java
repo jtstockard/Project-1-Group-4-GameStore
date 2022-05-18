@@ -106,37 +106,17 @@ public class ServiceLayer {
     public void deleteGames (int id){
         gamesRepository.deleteById(id);
     }
-    public List<Games> findAllGames() {
-        return gamesRepository.findAll();
-    }
-
-//    public List<Games> updateGamesByStudio() {
-//        gamesRepository.save();
+//    public List<Games> findAllGames() {
+//        return gamesRepository.findAll();
 //    }
-//
-//    public List<Games> updateGamesByRating() {
-//    }
-//
-//    public List<Games> updateGamesByTitle() {
-//    }
-//
-//    public List<Games> removeGamesByStudio() {
-//    }
-//
-//    public List<Games> removeGamesByRating() {
-//    }
-//
-//    public List<Games> removeGamesByTitle() {
-//    }
-
 
 
 //    Tshirts CRUD
     public List<Tshirts> getAllTshirts(){
         return tshirtsRepository.findAll();
     }
-    public List<Tshirts> getATshirtsById(int id){
-        return tshirtsRepository.findById(id);
+    public Tshirts getATshirtsById(Integer id){
+        return tshirtsRepository.findById(id).get();
     }
     public Tshirts addATshirts(Tshirts tshirts){
         return tshirtsRepository.save(tshirts);
