@@ -91,8 +91,14 @@ public class Invoices {
         this.zipCode = zipCode;
     }
 
-    public String getItemType() {
-        return itemType;
+    public BigDecimal getItemType() {
+        if (itemType == "Consoles"){
+            return Consoles.getPrice();
+        } else if (itemType == "Games") {
+            return Games.getPrice();
+        } else { return Tshirts.getPrice();
+
+        }
     }
 
     public void setItemType(String itemType) {
