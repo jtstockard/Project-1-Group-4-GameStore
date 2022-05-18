@@ -8,6 +8,7 @@ import java.util.List;
 
 public interface ConsolesRepository extends JpaRepository<Consoles, Integer> {
 
+
     List<Consoles> findByModel(String model);
 
     List<Consoles> findByManufacturer(String manufacturer);
