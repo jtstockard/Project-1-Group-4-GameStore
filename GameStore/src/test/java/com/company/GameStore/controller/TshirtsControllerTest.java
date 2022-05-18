@@ -15,9 +15,11 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
@@ -33,34 +35,29 @@ public class TshirtsControllerTest {
     @MockBean
     ServiceLayer serviceLayer;
 
-    private Tshirts tshirts;
+    private Tshirts inputTshirts;
+    private Tshirts outputTshirts;
+    private String inputTshirtsString;
+    private String outputTshirtsString;
 
-    private String tshirtsJson;
-
-    private List<Tshirts> allTshirts= new ArrayList<>();
-
-    private String allTshirtssJson;
-
+    private List<Tshirts> allTshirts;
+    private String allTshirtsString;
+    private int tshirtsId = 1;
+    private int nonExistentTshirtsId = 999;
 
 
     private ObjectMapper mapper = new ObjectMapper();
 
     @Before
     public void setUp() throws Exception {
-        Tshirts tshirts = new Tshirts();
-
-        tshirts.setSize("L");
-        tshirts.setColor("Yellow");
-        tshirts.setDescription("Ironic tshirt");
-        tshirts.setPrice(new BigDecimal("9.99"));
-        tshirts.setQuantity(999);
+        Tshirts tshirts = new Tshirts(0,"L","yellow", "athlrtic shirt", "14.99", 20 );
 
         Tshirts tshirts1 = new Tshirts();
-        tshirts1.setSize("XL");
-        tshirts1.setColor("Black");
-        tshirts1.setDescription("Anime shirt");
-        tshirts1.setPrice(new BigDecimal("34.99"));
-        tshirts1.setQuantity(23);
+        tshirts1.setSize("L");
+        tshirts1.setColor("Yellow");
+        tshirts1.setDescription("Ironic tshirt");
+        tshirts1.setPrice(new BigDecimal("9.99"));
+        tshirts1.setQuantity(999);
 
         Tshirts tshirts2 = new Tshirts();
         tshirts2.setSize("XXL");
@@ -74,7 +71,17 @@ public class TshirtsControllerTest {
         tshirtsList.add(tshirts1);
         tshirtsList.add(tshirts2);
         doReturn(tshirtsList).when(serviceLayer).getAllTshirts();
-        String tshirtsJson = mapper.writeValueAsString(tshirtsList);
+
+        inputTshirts = new Tshirts(1, "XL", "brown", "sports hoodie", "59.99", 79);
+        outputTshirts = new Tshirts(1, "XL", "brown", "sports hoodie", "59.99", 79);
+        inputTshirtsString = mapper.writeValueAsString(inputTshirts);
+        outputTshirtsString = mapper.writeValueAsString(outputTshirts);
+        allTshirts = Arrays.asList(outputTshirts);
+        allTshirtsString = mapper.writeValueAsString(allTshirts);
+
+        when(serviceLayer.addATshirts(inputTshirts)).thenReturn(outputTshirts);
+        when(serviceLayer.getAllTshirts()).thenReturn(allTshirts);
+        when(serviceLayer.getATshirtsById(tshirtsId)).thenReturn(outputTshirts);
     }
 
     @Test

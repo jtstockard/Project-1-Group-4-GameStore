@@ -42,13 +42,13 @@ public class TshirtsController {
     }
 
     @RequestMapping(value="/tshirts/{id}", method=RequestMethod.PUT)
-    @ResponseStatus(HttpStatus.OK)
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public Tshirts updateTshirtsById(@RequestBody Tshirts tshirts) {
         return serviceLayer.updateTshirts(tshirts);
     }
 
     @RequestMapping(value="/tshirts/{id}", method=RequestMethod.DELETE)
-    @ResponseStatus(HttpStatus.OK)
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public Tshirts deleteTshirtsById(@PathVariable int id) {
         serviceLayer.deleteTshirts(id);
         return null;
