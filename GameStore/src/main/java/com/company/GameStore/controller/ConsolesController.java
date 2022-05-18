@@ -46,13 +46,13 @@ public class ConsolesController {
 
     }
     @RequestMapping(value = "/consoles/{id}", method =RequestMethod.PUT)
-    @ResponseStatus(HttpStatus.OK)
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public Consoles updateConsoles(@RequestBody Consoles consoles) {
         return (Consoles) serviceLayer.updateConsoles(consoles);
     }
 
     @RequestMapping(value = "/consoles/{id}", method = RequestMethod.DELETE)
-    @ResponseStatus(HttpStatus.OK)
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public Consoles deleteConsoles(@PathVariable int id) {
         serviceLayer.deleteConsoles(id);
         return null;

@@ -43,9 +43,9 @@ public class ConsolesControllerTest {
 
     private List<Consoles> allConsoles;
     private String allConsolesString;
-    private int consolesId = 0;
+    private int consolesId = 1;
 
-    private int nonExistentArtistId = 999;
+    private int nonExistentConsolesId = 999;
 
     private ObjectMapper mapper = new ObjectMapper();
 
@@ -75,8 +75,8 @@ public class ConsolesControllerTest {
         consolesList.add(consoles2);
         doReturn(consolesList).when(serviceLayer).findAllConsoles();
 
-        inputConsoles = new Consoles(0,"Gamecube", "Nintendo", "128gb", "Intel", new BigDecimal("199.02"), 99);
-        outputConsoles = new Consoles( 0,"Gamecube", "Nintendo", "128gb", "Intel", new BigDecimal("199.02"), 99);
+        inputConsoles = new Consoles(1,"Gamecube", "Nintendo", "128gb", "Intel", new BigDecimal("199.02"), 99);
+        outputConsoles = new Consoles( 1,"Gamecube", "Nintendo", "128gb", "Intel", new BigDecimal("199.02"), 99);
         inputConsolesString = mapper.writeValueAsString(inputConsoles);
         outputConsolesString = mapper.writeValueAsString(outputConsoles);
         allConsoles = Arrays.asList(outputConsoles);
@@ -89,7 +89,7 @@ public class ConsolesControllerTest {
 }
 
     @Test
-    public void getAllConsoles() throws Exception{
+    public void shouldGetAllConsoles() throws Exception{
         Consoles consoles = new Consoles();
         consoles.setModel("Gamecube");
         consoles.setManufacturer("Nintendo");
@@ -125,7 +125,7 @@ public class ConsolesControllerTest {
 
 
 
-        mockMvc.perform(get("/console"))
+        mockMvc.perform(get("/consoles"))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(content().json(consolesJson));
@@ -134,43 +134,20 @@ public class ConsolesControllerTest {
 
 
       @Test
-        public void addConsoles() throws Exception{
-
-          Consoles inputConsoles = new Consoles();
-          inputConsoles.setModel("Gamecube");
-          inputConsoles.setManufacturer("Nintendo");
-          inputConsoles.setMemoryAmount("128gb");
-          inputConsoles.setPrice(new BigDecimal("199.02"));
-          inputConsoles.setProcessor("Intel");
-          inputConsoles.setQuantity(99);
-
-          String inputJson = mapper.writeValueAsString(inputConsoles);
-
-            Consoles outputConsoles = new Consoles();
-            outputConsoles.setModel("Gamecube");
-            outputConsoles.setManufacturer("Nintendo");
-            outputConsoles.setMemoryAmount("128gb");
-            outputConsoles.setPrice(new BigDecimal("199.02"));
-            outputConsoles.setProcessor("Intel");
-            outputConsoles.setQuantity(99);
-            outputConsoles.setId(0);
-
-
-            String outputJson = mapper.writeValueAsString(outputConsoles);
-
-
+        public void ShouldAddConsoles() throws Exception{
             mockMvc.perform(post("/consoles")                            // Perform the POST request.
-                    .content(inputJson)
+                    .content(inputConsolesString)
                     .contentType(MediaType.APPLICATION_JSON))
                 .andDo(print())
                     .andExpect(status().isCreated())
-                    .andExpect(content().json(outputJson));
+                    .andExpect(content().json(outputConsolesString));
 
     }
 
    @Test
-   public void getConsoleById() throws Exception{
+   public void shouldGetConsoleById() throws Exception{
        Consoles consoles = new Consoles();
+       consoles.setId(1);
        consoles.setModel("Gamecube");
        consoles.setManufacturer("Nintendo");
        consoles.setMemoryAmount("128gb");
@@ -178,12 +155,10 @@ public class ConsolesControllerTest {
        consoles.setProcessor("Intel");
        consoles.setQuantity(99);
 
-       List<Consoles> consolesList = new ArrayList<>();
-       consolesList.add(consoles);
 
-       String consolesJson = mapper.writeValueAsString(consolesList);
+       String consolesJson = mapper.writeValueAsString(consoles);
 
-       mockMvc.perform(get("/consoles/{2}"))
+       mockMvc.perform(get("/consoles/" + consolesId))
                .andDo(print())
                .andExpect(status().isOk())
                .andExpect(content().json(consolesJson));
@@ -191,28 +166,28 @@ public class ConsolesControllerTest {
    }
 
    @Test
-    public void updateConsole() throws Exception {
-       Consoles consoles = new Consoles();
-       consoles.setModel("Nvidia");
-       consoles.setManufacturer("Google");
-       consoles.setMemoryAmount("1tb");
-       consoles.setPrice(new BigDecimal("399.99"));
-       consoles.setProcessor("Intel");
-       consoles.setQuantity(2);
+    public void shouldUpdateConsoles() throws Exception {
+       Consoles outputConsoles = new Consoles();
+       outputConsoles.setId(1);
+       outputConsoles.setModel("Nvidia");
+       outputConsoles.setManufacturer("Google");
+       outputConsoles.setMemoryAmount("1tb");
+       outputConsoles.setPrice(new BigDecimal("399.99"));
+       outputConsoles.setProcessor("Intel");
+       outputConsoles.setQuantity(2);
 
-       List<Consoles> consolesList = new ArrayList<>();
-       consolesList.add(consoles);
-       String consolesJson = mapper.writeValueAsString(consolesList);
 
-       mockMvc.perform(post("/console/{2}"))
+       mockMvc.perform(put("/consoles/" + consolesId)
+               .content(outputConsolesString)
+               .contentType(MediaType.APPLICATION_JSON)
+               )
                .andDo(print())
-               .andExpect(status().isOk())
-               .andExpect(content().json(consolesJson));
+               .andExpect(status().isNoContent());
     }
 
   @Test
-   public void deleteConsole() throws Exception {
-      mockMvc.perform(delete("/console/2"))
+   public void shouldDeleteConsoles() throws Exception {
+      mockMvc.perform(delete("/consoles/" + consolesId))
               .andDo(print())
               .andExpect(status().isNoContent());
  }
