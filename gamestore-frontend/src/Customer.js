@@ -1,9 +1,8 @@
 import { useState, useEffect } from "react";
-import "./Customer.css";
+// import "./Customer.css";
 import CustomerCard from "./CustomerCard.js";
-import CustomerForm from "./CustomerForm.js";
+// import CustomerForm from "./CustomerForm.js";
 import ConsolesCard from "./ConsolesCard.js";
-import CustomerCard from "./CustomerCard.js";
 import GamesCard from "./GamesCard.js";
 import InvoiceCard from "./InvoiceCard";
 import OrderForm from "./OrderForm.js";
@@ -75,7 +74,7 @@ function Customers() {
   }
 
   if (showForm) {
-    return <CustomerForm customer={scopedCustomer} notify={notify} />;
+    return <OrderForm customer={scopedCustomer} notify={notify} />;
   }
 
   return (
