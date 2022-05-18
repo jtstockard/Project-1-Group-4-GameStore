@@ -18,13 +18,17 @@ public class ServiceLayer {
     private ConsolesRepository consolesRepository;
     private TshirtsRepository tshirtsRepository;
     private InvoicesRepository invoicesRepository;
+    private ProcessingFeeRepository processingFeeRepository;
+    private SalesTaxRepository salesTaxRepository;
 
     @Autowired
-    public ServiceLayer(GamesRepository gamesRepository, ConsolesRepository consolesRepository, TshirtsRepository tshirtsRepository, InvoicesRepository invoicesRepository) {
+    public ServiceLayer(GamesRepository gamesRepository, ConsolesRepository consolesRepository, TshirtsRepository tshirtsRepository, InvoicesRepository invoicesRepository, ProcessingFeeRepository processingFeeRepository, SalesTaxRepository salesTaxRepository) {
         this.gamesRepository = gamesRepository;
         this.consolesRepository = consolesRepository;
         this.tshirtsRepository = tshirtsRepository;
         this.invoicesRepository = invoicesRepository;
+        this.processingFeeRepository = processingFeeRepository;
+        this.salesTaxRepository = salesTaxRepository;
     }
 
 
@@ -146,17 +150,50 @@ public class ServiceLayer {
 
 // best idea for price calculation
     public Invoices buildInvoice(Invoices invoices) {
-        Invoices updateInvoices = invoices;
-        BigDecimal saleTax = SalesTaxRepository.findByState(invoices.getState().getRate());
-        BigDecimal processingFee = ProcessingFeeRepository.findByItemType(Invoices.getItemType()).getFee();
-//        BigDecimal subTotal =  invoices.getItemType() * invoices.getQuantity();
+//        Invoices updateInvoices = invoices;
 
-        BigDecimal subTotal = (new BigDecimal(String.valueOf(invoices.getItemType())).multiply(new BigDecimal(invoices.getQuantity());
+//        find item type
+        BigDecimal itemPrice;
 
-        BigDecimal total = (subTotal.add(subTotal.multiply(saleTax)).add(processingFee));
+        if (invoices.getItemType().equals("Consoles")){
+            Consoles consoles = consolesRepository.findById(invoices.getId()).get();
+            itemPrice = consoles.getPrice();
+        } else if (invoices.getItemType().equals("Games")) {
+            Games games = gamesRepository.findById(invoices.getId()).get();
+            itemPrice = games.getPrice();
+        } else {
+            Tshirts tshirts = tshirtsRepository.findById(invoices.getId()).get();
+            itemPrice = tshirts.getPrice();
+        }
 
-        return invoicesRepository.save(updateInvoices);
+//        grab the rate based on state
+        BigDecimal saleTax = salesTaxRepository.findById(invoices.getState()).get().getRate();
+//        grab fee based on item
+        BigDecimal processingFee = processingFeeRepository.findById(invoices.getItemType()).get().getFee();
+//
+//        find subtotal of items
+        BigDecimal subTotal = (itemPrice.multiply(new BigDecimal(invoices.getQuantity())));
+
+//        find total with sales tax and fees
+        BigDecimal taxTotal = subTotal.add(subTotal.multiply(saleTax));
+        BigDecimal total = (taxTotal.add(processingFee));
+
+//        send total to view-model
+        invoices.setTotal(total);
+        invoices.setSubTotal(subTotal);
+        invoices.setProcessing(processingFee);
+        invoices.setTaxTotal(taxTotal);
+
+
+        return buildInvoice(invoices);
     }
 }
 //    BigDecimal x = new BigDecimal("42");
 //        x.multiply(new BigDecimal("100"));
+//        if (itemType.equals("Consoles")){
+//            return consoles.getPrice();
+//        } else if (itemType.equals("Games")) {
+//            return gamesRespository.getPrice();
+//        } else { return tshirts.getPrice();
+//
+//        }

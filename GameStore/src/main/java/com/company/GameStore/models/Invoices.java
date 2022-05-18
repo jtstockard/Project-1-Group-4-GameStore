@@ -24,13 +24,17 @@ public class Invoices {
     private String zipCode;
     private String itemType;
     private Integer itemId;
+    private BigDecimal unitPrice;
+    private BigDecimal subTotal;
+    private BigDecimal taxTotal;
+    private BigDecimal processing;
     private int quantity;
     private BigDecimal total;
 
     public Invoices() {
     }
 
-    public Invoices(int id, String name, String street, String city, String state, String zipCode, String itemType, Integer itemId, int quantity, BigDecimal total) {
+    public Invoices(int id, String name, String street, String city, String state, String zipCode, String itemType, Integer itemId, BigDecimal unitPrice, BigDecimal subTotal, BigDecimal taxTotal, BigDecimal processing, int quantity, BigDecimal total) {
         this.id = id;
         this.name = name;
         this.street = street;
@@ -39,6 +43,10 @@ public class Invoices {
         this.zipCode = zipCode;
         this.itemType = itemType;
         this.itemId = itemId;
+        this.unitPrice = unitPrice;
+        this.subTotal = subTotal;
+        this.taxTotal = taxTotal;
+        this.processing = processing;
         this.quantity = quantity;
         this.total = total;
     }
@@ -91,14 +99,8 @@ public class Invoices {
         this.zipCode = zipCode;
     }
 
-    public BigDecimal getItemType() {
-        if (itemType == "Consoles"){
-            return Consoles.getPrice();
-        } else if (itemType == "Games") {
-            return Games.getPrice();
-        } else { return Tshirts.getPrice();
-
-        }
+    public String getItemType() {
+        return itemType;
     }
 
     public void setItemType(String itemType) {
@@ -111,6 +113,38 @@ public class Invoices {
 
     public void setItemId(Integer itemId) {
         this.itemId = itemId;
+    }
+
+    public BigDecimal getUnitPrice() {
+        return unitPrice;
+    }
+
+    public void setUnitPrice(BigDecimal unitPrice) {
+        this.unitPrice = unitPrice;
+    }
+
+    public BigDecimal getSubTotal() {
+        return subTotal;
+    }
+
+    public void setSubTotal(BigDecimal subTotal) {
+        this.subTotal = subTotal;
+    }
+
+    public BigDecimal getTaxTotal() {
+        return taxTotal;
+    }
+
+    public void setTaxTotal(BigDecimal taxTotal) {
+        this.taxTotal = taxTotal;
+    }
+
+    public BigDecimal getProcessing() {
+        return processing;
+    }
+
+    public void setProcessing(BigDecimal processing) {
+        this.processing = processing;
     }
 
     public int getQuantity() {
@@ -134,12 +168,12 @@ public class Invoices {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Invoices invoices = (Invoices) o;
-        return id == invoices.id && quantity == invoices.quantity && Objects.equals(name, invoices.name) && Objects.equals(street, invoices.street) && Objects.equals(city, invoices.city) && Objects.equals(state, invoices.state) && Objects.equals(zipCode, invoices.zipCode) && Objects.equals(itemType, invoices.itemType) && Objects.equals(itemId, invoices.itemId) && Objects.equals(total, invoices.total);
+        return id == invoices.id && quantity == invoices.quantity && Objects.equals(name, invoices.name) && Objects.equals(street, invoices.street) && Objects.equals(city, invoices.city) && Objects.equals(state, invoices.state) && Objects.equals(zipCode, invoices.zipCode) && Objects.equals(itemType, invoices.itemType) && Objects.equals(itemId, invoices.itemId) && Objects.equals(unitPrice, invoices.unitPrice) && Objects.equals(subTotal, invoices.subTotal) && Objects.equals(taxTotal, invoices.taxTotal) && Objects.equals(processing, invoices.processing) && Objects.equals(total, invoices.total);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, street, city, state, zipCode, itemType, itemId, quantity, total);
+        return Objects.hash(id, name, street, city, state, zipCode, itemType, itemId, unitPrice, subTotal, taxTotal, processing, quantity, total);
     }
 
     @Override
@@ -153,6 +187,10 @@ public class Invoices {
                 ", zipCode='" + zipCode + '\'' +
                 ", itemType='" + itemType + '\'' +
                 ", itemId=" + itemId +
+                ", unitPrice=" + unitPrice +
+                ", subTotal=" + subTotal +
+                ", taxTotal=" + taxTotal +
+                ", processing=" + processing +
                 ", quantity=" + quantity +
                 ", total=" + total +
                 '}';

@@ -14,9 +14,9 @@ public class SalesTaxAdd {
     @Autowired
     SalesTaxRepository salesTaxRepository;
 
-    public SalesTax findByState(Invoices invoices){
-        return SalesTaxRepository.findByState(invoices.getState());
-    }
+//    public SalesTax findByState(Invoices invoices){
+//        return salesTaxRepository.findByState(invoices.getState());
+//    }
 
     public void assignSalesTax(){
         salesTaxRepository.save(new SalesTax("AL", .05));

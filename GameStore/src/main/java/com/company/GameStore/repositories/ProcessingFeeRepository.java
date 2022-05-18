@@ -8,5 +8,5 @@ import java.math.BigDecimal;
 
 @Repository
 public interface ProcessingFeeRepository extends JpaRepository<ProcessingFees, String> {
-        ProcessingFees findByItemType(BigDecimal itemType);
+
 }

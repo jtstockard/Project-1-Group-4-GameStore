@@ -5,17 +5,23 @@ import com.sun.javafx.beans.IDProperty;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import java.math.BigDecimal;
 import java.util.Objects;
 
 @Entity
 public class SalesTax {
     @Id
     private String state;
-    private double rate;
+    private BigDecimal rate;
+
+    public SalesTax(String state, BigDecimal rate) {
+        this.state = state;
+        this.rate = rate;
+    }
 
     public SalesTax(String state, double rate) {
         this.state = state;
-        this.rate = rate;
+        this.rate = new BigDecimal(rate);
     }
 
     public SalesTax() {
@@ -29,11 +35,11 @@ public class SalesTax {
         this.state = state;
     }
 
-    public double getRate() {
+    public BigDecimal getRate() {
         return rate;
     }
 
-    public void setRate(double rate) {
+    public void setRate(BigDecimal rate) {
         this.rate = rate;
     }
 
@@ -42,7 +48,7 @@ public class SalesTax {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         SalesTax salesTax = (SalesTax) o;
-        return Double.compare(salesTax.rate, rate) == 0 && Objects.equals(state, salesTax.state);
+        return Objects.equals(state, salesTax.state) && Objects.equals(rate, salesTax.rate);
     }
 
     @Override
