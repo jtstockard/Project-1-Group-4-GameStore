@@ -15,9 +15,11 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
@@ -33,34 +35,70 @@ public class TshirtsControllerTest {
     @MockBean
     ServiceLayer serviceLayer;
 
-    private Tshirts tshirts;
+    private Tshirts inputTshirts;
+    private Tshirts outputTshirts;
+    private String inputTshirtsString;
+    private String outputTshirtsString;
 
-    private String tshirtsJson;
-
-    private List<Tshirts> allTshirts= new ArrayList<>();
-
-    private String allTshirtssJson;
-
+    private List<Tshirts> allTshirts;
+    private String allTshirtsString;
+    private int tshirtsId = 1;
+    private int nonExistentTshirtsId = 999;
 
 
     private ObjectMapper mapper = new ObjectMapper();
 
     @Before
     public void setUp() throws Exception {
-        Tshirts tshirts = new Tshirts();
-
-        tshirts.setSize("L");
-        tshirts.setColor("Yellow");
-        tshirts.setDescription("Ironic tshirt");
-        tshirts.setPrice(new BigDecimal("9.99"));
-        tshirts.setQuantity(999);
+        Tshirts tshirts = new Tshirts(0, "L", "yellow", "athlrtic shirt", new BigDecimal("14.99"), 20);
 
         Tshirts tshirts1 = new Tshirts();
-        tshirts1.setSize("XL");
-        tshirts1.setColor("Black");
-        tshirts1.setDescription("Anime shirt");
-        tshirts1.setPrice(new BigDecimal("34.99"));
-        tshirts1.setQuantity(23);
+        tshirts1.setSize("L");
+        tshirts1.setColor("Yellow");
+        tshirts1.setDescription("Ironic tshirt");
+        tshirts1.setPrice(new BigDecimal("9.99"));
+        tshirts1.setQuantity(999);
+
+        Tshirts tshirts2 = new Tshirts();
+        tshirts2.setSize("XXL");
+        tshirts2.setColor("Orange");
+        tshirts2.setDescription("Killer robot tshirt");
+        tshirts2.setPrice(new BigDecimal("25.00"));
+        tshirts2.setQuantity(102);
+
+        List<Tshirts> tshirtsList = new ArrayList<>();
+        tshirtsList.add(tshirts);
+        tshirtsList.add(tshirts1);
+        tshirtsList.add(tshirts2);
+        doReturn(tshirtsList).when(serviceLayer).getAllTshirts();
+
+        inputTshirts = new Tshirts(1, "XL", "brown", "sports hoodie", new BigDecimal("59.99"), 79);
+        outputTshirts = new Tshirts(1, "XL", "brown", "sports hoodie", new BigDecimal("59.99"), 79);
+        inputTshirtsString = mapper.writeValueAsString(inputTshirts);
+        outputTshirtsString = mapper.writeValueAsString(outputTshirts);
+        allTshirts = Arrays.asList(outputTshirts);
+        allTshirtsString = mapper.writeValueAsString(allTshirts);
+
+        when(serviceLayer.addATshirts(inputTshirts)).thenReturn(outputTshirts);
+        when(serviceLayer.getAllTshirts()).thenReturn(allTshirts);
+        when(serviceLayer.getATshirtsById(tshirtsId)).thenReturn(outputTshirts);
+    }
+
+    @Test
+    public void shouldGetAllTshirts() throws Exception {
+        Tshirts tshirts = new Tshirts();
+        tshirts.setSize("M");
+        tshirts.setColor("blue");
+        tshirts.setDescription("swim wear");
+        tshirts.setPrice(new BigDecimal("12.99"));
+        tshirts.setQuantity(20);
+
+        Tshirts tshirts1 = new Tshirts();
+        tshirts1.setSize("L");
+        tshirts1.setColor("Yellow");
+        tshirts1.setDescription("Ironic tshirt");
+        tshirts1.setPrice(new BigDecimal("9.99"));
+        tshirts1.setQuantity(999);
 
         Tshirts tshirts2 = new Tshirts();
         tshirts2.setSize("XXL");
@@ -75,14 +113,6 @@ public class TshirtsControllerTest {
         tshirtsList.add(tshirts2);
         doReturn(tshirtsList).when(serviceLayer).getAllTshirts();
         String tshirtsJson = mapper.writeValueAsString(tshirtsList);
-    }
-
-    @Test
-    public void getAllTshirts() throws Exception{
-
-        List<Tshirts> tshirtsList = new ArrayList<>();
-        tshirtsList.add(tshirts);
-        String tshirtsJson = mapper.writeValueAsString(tshirtsList);
 
         mockMvc.perform(get("/tshirts"))
                 .andDo(print())
@@ -90,95 +120,61 @@ public class TshirtsControllerTest {
                 .andExpect(content().json(tshirtsJson));
 
     }
+
     @Test
-    public void createTshirt() throws Exception{
-        Tshirts inputTshirts = new Tshirts();
-        inputTshirts.setSize("L");
-        inputTshirts.setColor("Blue");
-        inputTshirts.setDescription("Pokemon shirt");
-        inputTshirts.setPrice(new BigDecimal("19.99"));
-        inputTshirts.setQuantity(420);
-
-        String inputJson = mapper.writeValueAsString(inputTshirts);
-
-        Tshirts outputTshirts = new Tshirts();
-        outputTshirts.setSize("L");
-        outputTshirts.setColor("Blue");
-        outputTshirts.setDescription("Pokemon shirt");
-        outputTshirts.setPrice(new BigDecimal("19.99"));
-        outputTshirts.setQuantity(420);
-        outputTshirts.setId(2);
-
-        String outputJson = mapper.writeValueAsString(outputTshirts);
-
-        mockMvc.perform(put("/tshirts")
-                .content(inputJson)                           // Set the request body.
-                .contentType(MediaType.APPLICATION_JSON)      // Tell the server it's in JSON format.
-        )
+    public void shouldCreateTshirt() throws Exception {
+        mockMvc.perform(post("/tshirts")
+                        .content(inputTshirtsString)                           // Set the request body.
+                        .contentType(MediaType.APPLICATION_JSON))    // Tell the server it's in JSON format.
                 .andDo(print())
                 .andExpect(status().isCreated())
-                .andExpect(content().json(outputJson));
+                .andExpect(content().json(outputTshirtsString));
 
     }
 
     @Test
-    public void getTshirtById() throws Exception{
-        List<Tshirts> tshirtsList = new ArrayList<>();
-        tshirtsList.add(tshirts);
-        String tshirtsJson = mapper.writeValueAsString(tshirtsList);
-
-        mockMvc.perform(get("/tshirts/{2}"))
-                .andDo(print())
-                .andExpect(status().isCreated())
-                .andExpect(content().json(tshirtsJson));
-
-    }
-
-    @Test
-    public void updateTshirt() throws Exception {
+    public void shouldGetTshirtById() throws Exception {
         Tshirts tshirts = new Tshirts();
-        tshirts.setSize("S");
-        tshirts.setColor("Pink");
-        tshirts.setDescription("Hello Kitty");
-        tshirts.setPrice(new BigDecimal("$15.00"));
-        tshirts.setQuantity(100);
+        tshirts.setId(1);
+        tshirts.setSize("XL");
+        tshirts.setColor("brown");
+        tshirts.setDescription("sports hoodie");
+        tshirts.setPrice(new BigDecimal("59.99"));
+        tshirts.setQuantity(79);
 
-        List<Tshirts> tshirtsList = new ArrayList<>();
-        tshirtsList.add(tshirts);
-        String tshirtsJson = mapper.writeValueAsString(tshirtsList);
 
-        mockMvc.perform(post("/tshirts/{2}"))
-                .andDo(print())
-                .andExpect(status().isCreated())
-                .andExpect(content().json(tshirtsJson));
+        String tshirtsJson = mapper.writeValueAsString(tshirts);
+
+       mockMvc.perform(get("/tshirts/" + tshirtsId))
+               .andDo(print())
+               .andExpect(status().isOk())
+               .andExpect(content().json(tshirtsJson));
+
     }
 
     @Test
-    public void deleteTshirt() throws Exception {
-        mockMvc.perform(delete("/tshirts/{2}"))
+    public void shouldUpdateTshirt() throws Exception {
+        Tshirts outputTshirts = new Tshirts();
+        outputTshirts.setId(1);
+        outputTshirts.setSize("S");
+        outputTshirts.setColor("Pink");
+        outputTshirts.setDescription("Hello Kitty");
+        outputTshirts.setPrice(new BigDecimal("15.00"));
+        outputTshirts.setQuantity(100);
+
+
+        mockMvc.perform(put("/tshirts/" + tshirtsId)
+                        .content(outputTshirtsString)
+                        .contentType(MediaType.APPLICATION_JSON))
+
                 .andDo(print())
                 .andExpect(status().isNoContent());
     }
-//     @Test
-//       public void getTshirtsByColor() {
-//       }
 
-//       @Test
-//       public void getTshirtBySize() {
-//       }
-
-//       @Test
-//       public void updateTshirtsByColor() {
-//       }
-
-//       @Test
-//       public void updateTshirtsBySize() {
-//       }
-
-//       @Test
-//       public void deleteTshirtsByColor() {
-//       }
-
-//       @Test
-//       public void deleteTshirtsBySize() {
- }
+    @Test
+    public void shouldDeleteTshirt() throws Exception {
+        mockMvc.perform(delete("/tshirts/" + tshirtsId))
+                .andDo(print())
+                .andExpect(status().isNoContent());
+    }
+}
