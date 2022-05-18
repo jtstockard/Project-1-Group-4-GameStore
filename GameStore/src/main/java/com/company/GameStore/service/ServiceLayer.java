@@ -87,11 +87,16 @@ public class ServiceLayer {
     public List<Games> getGamesByTitle(String title){
         return gamesRepository.findByTitle(title);
     }
-    public List<Games> getAGamesById(int id){
-        return gamesRepository.findById(id);
+
+//  Had to chnage int to Integer.
+    public Games getGamesById(Integer id){
+       return gamesRepository.findById(id).get();
     }
+
+
     public Games addGames(Games games) {
         return gamesRepository.save(games); }
+
 
     public Games updateGames (Games games){
         gamesRepository.save(games);
@@ -101,37 +106,17 @@ public class ServiceLayer {
     public void deleteGames (int id){
         gamesRepository.deleteById(id);
     }
-    public List<Games> findAllGames() {
-        return gamesRepository.findAll();
-    }
-
-//    public List<Games> updateGamesByStudio() {
-//        gamesRepository.save();
+//    public List<Games> findAllGames() {
+//        return gamesRepository.findAll();
 //    }
-//
-//    public List<Games> updateGamesByRating() {
-//    }
-//
-//    public List<Games> updateGamesByTitle() {
-//    }
-//
-//    public List<Games> removeGamesByStudio() {
-//    }
-//
-//    public List<Games> removeGamesByRating() {
-//    }
-//
-//    public List<Games> removeGamesByTitle() {
-//    }
-
 
 
 //    Tshirts CRUD
     public List<Tshirts> getAllTshirts(){
         return tshirtsRepository.findAll();
     }
-    public List<Tshirts> getATshirtsById(int id){
-        return tshirtsRepository.findById(id);
+    public Tshirts getATshirtsById(Integer id){
+        return tshirtsRepository.findById(id).get();
     }
     public Tshirts addATshirts(Tshirts tshirts){
         return tshirtsRepository.save(tshirts);
