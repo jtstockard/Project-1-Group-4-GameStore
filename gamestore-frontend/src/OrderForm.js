@@ -1,5 +1,14 @@
 import { useState } from "react";
 
+import CustomerCard from "./CustomerCard.js";
+import CustomerForm from "./CustomerForm.js";
+import ConsolesCard from "./ConsolesCard.js";
+import CustomerCard from "./CustomerCard.js";
+import GamesCard from "./GamesCard.js";
+import InvoiceCard from "./InvoiceCard";
+import OrderForm from "./OrderForm.js";
+import TshirtsCard from "./TshirtsCard.js";
+
 function CustomerForm({ customer: initialCustomer, notify }) {
   const [customer, setCustomer] = useState(initialCustomer);
   const isAdd = initialCustomer.id === 0;
