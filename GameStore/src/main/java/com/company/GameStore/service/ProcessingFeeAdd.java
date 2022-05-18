@@ -14,9 +14,9 @@ public class ProcessingFeeAdd {
     @Autowired
     ProcessingFeeRepository processingFeeRepository;
 
-    public ProcessingFees addProcessingFee(Invoices invoices) {
-        return ProcessingFeeRepository.findByItemType(invoices.getItemType());
-    }
+//    public ProcessingFees addProcessingFee(Invoices invoices) {
+//        return processingFeeRepository.findByItemId(invoices.getItemType());
+//    }
 
     public void assignFees() {
         processingFeeRepository.save(new ProcessingFees("Consoles", new BigDecimal(14.99)));

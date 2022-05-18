@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 import java.math.BigDecimal;
 
 @Repository
-public interface SalesTaxRepository extends JpaRepository<SalesTax, BigDecimal> {
-    SalesTax findByState(BigDecimal state);
+public interface SalesTaxRepository extends JpaRepository<SalesTax, String> {
+//    SalesTax findByState(St state);
 
 }
