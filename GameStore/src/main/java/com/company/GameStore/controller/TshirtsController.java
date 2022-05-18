@@ -40,6 +40,12 @@ public class TshirtsController {
 
         return serviceLayer.getTshirtsBySize(size);
     }
+    @RequestMapping(value="/tshirts/{id}", method=RequestMethod.GET)
+    @ResponseStatus(HttpStatus.OK)
+    public Tshirts getTshirtById(@PathVariable int id) {
+
+        return serviceLayer.getATshirtsById(id);
+    }
 
     @RequestMapping(value="/tshirts/{id}", method=RequestMethod.PUT)
     @ResponseStatus(HttpStatus.NO_CONTENT)

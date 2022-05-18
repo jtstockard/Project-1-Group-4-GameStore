@@ -50,7 +50,7 @@ public class TshirtsControllerTest {
 
     @Before
     public void setUp() throws Exception {
-        Tshirts tshirts = new Tshirts(0,"L","yellow", "athlrtic shirt", new BigDecimal("14.99"), 20 );
+        Tshirts tshirts = new Tshirts(0, "L", "yellow", "athlrtic shirt", new BigDecimal("14.99"), 20);
 
         Tshirts tshirts1 = new Tshirts();
         tshirts1.setSize("L");
@@ -85,7 +85,7 @@ public class TshirtsControllerTest {
     }
 
     @Test
-    public void shouldGetAllTshirts() throws Exception{
+    public void shouldGetAllTshirts() throws Exception {
         Tshirts tshirts = new Tshirts();
         tshirts.setSize("M");
         tshirts.setColor("blue");
@@ -120,75 +120,61 @@ public class TshirtsControllerTest {
                 .andExpect(content().json(tshirtsJson));
 
     }
+
     @Test
-    public void shouldCreateTshirt() throws Exception{
+    public void shouldCreateTshirt() throws Exception {
         mockMvc.perform(post("/tshirts")
-                .content(inputTshirtsString)                           // Set the request body.
-                .contentType(MediaType.APPLICATION_JSON))    // Tell the server it's in JSON format.
+                        .content(inputTshirtsString)                           // Set the request body.
+                        .contentType(MediaType.APPLICATION_JSON))    // Tell the server it's in JSON format.
                 .andDo(print())
                 .andExpect(status().isCreated())
                 .andExpect(content().json(outputTshirtsString));
 
     }
 
-//    @Test
-//    public void getTshirtById() throws Exception{
-//        List<Tshirts> tshirtsList = new ArrayList<>();
-//        tshirtsList.add(tshirts);
-//        String tshirtsJson = mapper.writeValueAsString(tshirtsList);
-//
-//        mockMvc.perform(get("/tshirts/{2}"))
-//                .andDo(print())
-//                .andExpect(status().isCreated())
-//                .andExpect(content().json(tshirtsJson));
-//
-//    }
-
     @Test
-    public void updateTshirt() throws Exception {
+    public void shouldGetTshirtById() throws Exception {
         Tshirts tshirts = new Tshirts();
-        tshirts.setSize("S");
-        tshirts.setColor("Pink");
-        tshirts.setDescription("Hello Kitty");
-        tshirts.setPrice(new BigDecimal("$15.00"));
-        tshirts.setQuantity(100);
+        tshirts.setId(1);
+        tshirts.setSize("XL");
+        tshirts.setColor("brown");
+        tshirts.setDescription("sports hoodie");
+        tshirts.setPrice(new BigDecimal("59.99"));
+        tshirts.setQuantity(79);
 
-        List<Tshirts> tshirtsList = new ArrayList<>();
-        tshirtsList.add(tshirts);
-        String tshirtsJson = mapper.writeValueAsString(tshirtsList);
 
-        mockMvc.perform(post("/tshirts/{2}"))
-                .andDo(print())
-                .andExpect(status().isCreated())
-                .andExpect(content().json(tshirtsJson));
+        String tshirtsJson = mapper.writeValueAsString(tshirts);
+
+       mockMvc.perform(get("/tshirts/" + tshirtsId))
+               .andDo(print())
+               .andExpect(status().isOk())
+               .andExpect(content().json(tshirtsJson));
+
     }
 
     @Test
-    public void deleteTshirt() throws Exception {
-        mockMvc.perform(delete("/tshirts/{2}"))
+    public void shouldUpdateTshirt() throws Exception {
+        Tshirts outputTshirts = new Tshirts();
+        outputTshirts.setId(1);
+        outputTshirts.setSize("S");
+        outputTshirts.setColor("Pink");
+        outputTshirts.setDescription("Hello Kitty");
+        outputTshirts.setPrice(new BigDecimal("15.00"));
+        outputTshirts.setQuantity(100);
+
+
+        mockMvc.perform(put("/tshirts/" + tshirtsId)
+                        .content(outputTshirtsString)
+                        .contentType(MediaType.APPLICATION_JSON))
+
                 .andDo(print())
                 .andExpect(status().isNoContent());
     }
-//     @Test
-//       public void getTshirtsByColor() {
-//       }
 
-//       @Test
-//       public void getTshirtBySize() {
-//       }
-
-//       @Test
-//       public void updateTshirtsByColor() {
-//       }
-
-//       @Test
-//       public void updateTshirtsBySize() {
-//       }
-
-//       @Test
-//       public void deleteTshirtsByColor() {
-//       }
-
-//       @Test
-//       public void deleteTshirtsBySize() {
- }
+    @Test
+    public void shouldDeleteTshirt() throws Exception {
+        mockMvc.perform(delete("/tshirts/" + tshirtsId))
+                .andDo(print())
+                .andExpect(status().isNoContent());
+    }
+}
