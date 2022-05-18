@@ -15,10 +15,11 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
 
 import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
@@ -35,26 +36,22 @@ public class ConsolesControllerTest {
     @MockBean
     ServiceLayer serviceLayer;
 
-    private Consoles consoles;
+    private Consoles inputConsoles;
+    private Consoles outputConsoles;
+    private String inputConsolesString;
+    private String outputConsolesString;
 
-    private String consolesJson;
+    private List<Consoles> allConsoles;
+    private String allConsolesString;
+    private int consolesId = 0;
 
-    private List<Consoles> allConsoles = new ArrayList<>();
-
-    private String allConsolesJson;
-
+    private int nonExistentArtistId = 999;
 
     private ObjectMapper mapper = new ObjectMapper();
 
     @Before
-    public void setUp() throws Exception {
-        Consoles consoles = new Consoles();
-        consoles.setModel("Gamecube");
-        consoles.setManufacturer("Nintendo");
-        consoles.setMemoryAmount("128gb");
-        consoles.setPrice(new BigDecimal("199.02"));
-        consoles.setProcessor("Intel");
-        consoles.setQuantity(99);
+   public void setUp() throws Exception {
+        Consoles consoles = new Consoles(0,"Gamecube", "Nintendo", "128gb", "Intel", new BigDecimal("199.02"), 99);
 
         Consoles consoles1 = new Consoles();
         consoles1.setModel("PlayStation 3");
@@ -77,7 +74,19 @@ public class ConsolesControllerTest {
         consolesList.add(consoles1);
         consolesList.add(consoles2);
         doReturn(consolesList).when(serviceLayer).findAllConsoles();
-    }
+
+        inputConsoles = new Consoles(0,"Gamecube", "Nintendo", "128gb", "Intel", new BigDecimal("199.02"), 99);
+        outputConsoles = new Consoles( 0,"Gamecube", "Nintendo", "128gb", "Intel", new BigDecimal("199.02"), 99);
+        inputConsolesString = mapper.writeValueAsString(inputConsoles);
+        outputConsolesString = mapper.writeValueAsString(outputConsoles);
+        allConsoles = Arrays.asList(outputConsoles);
+        allConsolesString = mapper.writeValueAsString(allConsoles);
+
+        when(serviceLayer.addConsoles(inputConsoles)).thenReturn(outputConsoles);
+        when(serviceLayer.findAllConsoles()).thenReturn(allConsoles);
+        when(serviceLayer.getAConsoles(consolesId)).thenReturn(outputConsoles);
+
+}
 
     @Test
     public void getAllConsoles() throws Exception{
@@ -113,6 +122,9 @@ public class ConsolesControllerTest {
 
         String consolesJson = mapper.writeValueAsString(consolesList);
 
+
+
+
         mockMvc.perform(get("/console"))
                 .andDo(print())
                 .andExpect(status().isOk())
@@ -122,22 +134,37 @@ public class ConsolesControllerTest {
 
 
       @Test
-        public void createConsole() throws Exception{
-        Consoles consoles = new Consoles();
-        consoles.setModel("Gamecube");
-        consoles.setManufacturer("Nintendo");
-        consoles.setMemoryAmount("128gb");
-        consoles.setPrice(new BigDecimal("199.02"));
-        consoles.setProcessor("Intel");
-        consoles.setQuantity(99);
+        public void addConsoles() throws Exception{
+
+          Consoles inputConsoles = new Consoles();
+          inputConsoles.setModel("Gamecube");
+          inputConsoles.setManufacturer("Nintendo");
+          inputConsoles.setMemoryAmount("128gb");
+          inputConsoles.setPrice(new BigDecimal("199.02"));
+          inputConsoles.setProcessor("Intel");
+          inputConsoles.setQuantity(99);
+
+          String inputJson = mapper.writeValueAsString(inputConsoles);
+
+            Consoles outputConsoles = new Consoles();
+            outputConsoles.setModel("Gamecube");
+            outputConsoles.setManufacturer("Nintendo");
+            outputConsoles.setMemoryAmount("128gb");
+            outputConsoles.setPrice(new BigDecimal("199.02"));
+            outputConsoles.setProcessor("Intel");
+            outputConsoles.setQuantity(99);
+            outputConsoles.setId(0);
 
 
-        String consolesJson = mapper.writeValueAsString(consoles);
+            String outputJson = mapper.writeValueAsString(outputConsoles);
 
-            mockMvc.perform(get("/console"))
-               .andDo(print())
-                .andExpect(status().isOk())
-                .andExpect(content().json(consolesJson));
+
+            mockMvc.perform(post("/consoles")                            // Perform the POST request.
+                    .content(inputJson)
+                    .contentType(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                    .andExpect(status().isCreated())
+                    .andExpect(content().json(outputJson));
 
     }
 
@@ -156,9 +183,9 @@ public class ConsolesControllerTest {
 
        String consolesJson = mapper.writeValueAsString(consolesList);
 
-       mockMvc.perform(get("/console"))
+       mockMvc.perform(get("/consoles/{2}"))
                .andDo(print())
-               .andExpect(status().isCreated())
+               .andExpect(status().isOk())
                .andExpect(content().json(consolesJson));
 
    }
@@ -179,7 +206,7 @@ public class ConsolesControllerTest {
 
        mockMvc.perform(post("/console/{2}"))
                .andDo(print())
-               .andExpect(status().isCreated())
+               .andExpect(status().isOk())
                .andExpect(content().json(consolesJson));
     }
 
