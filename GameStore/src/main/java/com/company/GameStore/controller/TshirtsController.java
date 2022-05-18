@@ -40,15 +40,21 @@ public class TshirtsController {
 
         return serviceLayer.getTshirtsBySize(size);
     }
+    @RequestMapping(value="/tshirts/{id}", method=RequestMethod.GET)
+    @ResponseStatus(HttpStatus.OK)
+    public Tshirts getTshirtById(@PathVariable int id) {
+
+        return serviceLayer.getATshirtsById(id);
+    }
 
     @RequestMapping(value="/tshirts/{id}", method=RequestMethod.PUT)
-    @ResponseStatus(HttpStatus.OK)
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public Tshirts updateTshirtsById(@RequestBody Tshirts tshirts) {
         return serviceLayer.updateTshirts(tshirts);
     }
 
     @RequestMapping(value="/tshirts/{id}", method=RequestMethod.DELETE)
-    @ResponseStatus(HttpStatus.OK)
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public Tshirts deleteTshirtsById(@PathVariable int id) {
         serviceLayer.deleteTshirts(id);
         return null;
