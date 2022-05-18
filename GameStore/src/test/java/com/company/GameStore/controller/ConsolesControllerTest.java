@@ -123,8 +123,6 @@ public class ConsolesControllerTest {
         String consolesJson = mapper.writeValueAsString(consolesList);
 
 
-
-
         mockMvc.perform(get("/consoles"))
                 .andDo(print())
                 .andExpect(status().isOk())
