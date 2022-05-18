@@ -23,11 +23,9 @@ public class GamesController {
 
     @RequestMapping(value="/games/{id}", method= RequestMethod.GET)
     @ResponseStatus(HttpStatus.OK)
-    public Games getAGamesById(@PathVariable int id) {
+    public Games getGamesById(@PathVariable int id) {
 
-        Games games = (Games) serviceLayer.getAGamesById(id);
-
-        return games;
+       return serviceLayer.getGamesById(id);
     }
 
     @RequestMapping(value="/games", method=RequestMethod.POST)
@@ -36,21 +34,21 @@ public class GamesController {
         return serviceLayer.addGames(games);
     }
 
-    @RequestMapping(value="/games/{studio}", method=RequestMethod.GET)
+    @RequestMapping(value="/games/studio/{studio}", method=RequestMethod.GET)
     @ResponseStatus(HttpStatus.OK)
     public List<Games> getGamesByStudio(@PathVariable String studio) {
         return serviceLayer.getGamesByStudio(studio);
 
     }
 
-    @RequestMapping(value="/games/{rating}", method=RequestMethod.GET)
+    @RequestMapping(value="/games/rating/{rating}", method=RequestMethod.GET)
     @ResponseStatus(HttpStatus.OK)
     public List<Games> getGamesByRating(@PathVariable String rating) {
 
         return serviceLayer.getGamesByErsbRating(rating);
     }
 
-    @RequestMapping(value="/games/{title}", method=RequestMethod.GET)
+    @RequestMapping(value="/games/title/{title}", method=RequestMethod.GET)
     @ResponseStatus(HttpStatus.OK)
     public List<Games> getGamesByTitle(@PathVariable String title) {
         return serviceLayer.getGamesByTitle(title);
@@ -58,17 +56,17 @@ public class GamesController {
 
 
 
-    @RequestMapping(value="/games/{studio}", method=RequestMethod.PUT)
+    @RequestMapping(value="/games/{id}", method=RequestMethod.PUT)
     @ResponseStatus(HttpStatus.OK)
     public Games updateGames(@RequestBody Games games){
-        return serviceLayer.updateGames(games);
+        return (Games) serviceLayer.updateGames(games);
     }
 
-    @RequestMapping(value="/games/{title}", method=RequestMethod.DELETE)
+    @RequestMapping(value="/games/{id}", method=RequestMethod.DELETE)
     @ResponseStatus(HttpStatus.OK)
     public Games deleteGames(@PathVariable int id) {
         serviceLayer.deleteGames(id);
-        return deleteGames(id);
+        return null;
     }
 }
 

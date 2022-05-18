@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import java.math.BigDecimal;
 import java.util.List;
 
-@Repository
+//@Repository
 public interface GamesRepository extends JpaRepository<Games, Integer> {
 
 

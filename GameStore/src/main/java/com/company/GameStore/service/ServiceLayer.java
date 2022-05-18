@@ -87,11 +87,16 @@ public class ServiceLayer {
     public List<Games> getGamesByTitle(String title){
         return gamesRepository.findByTitle(title);
     }
-    public List<Games> getAGamesById(int id){
-        return gamesRepository.findById(id);
+
+//  Had to chnage int to Integer.
+    public Games getGamesById(Integer id){
+       return gamesRepository.findById(id).get();
     }
+
+
     public Games addGames(Games games) {
         return gamesRepository.save(games); }
+
 
     public Games updateGames (Games games){
         gamesRepository.save(games);
