@@ -192,7 +192,7 @@ public class ServiceLayer {
         invoices.setTaxTotal(taxTotal);
 
 
-        return buildInvoice(invoices);
+        return invoices;
     }
 
 

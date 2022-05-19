@@ -1,6 +1,6 @@
 function TshirtsCard({ tshirts, notify }) {
   function handleDelete() {
-    fetch(`http://localhost:8080/tshirts/${tshirts.tshirtsId}`, {
+    fetch(`http://localhost:8080/tshirts/${tshirts.id}`, {
       method: "DELETE",
     })
       .then(() => notify({ action: "delete", tshirts: tshirts }))
