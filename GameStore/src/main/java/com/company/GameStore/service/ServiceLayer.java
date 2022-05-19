@@ -98,7 +98,7 @@ public class ServiceLayer {
         return gamesRepository.findByTitle(title);
     }
 
-    //  Had to chnage int to Integer.
+    //  Had to change int to Integer.
     public Games getGamesById(Integer id) {
         return gamesRepository.findById(id).get();
     }
