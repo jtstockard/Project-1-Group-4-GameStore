@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Optional;
 
 public interface InvoicesRepository extends JpaRepository<Invoices, Integer>{
-
     Optional<Invoices> findById(int id);
 
     List<Invoices> findByName(String name);
