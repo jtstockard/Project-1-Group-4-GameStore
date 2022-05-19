@@ -1,23 +1,18 @@
 import { useState, useEffect } from "react";
-// import "./Customer.css";
-import CustomerCard from "./CustomerCard.js";
-// import CustomerForm from "./CustomerForm.js";
-import ConsolesCard from "./ConsolesCard.js";
-import GamesCard from "./GamesCard.js";
-import InvoiceCard from "./InvoiceCard";
-import OrderForm from "./OrderForm.js";
-import TshirtsCard from "./TshirtsCard.js";
+import "./Card.css";
+import InvoiceCard from "./InvoiceCard.js";
+import InvoicesForm from "./InvoicesForm.js";
 
-function Customers() {
-  const [customers, setCustomers] = useState([]);
+function Invoices() {
+  const [invoices, setInvoices] = useState([]);
   const [showForm, setShowForm] = useState(false);
   const [scopedCustomer, setScopedCustomer] = useState({});
   const [error, setError] = useState();
 
   useEffect(() => {
-    fetch("http://localhost:8080/customer")
+    fetch("http://localhost:8080/invoices")
       .then((response) => response.json())
-      .then((result) => setCustomers(result))
+      .then((result) => setInvoices(result))
       .catch(console.log);
   }, []);
 
@@ -25,18 +20,24 @@ function Customers() {
     // const now = new Date();
     setScopedCustomer({
       id: 0,
-      firstName: "",
-      lastName: "",
+      name: "",
       street: "",
       city: "",
       state: "",
-      zip: "",
-      level: "",
+      zipCode: "",
+      itemType: "",
+      itemId: "",
+      unitPrice: "",
+      subTotal: "",
+      taxTotal: "",
+      processing: "",
+      quantity: "",
+      total: "",
     });
     setShowForm(true);
   }
 
-  function notify({ action, customer, error }) {
+  function notify({ action, invoices, error }) {
     if (error) {
       setError(error);
       setShowForm(false);
@@ -45,24 +46,24 @@ function Customers() {
 
     switch (action) {
       case "add":
-        setCustomers([...customers, customer]);
+        setInvoices([...invoices, invoices]);
         break;
       case "edit":
-        setCustomers(
-          customers.map((e) => {
-            if (e.id === customer.id) {
-              return customer;
+        setInvoices(
+          invoices.map((e) => {
+            if (e.id === invoices.id) {
+              return invoices;
             }
             return e;
           })
         );
         break;
       case "edit-form":
-        setScopedCustomer(customer);
+        setScopedCustomer(invoices);
         setShowForm(true);
         return;
       case "delete":
-        setCustomers(customers.filter((e) => e.id !== customer.id));
+        setInvoices(invoices.filter((e) => e.id !== invoices.id));
         break;
       default:
         console.log("You have entered an invalid choice! Try again!");
@@ -74,30 +75,36 @@ function Customers() {
   }
 
   if (showForm) {
-    return <OrderForm customer={scopedCustomer} notify={notify} />;
+    return <InvoicesForm invoices={scopedCustomer} notify={notify} />;
   }
 
   return (
     <>
       {error && <div className="alert alert-danger">{error}</div>}
       <div>
-        <h1 id="customerTitle">Customers</h1>
+        <h1 id="customerTitle">Invoices</h1>
         <button className="btn btn-primary" type="button" onClick={addClick}>
-          Place an Order
+          Add a Invoices
         </button>
-        <table id="customers">
+        <table id="invoices">
           <tr>
-            <th>First Name</th>
-            <th>Last Name</th>
+            <th>Name</th>
             <th>Street</th>
             <th>City</th>
             <th>State</th>
             <th>Zip</th>
-            <th>Level</th>
+            <th>itemType</th>
+            <th>itemId</th>
+            <th>unitPrice</th>
+            <th>subTotal</th>
+            <th>taxTotal</th>
+            <th>processing</th>
+            <th>quantity</th>
+            <th>total</th>
           </tr>
           <tbody>
-            {customers.map((r) => (
-              <CustomerCard key={r.customerId} customer={r} notify={notify} />
+            {invoices.map((r) => (
+              <InvoiceCard key={r.customerId} invoices={r} notify={notify} />
             ))}
           </tbody>
         </table>
@@ -106,4 +113,4 @@ function Customers() {
   );
 }
 
-export default Customers;
+export default Invoices;
