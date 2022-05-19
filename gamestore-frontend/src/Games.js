@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react";
-import "./Card.css";
+// // import "./Card.css";
 import GamesCard from "./GamesCard.js";
 import GamesForm from "./GamesForm.js";
 
 function Games() {
   const [games, setGames] = useState([]);
   const [showForm, setShowForm] = useState(false);
-  const [scopedCustomer, setScopedCustomer] = useState({});
+  const [scopedGames, setScopedGames] = useState({});
   const [error, setError] = useState();
 
   useEffect(() => {
@@ -18,7 +18,7 @@ function Games() {
 
   function addClick() {
     // const now = new Date();
-    setScopedCustomer({
+    setScopedGames({
       id: 0,
       title: "",
       esrbRating: "",
@@ -52,7 +52,7 @@ function Games() {
         );
         break;
       case "edit-form":
-        setScopedCustomer(games);
+        setScopedGames(games);
         setShowForm(true);
         return;
       case "delete":
@@ -68,14 +68,14 @@ function Games() {
   }
 
   if (showForm) {
-    return <GamesForm games={scopedCustomer} notify={notify} />;
+    return <GamesForm games={scopedGames} notify={notify} />;
   }
 
   return (
     <>
       {error && <div className="alert alert-danger">{error}</div>}
       <div>
-        <h1 id="customerTitle">Games</h1>
+        <h1 id="gamesTitle">Games</h1>
         <button className="btn btn-primary" type="button" onClick={addClick}>
           Add a Games
         </button>
@@ -90,7 +90,7 @@ function Games() {
           </tr>
           <tbody>
             {games.map((r) => (
-              <GamesCard key={r.customerId} games={r} notify={notify} />
+              <GamesCard key={r.gamesId} games={r} notify={notify} />
             ))}
           </tbody>
         </table>

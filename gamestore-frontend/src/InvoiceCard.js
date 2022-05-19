@@ -1,4 +1,4 @@
-import "./Card.css";
+// import "./Card.css";
 
 function InvoiceCard({ invoice, notify }) {
   function handleDelete() {
