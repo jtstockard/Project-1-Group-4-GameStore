@@ -38,19 +38,18 @@ class InvoiceControllerTest {
 
     private ObjectMapper mapper = new ObjectMapper();
 
-    Invoices expectedInvoices1;
-    Invoices expectedInvoices2;
-    Invoices inputInvoices1;
-    List<Invoices> invoicesList;
-    String expectedJson;
-    String inputJson;
+    public Invoices expectedInvoices1;
+    public Invoices expectedInvoices2;
+    public Invoices inputInvoices1;
+    public List<Invoices> invoicesList;
+    public String expectedJson;
+    public String inputJson;
 
     @Before
     public void setUp(){
-        expectedInvoices1 = new Invoices(3,"Johnny Carson","402 Hollywood Blvd","Los Angeles","California","90210","Game",3,6,new BigDecimal(493.29));
-        expectedInvoices2 = new Invoices(4,"Ed McMahon","403 Hollywood Blvd","Los Angeles","California","90210","Console",7,2,new BigDecimal(1293.39));
-
-        inputInvoices1 = new Invoices(3,"Johnny Carson","402 Hollywood Blvd","Los Angeles","California","90210","Game",3,6, new BigDecimal(493.29));
+        expectedInvoices1 = new Invoices(3,"Johnny Carson","402 Hollywood Blvd","Los Angeles","California","90210","Game",3,new BigDecimal("493.29"),new BigDecimal("493.34"),new BigDecimal(".05"), new BigDecimal("1.49"),10, new BigDecimal("494.83"));
+        expectedInvoices2 = new Invoices(4,"Max Gosling","1232 Mason Rd","Chicago","Illinois","69420","Console",2,new BigDecimal("599.99"),new BigDecimal("600.04"),new BigDecimal(".05"), new BigDecimal("14.99"),100, new BigDecimal("615.94"));
+        inputInvoices1 = new Invoices(3,"Johnny Carson","402 Hollywood Blvd","Los Angeles","California","90210","Game",3,new BigDecimal("493.29"),new BigDecimal("493.34"),new BigDecimal(".05"), new BigDecimal("1.49"),10, new BigDecimal("494.83"));
 
         invoicesList = Arrays.asList(expectedInvoices1, expectedInvoices2);
 
