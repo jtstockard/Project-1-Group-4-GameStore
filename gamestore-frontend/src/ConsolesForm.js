@@ -1,28 +1,21 @@
 import { useState } from "react";
 
-import CustomerCard from "./CustomerCard.js";
-// import CustomerForm from "./CustomerForm.js";
-import ConsolesCard from "./ConsolesCard.js";
-import GamesCard from "./GamesCard.js";
-import InvoiceCard from "./InvoiceCard";
-import TshirtsCard from "./TshirtsCard.js";
-
-function OrderForm({ customer: initialCustomer, notify }) {
-  const [customer, setCustomer] = useState(initialCustomer);
-  const isAdd = initialCustomer.id === 0;
+function ConsolesForm({ consoles: initialConsoles, notify }) {
+  const [consoles, setConsoles] = useState(initialConsoles);
+  const isAdd = initialConsoles.id === 0;
 
   function handleChange(evt) {
-    const clone = { ...customer };
+    const clone = { ...consoles };
     clone[evt.target.name] = evt.target.value;
-    setCustomer(clone);
+    setConsoles(clone);
   }
 
   function handleSubmit(evt) {
     evt.preventDefault();
 
     const url = isAdd
-      ? "http://localhost:8080/customer"
-      : `http://localhost:8080/customer/${customer.id}`;
+      ? "http://localhost:8080/consoles"
+      : `http://localhost:8080/consoles/${consoles.id}`;
     const method = isAdd ? "POST" : "PUT";
     const expectedStatus = isAdd ? 201 : 204;
 
@@ -32,7 +25,7 @@ function OrderForm({ customer: initialCustomer, notify }) {
         "Content-Type": "application/json",
         Accept: "application/json",
       },
-      body: JSON.stringify(customer),
+      body: JSON.stringify(consoles),
     };
 
     fetch(url, init)
@@ -41,7 +34,7 @@ function OrderForm({ customer: initialCustomer, notify }) {
           if (isAdd) {
             return response.json();
           } else {
-            return customer;
+            return consoles;
           }
         }
         return Promise.reject(
@@ -51,7 +44,7 @@ function OrderForm({ customer: initialCustomer, notify }) {
       .then((result) =>
         notify({
           action: isAdd ? "add" : "edit",
-          customer: result,
+          consoles: result,
         })
       )
       .catch((error) => notify({ error: error }));
@@ -59,94 +52,71 @@ function OrderForm({ customer: initialCustomer, notify }) {
 
   return (
     <>
-      <h1>{customer.id > 0 ? "Edit" : "Add"} Order</h1>
+      <h1>{consoles.id > 0 ? "Edit" : "Add"} Consoles</h1>
       <form onSubmit={handleSubmit}>
         <div className="mb-3">
-          <label htmlFor="firstName">Name</label>
+          <label htmlFor="model">model</label>
           <input
             type="text"
-            id="name"
-            name="ne"
+            id="model"
+            name="model"
             className="form-control"
-            value={customer.name}
+            value={consoles.model}
             onChange={handleChange}
           />
         </div>
         <div className="mb-3">
-          <label htmlFor="street">Street</label>
+          <label htmlFor="manufacturer">manufacturer</label>
           <input
             type="text"
-            id="street"
-            name="street"
+            id="manufacturer"
+            name="manufacturer"
             className="form-control"
-            value={customer.street}
+            value={consoles.manufacturer}
             onChange={handleChange}
           />
         </div>
         <div className="mb-3">
-          <label htmlFor="city">City</label>
+          <label htmlFor="memoryAmount">memoryAmount</label>
           <input
             type="text"
-            id="city"
-            name="city"
+            id="memoryAmount"
+            name="memoryAmount"
             className="form-control"
-            value={customer.city}
+            value={consoles.memoryAmount}
             onChange={handleChange}
           />
         </div>
         <div className="mb-3">
-          <label htmlFor="state">State</label>
+          <label htmlFor="processor">processor</label>
           <input
             type="text"
-            id="state"
-            name="state"
+            id="processor"
+            name="processor"
             className="form-control"
-            value={customer.state}
-            onChange={handleChange}
-          />
-        </div>
-
-        <div className="mb-3">
-          <label htmlFor="zip">Zip</label>
-          <input
-            type="text"
-            id="zip"
-            name="zip"
-            className="form-control"
-            value={customer.zip}
+            value={consoles.processor}
             onChange={handleChange}
           />
         </div>
         <div className="mb-3">
-          <label htmlFor="itemType">Item Type</label>
+          <label htmlFor="price">price</label>
           <input
             type="text"
-            id="itemType"
-            name="itemType"
+            id="price"
+            name="price"
             className="form-control"
-            value={customer.itemType}
+            value={consoles.price}
             onChange={handleChange}
           />
         </div>
         <div className="mb-3">
-          <label htmlFor="itemId">Item Id</label>
-          <input
-            type="text"
-            id="itemId"
-            name="itemId"
-            className="form-control"
-            value={customer.itemId}
-            onChange={handleChange}
-          />
-        </div>
-        <div className="mb-3">
-          <label htmlFor="quantity">Quantity</label>
+          <label htmlFor="quantity">quantity</label>
           <input
             type="text"
             id="quantity"
             name="quantity"
             className="form-control"
-            value={customer.quantity}
+            value={consoles.quantity}
             onChange={handleChange}
           />
         </div>
@@ -168,4 +138,4 @@ function OrderForm({ customer: initialCustomer, notify }) {
   );
 }
 
-export default OrderForm;
+export default ConsolesForm;

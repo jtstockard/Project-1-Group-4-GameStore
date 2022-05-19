@@ -1,3 +1,5 @@
+import "./Card.css";
+
 function InvoiceCard({ invoice, notify }) {
   function handleDelete() {
     fetch(`http://localhost:8080/invoice/${invoice.invoiceId}`, {
@@ -16,9 +18,12 @@ function InvoiceCard({ invoice, notify }) {
       <td>{invoice.zipCode}</td>
       <td>{invoice.itemType}</td>
       <td>{invoice.itemId}</td>
+      <td>{invoice.unitPrice}</td>
+      <td>{invoice.subTotal}</td>
+      <td>{invoice.taxTotal}</td>
+      <td>{invoice.processing}</td>
       <td>{invoice.quantity}</td>
       <td>{invoice.total}</td>
-
       <td>
         <button
           id="deleteButton"
