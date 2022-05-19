@@ -11,3 +11,29 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+
+.home-h1 {
+  text-align: center;
+  color: rgb(40, 134, 222);
+  padding: 20px;
+}
+
+.container-home {
+  background-color: rgb(218, 217, 217);
+  height: 100vh;
+}
+
+.hompage-link-container {
+  text-align: center;
+  justify-content: space-around;
+  padding: 10px;
+}
+
+.homepage-link {
+  text-align: center;
+  padding: 10px;
+  text-decoration: none;
+  color: black;
+}
+

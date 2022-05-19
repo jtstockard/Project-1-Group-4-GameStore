@@ -3,6 +3,7 @@ import Games from "./Games";
 import Consoles from "./Consoles";
 import Tshirts from "./Tshirts";
 import Navbar from "./navbar";
+import Home from "./Home.js";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 function App() {
@@ -12,7 +13,8 @@ function App() {
       <Router>
         <Switch>
           <Route exact path="/">
-            <Invoices />
+            <Home />
+            {/* <Invoices /> */}
           </Route>
           <Route exact path="/games">
             <Games />
@@ -22,6 +24,9 @@ function App() {
           </Route>
           <Route exact path="/tshirts">
             <Tshirts />
+          </Route>
+          <Route exact path="/invoice">
+            <Invoices />
           </Route>
         </Switch>
       </Router>
