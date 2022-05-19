@@ -28,7 +28,7 @@ function Tshirts() {
     setShowForm(true);
   }
 
-  function notify({ action, tshirts, error }) {
+  function notify({ action, tshirts: tshirtsAdd, error }) {
     if (error) {
       setError(error);
       setShowForm(false);
@@ -37,12 +37,12 @@ function Tshirts() {
 
     switch (action) {
       case "add":
-        setTshirts([...tshirts, tshirts]);
+        setTshirts([...tshirtsAdd, tshirts]);
         break;
       case "edit":
         setTshirts(
           tshirts.map((e) => {
-            if (e.id === tshirts.id) {
+            if (e.id === tshirtsAdd.id) {
               return tshirts;
             }
             return e;
@@ -50,11 +50,11 @@ function Tshirts() {
         );
         break;
       case "edit-form":
-        setScopedTshirts(tshirts);
+        setScopedTshirts(tshirtsAdd);
         setShowForm(true);
         return;
       case "delete":
-        setTshirts(tshirts.filter((e) => e.id !== tshirts.id));
+        setTshirts(tshirts.filter((e) => e.id !== tshirtsAdd.id));
         break;
       default:
         console.log("You have entered an invalid choice! Try again!");
@@ -87,7 +87,7 @@ function Tshirts() {
           </tr>
           <tbody>
             {tshirts.map((r) => (
-              <TshirtsCard key={r.tshirtsId} tshirts={r} notify={notify} />
+              <TshirtsCard key={r.id} tshirts={r} notify={notify} />
             ))}
           </tbody>
         </table>

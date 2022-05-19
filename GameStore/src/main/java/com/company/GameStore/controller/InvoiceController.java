@@ -17,7 +17,7 @@ public class InvoiceController {
     @Autowired
     private ServiceLayer serviceLayer;
 
-    @GetMapping(value = "/invoice")
+    @GetMapping(value = "/invoices")
     @ResponseStatus(HttpStatus.OK)
     public List<Invoices> getAllInvoices() {
         return serviceLayer.getAllInvoices();

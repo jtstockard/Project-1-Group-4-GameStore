@@ -30,7 +30,7 @@ function Consoles() {
     setShowForm(true);
   }
 
-  function notify({ action, consoles, error }) {
+  function notify({ action, consoles: consolesAdd, error }) {
     if (error) {
       setError(error);
       setShowForm(false);
@@ -39,12 +39,12 @@ function Consoles() {
 
     switch (action) {
       case "add":
-        setConsoles([...consoles, consoles]);
+        setConsoles([...consolesAdd, consoles]);
         break;
       case "edit":
         setConsoles(
           consoles.map((e) => {
-            if (e.id === consoles.id) {
+            if (e.id === consolesAdd.id) {
               return consoles;
             }
             return e;
@@ -52,11 +52,11 @@ function Consoles() {
         );
         break;
       case "edit-form":
-        setScopedConsoles(consoles);
+        setScopedConsoles(consolesAdd);
         setShowForm(true);
         return;
       case "delete":
-        setConsoles(consoles.filter((e) => e.id !== consoles.id));
+        setConsoles(consoles.filter((e) => e.id !== consolesAdd.id));
         break;
       default:
         console.log("You have entered an invalid choice! Try again!");
@@ -70,7 +70,8 @@ function Consoles() {
   if (showForm) {
     return <ConsolesForm consoles={scopedConsoles} notify={notify} />;
   }
-
+  console.log(consoles);
+  console.log("we did something");
   return (
     <>
       {error && <div className="alert alert-danger">{error}</div>}
@@ -90,7 +91,7 @@ function Consoles() {
           </tr>
           <tbody>
             {consoles.map((r) => (
-              <ConsoleCard key={r.consolesId} consoles={r} notify={notify} />
+              <ConsoleCard key={r.id} consoles={r} notify={notify} />
             ))}
           </tbody>
         </table>

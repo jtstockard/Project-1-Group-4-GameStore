@@ -15,7 +15,6 @@ function GamesCard({ games, notify }) {
       <td>{games.price}</td>
       <td>{games.studio}</td>
       <td>{games.quantity}</td>
-
       <td>
         <button
           id="deleteButton"

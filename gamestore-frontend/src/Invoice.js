@@ -11,7 +11,10 @@ function Invoices() {
 
   useEffect(() => {
     fetch("http://localhost:8080/invoices")
-      .then((response) => response.json())
+      .then((response) => {
+        console.log(response);
+        return response.json();
+      })
       .then((result) => setInvoices(result))
       .catch(console.log);
   }, []);
@@ -37,7 +40,7 @@ function Invoices() {
     setShowForm(true);
   }
 
-  function notify({ action, invoices, error }) {
+  function notify({ action, invoices: invoicesAdd, error }) {
     if (error) {
       setError(error);
       setShowForm(false);
@@ -46,12 +49,12 @@ function Invoices() {
 
     switch (action) {
       case "add":
-        setInvoices([...invoices, invoices]);
+        setInvoices([...invoices, invoicesAdd]);
         break;
       case "edit":
         setInvoices(
           invoices.map((e) => {
-            if (e.id === invoices.id) {
+            if (e.id === invoicesAdd.id) {
               return invoices;
             }
             return e;
@@ -59,11 +62,11 @@ function Invoices() {
         );
         break;
       case "edit-form":
-        setScopedInvoices(invoices);
+        setScopedInvoices(invoicesAdd);
         setShowForm(true);
         return;
       case "delete":
-        setInvoices(invoices.filter((e) => e.id !== invoices.id));
+        setInvoices(invoices.filter((e) => e.id !== invoicesAdd.id));
         break;
       default:
         console.log("You have entered an invalid choice! Try again!");
@@ -104,7 +107,7 @@ function Invoices() {
           </tr>
           <tbody>
             {invoices.map((r) => (
-              <InvoiceCard key={r.invoicesId} invoices={r} notify={notify} />
+              <InvoiceCard key={r.id} invoices={r} notify={notify} />
             ))}
           </tbody>
         </table>
