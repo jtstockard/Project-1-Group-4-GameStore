@@ -1,12 +1,11 @@
 import { useState, useEffect } from "react";
-import "./Card.css";
 import TshirtsCard from "./TshirtsCard.js";
 import TshirtsForm from "./TshirtsForm.js";
 
 function Tshirts() {
   const [tshirts, setTshirts] = useState([]);
   const [showForm, setShowForm] = useState(false);
-  const [scopedCustomer, setScopedCustomer] = useState({});
+  const [scopedTshirts, setScopedTshirts] = useState({});
   const [error, setError] = useState();
 
   useEffect(() => {
@@ -18,7 +17,7 @@ function Tshirts() {
 
   function addClick() {
     // const now = new Date();
-    setScopedCustomer({
+    setScopedTshirts({
       id: 0,
       size: "",
       color: "",
@@ -51,7 +50,7 @@ function Tshirts() {
         );
         break;
       case "edit-form":
-        setScopedCustomer(tshirts);
+        setScopedTshirts(tshirts);
         setShowForm(true);
         return;
       case "delete":
@@ -67,14 +66,14 @@ function Tshirts() {
   }
 
   if (showForm) {
-    return <TshirtsForm tshirts={scopedCustomer} notify={notify} />;
+    return <TshirtsForm tshirts={scopedTshirts} notify={notify} />;
   }
 
   return (
     <>
       {error && <div className="alert alert-danger">{error}</div>}
       <div>
-        <h1 id="customerTitle">Tshirts</h1>
+        <h1 id="tshirtsTitle">Tshirts</h1>
         <button className="btn btn-primary" type="button" onClick={addClick}>
           Add a Tshirts
         </button>
@@ -88,7 +87,7 @@ function Tshirts() {
           </tr>
           <tbody>
             {tshirts.map((r) => (
-              <TshirtsCard key={r.customerId} tshirts={r} notify={notify} />
+              <TshirtsCard key={r.tshirtsId} tshirts={r} notify={notify} />
             ))}
           </tbody>
         </table>

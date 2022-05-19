@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react";
-import "./Card.css";
+
 import ConsoleCard from "./ConsolesCard.js";
 import ConsolesForm from "./ConsolesForm.js";
 
 function Consoles() {
   const [consoles, setConsoles] = useState([]);
   const [showForm, setShowForm] = useState(false);
-  const [scopedCustomer, setScopedCustomer] = useState({});
+  const [scopedConsoles, setScopedConsoles] = useState({});
   const [error, setError] = useState();
 
   useEffect(() => {
@@ -18,7 +18,7 @@ function Consoles() {
 
   function addClick() {
     // const now = new Date();
-    setScopedCustomer({
+    setScopedConsoles({
       id: 0,
       model: "",
       manufacturer: "",
@@ -52,7 +52,7 @@ function Consoles() {
         );
         break;
       case "edit-form":
-        setScopedCustomer(consoles);
+        setScopedConsoles(consoles);
         setShowForm(true);
         return;
       case "delete":
@@ -68,14 +68,14 @@ function Consoles() {
   }
 
   if (showForm) {
-    return <ConsolesForm consoles={scopedCustomer} notify={notify} />;
+    return <ConsolesForm consoles={scopedConsoles} notify={notify} />;
   }
 
   return (
     <>
       {error && <div className="alert alert-danger">{error}</div>}
       <div>
-        <h1 id="customerTitle">Consoles</h1>
+        <h1 id="consolesTitle">Consoles</h1>
         <button className="btn btn-primary" type="button" onClick={addClick}>
           Add a Consoles
         </button>
@@ -90,7 +90,7 @@ function Consoles() {
           </tr>
           <tbody>
             {consoles.map((r) => (
-              <ConsoleCard key={r.customerId} consoles={r} notify={notify} />
+              <ConsoleCard key={r.consolesId} consoles={r} notify={notify} />
             ))}
           </tbody>
         </table>

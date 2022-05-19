@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react";
-import "./Card.css";
+// import "./Card.css";
 import InvoiceCard from "./InvoiceCard.js";
 import InvoicesForm from "./InvoicesForm.js";
 
 function Invoices() {
   const [invoices, setInvoices] = useState([]);
   const [showForm, setShowForm] = useState(false);
-  const [scopedCustomer, setScopedCustomer] = useState({});
+  const [scopedInvoices, setScopedInvoices] = useState({});
   const [error, setError] = useState();
 
   useEffect(() => {
@@ -18,7 +18,7 @@ function Invoices() {
 
   function addClick() {
     // const now = new Date();
-    setScopedCustomer({
+    setScopedInvoices({
       id: 0,
       name: "",
       street: "",
@@ -59,7 +59,7 @@ function Invoices() {
         );
         break;
       case "edit-form":
-        setScopedCustomer(invoices);
+        setScopedInvoices(invoices);
         setShowForm(true);
         return;
       case "delete":
@@ -75,14 +75,14 @@ function Invoices() {
   }
 
   if (showForm) {
-    return <InvoicesForm invoices={scopedCustomer} notify={notify} />;
+    return <InvoicesForm invoices={scopedInvoices} notify={notify} />;
   }
 
   return (
     <>
       {error && <div className="alert alert-danger">{error}</div>}
       <div>
-        <h1 id="customerTitle">Invoices</h1>
+        <h1 id="invoicesTitle">Invoices</h1>
         <button className="btn btn-primary" type="button" onClick={addClick}>
           Add a Invoices
         </button>
@@ -104,7 +104,7 @@ function Invoices() {
           </tr>
           <tbody>
             {invoices.map((r) => (
-              <InvoiceCard key={r.customerId} invoices={r} notify={notify} />
+              <InvoiceCard key={r.invoicesId} invoices={r} notify={notify} />
             ))}
           </tbody>
         </table>

@@ -77,7 +77,9 @@ function TshirtsForm({ tshirts: initialTshirts, notify }) {
           />
         </div>
         <div className="mb-3">
-          <textarea name="description" rows="10" cols="30"></textarea>
+          <textarea name="description" rows="10" cols="30">
+            Was is it like
+          </textarea>
         </div>
         <div className="mb-3">
           <label htmlFor="price">price</label>
