@@ -37,3 +37,19 @@ code {
   color: black;
 }
 
+.logo-link {
+  text-decoration: none;
+}
+
+h2.logo {
+
+  color: black;
+
+}
+
+.nav-link {
+  padding: 10px;
+  color: rgb(98, 95, 95);
+
+  
+}
