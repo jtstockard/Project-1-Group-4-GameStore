@@ -13,7 +13,6 @@ function App() {
       <Router>
         <Switch>
           <Route exact path="/">
-            {/* <Home /> */}
             <Invoices />
           </Route>
           <Route exact path="/games">
