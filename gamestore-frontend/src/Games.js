@@ -30,7 +30,7 @@ function Games() {
     setShowForm(true);
   }
 
-  function notify({ action, games, error }) {
+  function notify({ action, games: gamesAdd, error }) {
     if (error) {
       setError(error);
       setShowForm(false);
@@ -39,12 +39,12 @@ function Games() {
 
     switch (action) {
       case "add":
-        setGames([...games, games]);
+        setGames([...gamesAdd, games]);
         break;
       case "edit":
         setGames(
           games.map((e) => {
-            if (e.id === games.id) {
+            if (e.id === gamesAdd.id) {
               return games;
             }
             return e;
@@ -52,11 +52,11 @@ function Games() {
         );
         break;
       case "edit-form":
-        setScopedGames(games);
+        setScopedGames(gamesAdd);
         setShowForm(true);
         return;
       case "delete":
-        setGames(games.filter((e) => e.id !== games.id));
+        setGames(games.filter((e) => e.id !== gamesAdd.id));
         break;
       default:
         console.log("You have entered an invalid choice! Try again!");
@@ -90,7 +90,7 @@ function Games() {
           </tr>
           <tbody>
             {games.map((r) => (
-              <GamesCard key={r.gamesId} games={r} notify={notify} />
+              <GamesCard key={r.id} games={r} notify={notify} />
             ))}
           </tbody>
         </table>

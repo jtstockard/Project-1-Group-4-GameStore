@@ -1,8 +1,44 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+// import tshirts from "./Tshirts";
+// import consoles from "./Consoles";
+// import games from "./Games";
 
 function InvoicesForm({ invoices: initialInvoices, notify }) {
   const [invoices, setInvoices] = useState(initialInvoices);
   const isAdd = initialInvoices.id === 0;
+  const [tshirts, setTshirts] = useState([]);
+  const [consoles, setConsoles] = useState([]);
+  const [games, setGames] = useState([]);
+
+  useEffect(() => {
+    fetch("http://localhost:8080/games")
+      .then((response) => {
+        console.log(response);
+        return response.json();
+      })
+      .then((result) => setGames(result))
+      .catch(console.log);
+  }, []);
+
+  useEffect(() => {
+    fetch("http://localhost:8080/consoles")
+      .then((response) => {
+        console.log(response);
+        return response.json();
+      })
+      .then((result) => setConsoles(result))
+      .catch(console.log);
+  }, []);
+
+  useEffect(() => {
+    fetch("http://localhost:8080/tshirts")
+      .then((response) => {
+        console.log(response);
+        return response.json();
+      })
+      .then((result) => setTshirts(result))
+      .catch(console.log);
+  }, []);
 
   function handleChange(evt) {
     const clone = { ...invoices };
@@ -59,7 +95,7 @@ function InvoicesForm({ invoices: initialInvoices, notify }) {
           <input
             type="text"
             id="name"
-            name="ne"
+            name="name"
             className="form-control"
             value={invoices.name}
             onChange={handleChange}
@@ -100,13 +136,13 @@ function InvoicesForm({ invoices: initialInvoices, notify }) {
         </div>
 
         <div className="mb-3">
-          <label htmlFor="zip">Zip</label>
+          <label htmlFor="zipCode">zipCode</label>
           <input
             type="text"
-            id="zip"
-            name="zip"
+            id="zipCode"
+            name="zipCode"
             className="form-control"
-            value={invoices.zip}
+            value={invoices.zipCode}
             onChange={handleChange}
           />
         </div>
@@ -114,19 +150,29 @@ function InvoicesForm({ invoices: initialInvoices, notify }) {
           <label htmlFor="itemType">Item Type</label>
           <select id="itemType" name="itemType">
             <optgroup label="Consoles">
-              <option> Nintendo Wii</option>
-              <option> Xbox</option>
-              <option> Playstation</option>
+              {consoles.map((c) => (
+                <option data-type="Console" data-id={c.id}>
+                  {c.manuacturer} {c.memoryAmount}
+                  {c.processor}
+                </option>
+              ))}
             </optgroup>
             <optgroup label="Games">
-              <option> Final Fantasy</option>
-              <option> Call of Duty</option>
-              <option> Time Crisis</option>
+              {games.map((g) => (
+                <option data-type="Games" data-id={g.id}>
+                  {g.title}
+                  {g.studio}
+                  {g.ersbRating}
+                </option>
+              ))}
             </optgroup>
             <optgroup label="Tshirts">
-              <option> red</option>
-              <option> blue</option>
-              <option> black</option>
+              {tshirts.map((t) => (
+                <option data-type="Tshirts" data-id={t.id}>
+                  {t.size}
+                  {t.color}
+                </option>
+              ))}
             </optgroup>
           </select>
         </div>

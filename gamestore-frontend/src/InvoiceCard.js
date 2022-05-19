@@ -1,29 +1,29 @@
 // import "./Card.css";
 
-function InvoiceCard({ invoice, notify }) {
+function InvoiceCard({ invoices, notify }) {
   function handleDelete() {
-    fetch(`http://localhost:8080/invoice/${invoice.invoiceId}`, {
+    fetch(`http://localhost:8080/invoices/${invoices.invoicesId}`, {
       method: "DELETE",
     })
-      .then(() => notify({ action: "delete", invoice: invoice }))
+      .then(() => notify({ action: "delete", invoices: invoices }))
       .catch((error) => notify({ action: "delete", error: error }));
   }
 
   return (
-    <tr key={invoice.invoiceId}>
-      <td>{invoice.name}</td>
-      <td>{invoice.street}</td>
-      <td>{invoice.city}</td>
-      <td>{invoice.state}</td>
-      <td>{invoice.zipCode}</td>
-      <td>{invoice.itemType}</td>
-      <td>{invoice.itemId}</td>
-      <td>{invoice.unitPrice}</td>
-      <td>{invoice.subTotal}</td>
-      <td>{invoice.taxTotal}</td>
-      <td>{invoice.processing}</td>
-      <td>{invoice.quantity}</td>
-      <td>{invoice.total}</td>
+    <tr key={invoices.invoicesId}>
+      <td>{invoices.name}</td>
+      <td>{invoices.street}</td>
+      <td>{invoices.city}</td>
+      <td>{invoices.state}</td>
+      <td>{invoices.zipCode}</td>
+      <td>{invoices.itemType}</td>
+      <td>{invoices.itemId}</td>
+      <td>{invoices.unitPrice}</td>
+      <td>{invoices.subTotal}</td>
+      <td>{invoices.taxTotal}</td>
+      <td>{invoices.processing}</td>
+      <td>{invoices.quantity}</td>
+      <td>{invoices.total}</td>
       <td>
         <button
           id="deleteButton"
@@ -37,7 +37,7 @@ function InvoiceCard({ invoice, notify }) {
           id="editButton"
           className="btn btn-secondary"
           type="button"
-          onClick={() => notify({ action: "edit-form", invoice: invoice })}
+          onClick={() => notify({ action: "edit-form", invoices: invoices })}
         >
           Edit
         </button>
