@@ -73,7 +73,9 @@ public class ServiceLayer {
     }
 
     public Invoices addInvoices(Invoices invoices) {
-        return invoicesRepository.save(invoices);
+
+        Invoices popInvoices = buildInvoice(invoices);
+        return invoicesRepository.save(popInvoices);
     }
     public Invoices updateInvoices(Invoices invoices) {
         return invoicesRepository.save(invoices);
@@ -156,19 +158,18 @@ public class ServiceLayer {
 
 // best idea for price calculation
     public Invoices buildInvoice(Invoices invoices) {
-//        Invoices updateInvoices = invoices;
 
 //        find item type
         BigDecimal itemPrice;
 
         if (invoices.getItemType().equals("Consoles")){
-            Consoles consoles = consolesRepository.findById(invoices.getId()).get();
+            Consoles consoles = consolesRepository.findById(invoices.getItemId()).get();
             itemPrice = consoles.getPrice();
         } else if (invoices.getItemType().equals("Games")) {
-            Games games = gamesRepository.findById(invoices.getId()).get();
+            Games games = gamesRepository.findById(invoices.getItemId()).get();
             itemPrice = games.getPrice();
         } else {
-            Tshirts tshirts = tshirtsRepository.findById(invoices.getId()).get();
+            Tshirts tshirts = tshirtsRepository.findById(invoices.getItemId()).get();
             itemPrice = tshirts.getPrice();
         }
 
@@ -191,7 +192,7 @@ public class ServiceLayer {
         invoices.setTaxTotal(taxTotal);
 
 
-        return buildInvoice(invoices);
+        return invoices;
     }
 
 

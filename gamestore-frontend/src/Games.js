@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-// // import "./Card.css";
+
 import GamesCard from "./GamesCard.js";
 import GamesForm from "./GamesForm.js";
 

@@ -11,14 +11,11 @@ import java.math.BigDecimal;
 @Service
 public class SalesTaxAdd {
 
-    @Autowired
+
     SalesTaxRepository salesTaxRepository;
 
-//    public SalesTax findByState(Invoices invoices){
-//        return salesTaxRepository.findByState(invoices.getState());
-//    }
-
-    public void assignSalesTax(){
+    @Autowired
+    public SalesTaxAdd(SalesTaxRepository salesTaxRepository){
         salesTaxRepository.save(new SalesTax("AL", .05));
         salesTaxRepository.save(new SalesTax("AK", .06));
         salesTaxRepository.save(new SalesTax("AZ", .04));

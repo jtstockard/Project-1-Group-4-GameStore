@@ -11,14 +11,11 @@ import java.math.BigDecimal;
 //       need to calculate total with
 @Service
 public class ProcessingFeeAdd {
-    @Autowired
+
     ProcessingFeeRepository processingFeeRepository;
 
-//    public ProcessingFees addProcessingFee(Invoices invoices) {
-//        return processingFeeRepository.findByItemId(invoices.getItemType());
-//    }
-
-    public void assignFees() {
+@Autowired
+    public ProcessingFeeAdd(ProcessingFeeRepository processingFeeRepository) {
         processingFeeRepository.save(new ProcessingFees("Consoles", new BigDecimal(14.99)));
         processingFeeRepository.save(new ProcessingFees("T-Shirts", new BigDecimal(1.98)));
         processingFeeRepository.save(new ProcessingFees("Games", new BigDecimal(1.49)));
