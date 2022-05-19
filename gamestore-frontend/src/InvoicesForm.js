@@ -42,7 +42,16 @@ function InvoicesForm({ invoices: initialInvoices, notify }) {
 
   function handleChange(evt) {
     const clone = { ...invoices };
-    clone[evt.target.name] = evt.target.value;
+    if (evt.target.name === "itemType") {
+      clone["itemType"] =
+        evt.target.options[evt.target.selectedIndex].getAttribute("data-type");
+      clone["itemId"] =
+        evt.target.options[evt.target.selectedIndex].getAttribute("data-id");
+      console.log(clone);
+    } else {
+      clone[evt.target.name] = evt.target.value;
+    }
+
     setInvoices(clone);
   }
 
@@ -148,10 +157,10 @@ function InvoicesForm({ invoices: initialInvoices, notify }) {
         </div>
         <div className="mb-3">
           <label htmlFor="itemType">Item Type</label>
-          <select id="itemType" name="itemType">
+          <select id="itemType" name="itemType" onChange={handleChange}>
             <optgroup label="Consoles">
               {consoles.map((c) => (
-                <option data-type="Console" data-id={c.id}>
+                <option data-type="Consoles" data-id={c.id}>
                   {c.manuacturer} {c.memoryAmount}
                   {c.processor}
                 </option>
