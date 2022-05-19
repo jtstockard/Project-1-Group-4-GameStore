@@ -36,4 +36,15 @@ public class InvoiceController {
         return serviceLayer.addInvoices(invoices);
     }
 
+    @PutMapping("/invoices/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public Invoices updateInvoices(@RequestBody Invoices invoices) {
+        return serviceLayer.updateInvoices(invoices);
+    }
+    @DeleteMapping("/invoices/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public Invoices deleteInvoices(@PathVariable int id) {
+        serviceLayer.deleteInvoices(id);
+        return null;
+    }
 }

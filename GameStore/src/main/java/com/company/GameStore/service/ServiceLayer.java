@@ -75,7 +75,12 @@ public class ServiceLayer {
     public Invoices addInvoices(Invoices invoices) {
         return invoicesRepository.save(invoices);
     }
+    public Invoices updateInvoices(Invoices invoices) {
+        return invoicesRepository.save(invoices);
+    }
 
+    public void deleteInvoices(int id) { invoicesRepository.deleteById(id);
+    }
     //    Game CRUD
     public List<Games> getAllGames() {
         return gamesRepository.findAll();
@@ -148,6 +153,7 @@ public class ServiceLayer {
     }
 
 
+
 // best idea for price calculation
     public Invoices buildInvoice(Invoices invoices) {
 //        Invoices updateInvoices = invoices;
@@ -187,6 +193,8 @@ public class ServiceLayer {
 
         return buildInvoice(invoices);
     }
+
+
 }
 //    BigDecimal x = new BigDecimal("42");
 //        x.multiply(new BigDecimal("100"));
