@@ -1,6 +1,5 @@
 package com.company.GameStore.controller;
 
-import com.company.GameStore.exception.InvalidRequestException;
 import com.company.GameStore.models.Invoices;
 import com.company.GameStore.service.ServiceLayer;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +16,7 @@ public class InvoiceController {
     @Autowired
     private ServiceLayer serviceLayer;
 
-    @GetMapping(value = "/invoice")
+    @GetMapping(value = "/invoices")
     @ResponseStatus(HttpStatus.OK)
     public List<Invoices> getAllInvoices() {
         return serviceLayer.getAllInvoices();
@@ -25,8 +24,7 @@ public class InvoiceController {
 
     @GetMapping("/invoices/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public Optional<Invoices> getInvoiceById(@PathVariable int id) {
-
+    public Optional<Invoices> getInvoicesById(@PathVariable int id) {
         return serviceLayer.getInvoicesById(id);
     }
 
