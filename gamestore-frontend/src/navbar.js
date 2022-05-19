@@ -7,9 +7,9 @@ function NavbarApp(props) {
     <Navbar collapseOnSelect expand="md" bg="dark" variant="dark" fixed="top">
       <Container>
         <Navbar.Brand className="logo-link" href="/">
-          <h2 className="logo">
+          <h1 className="logo">
           Game Store
-          </h2>
+          </h1>
           </Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
