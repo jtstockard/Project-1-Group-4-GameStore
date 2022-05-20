@@ -6,13 +6,17 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Objects;
-
+//Lets the class be put into a table
 @Entity
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+//Optionally names the table for the class to be more specific
 @Table(name = "consoles")
 public class Consoles implements Serializable {
+    //creates an id field
     @Id
+    //optional way of naming the id column
     @Column(name = "consoles_id")
+    //Works with sql to be a serial type
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 
     private int id;
@@ -92,6 +96,7 @@ public class Consoles implements Serializable {
         this.quantity = quantity;
     }
 
+    //child class overridding the parent class
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
