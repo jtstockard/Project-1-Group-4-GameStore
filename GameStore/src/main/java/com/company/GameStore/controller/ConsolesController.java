@@ -17,13 +17,13 @@ public class ConsolesController {
 
 
     @RequestMapping(value = "/consoles", method = RequestMethod.GET)
-    @ResponseStatus(HttpStatus.OK)
+    @ResponseStatus(HttpStatus.OK)              // ok tells the server nothing has changed prior after this request
     public List<Consoles> getAllConsoles() {
         return serviceLayer.findAllConsoles();
     }
 
     @RequestMapping(value="/consoles", method=RequestMethod.POST)
-    @ResponseStatus(HttpStatus.CREATED)
+    @ResponseStatus(HttpStatus.CREATED)   //create is a status to show the data had been added
     public Consoles addConsoles(@RequestBody Consoles consoles) {
 
         return serviceLayer.addConsoles(consoles);
@@ -38,7 +38,7 @@ public class ConsolesController {
     }
 
     @RequestMapping(value="/consoles/manufacturer/{manufacturer}", method=RequestMethod.GET)
-    @ResponseStatus(HttpStatus.OK)
+    @ResponseStatus(HttpStatus.OK)              //takes the variable out and puts them in a method
     public List<Consoles> getByManufacturer(@PathVariable String manufacturer) {
 
         return serviceLayer.getByManufacturer(manufacturer);
@@ -46,7 +46,7 @@ public class ConsolesController {
 
     }
     @RequestMapping(value = "/consoles/{id}", method =RequestMethod.PUT)
-    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @ResponseStatus(HttpStatus.NO_CONTENT)  //nothing needs to be passed through, so it's no content
     public Consoles updateConsoles(@RequestBody Consoles consoles) {
         return (Consoles) serviceLayer.updateConsoles(consoles);
     }

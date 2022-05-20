@@ -26,6 +26,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringRunner.class)
+//tells the class that it's a test file
 @WebMvcTest(GamesController.class)
 
 public class GamesControllerTest {
