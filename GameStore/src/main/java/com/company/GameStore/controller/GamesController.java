@@ -8,9 +8,11 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+//combines controller and responsebody
 @RestController
 public class GamesController {
 
+    //lets java use auto wiring
     @Autowired
     private ServiceLayer serviceLayer;
 

@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Component
+//allows spring framework to detect the beans in our files
 public class ServiceLayer {
     private GamesRepository gamesRepository;
     private ConsolesRepository consolesRepository;

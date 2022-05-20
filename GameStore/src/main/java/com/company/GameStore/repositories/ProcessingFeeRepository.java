@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 
 import java.math.BigDecimal;
 
+//allows the interface to store data as a repository
 @Repository
 public interface ProcessingFeeRepository extends JpaRepository<ProcessingFees, String> {
 
